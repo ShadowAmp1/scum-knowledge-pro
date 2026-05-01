@@ -5,6 +5,7 @@ import { InfoCard } from "@/components/InfoCard";
 import { RarityBadge, TierBadge } from "@/components/WeaponBadge";
 import { StatBar } from "@/components/StatBar";
 import { getWeaponBySlug, weapons } from "@/data/weapons";
+import { attachments } from "@/data/attachments";
 
 export function generateStaticParams() {
   return weapons.map((weapon) => ({ slug: weapon.slug }));
@@ -27,6 +28,10 @@ export default function WeaponPage({ params }: { params: { slug: string } }) {
   const similarWeapons = weapons
     .filter((item) => item.slug !== weapon.slug && (item.category === weapon.category || item.ammo === weapon.ammo))
     .slice(0, 3);
+
+  const compatibleAttachments = attachments
+    .filter((attachment) => attachment.compatibleWeaponSlugs.includes(weapon.slug))
+    .slice(0, 8);
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-12">
@@ -135,6 +140,29 @@ export default function WeaponPage({ params }: { params: { slug: string } }) {
           </InfoCard>
         </div>
       </div>
+
+      {compatibleAttachments.length > 0 && (
+        <section className="mt-10 rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-2xl font-black text-white">Подходящие обвесы</h2>
+              <p className="mt-2 text-sm text-zinc-500">Обвесы из базы, которые связаны с этим оружием.</p>
+            </div>
+            <Link href="/weapons/attachments" className="rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-black text-red-200 transition hover:bg-red-500/20">
+              Все обвесы →
+            </Link>
+          </div>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {compatibleAttachments.map((attachment) => (
+              <Link key={attachment.slug} href={`/weapons/attachments/${attachment.slug}`} className="rounded-2xl border border-zinc-800 bg-black p-4 transition hover:border-red-500/50">
+                <div className="text-xs font-black uppercase tracking-widest text-red-400">{attachment.category}</div>
+                <div className="mt-2 font-black text-white">{attachment.name}</div>
+                <div className="mt-2 text-xs text-zinc-500">{attachment.subcategory}</div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {similarWeapons.length > 0 && (
         <section className="mt-10">
