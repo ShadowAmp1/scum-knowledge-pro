@@ -16,8 +16,17 @@ import {
   Store,
   Target,
   X,
+  ZoomIn,
+  ZoomOut,
 } from "lucide-react";
-import { MapMarker, MapMarkerCategory, mapCategoryLabels, mapMarkers } from "@/data/mapMarkers";
+import {
+  MapMarker,
+  MapMarkerCategory,
+  mapCategoryLabels,
+  mapColumns,
+  mapMarkers,
+  mapRows,
+} from "@/data/mapMarkers";
 
 const categoryIcons: Record<MapMarkerCategory, ElementType> = {
   bunker: Shield,
@@ -31,14 +40,46 @@ const categoryIcons: Record<MapMarkerCategory, ElementType> = {
 };
 
 const categoryStyles: Record<MapMarkerCategory, { dot: string; chip: string; ring: string }> = {
-  bunker: { dot: "bg-red-600", chip: "border-red-500/30 bg-red-500/10 text-red-200", ring: "shadow-[0_0_32px_rgba(220,38,38,0.55)]" },
-  trader: { dot: "bg-emerald-500", chip: "border-emerald-500/30 bg-emerald-500/10 text-emerald-200", ring: "shadow-[0_0_32px_rgba(16,185,129,0.45)]" },
-  loot: { dot: "bg-amber-400", chip: "border-amber-500/30 bg-amber-500/10 text-amber-200", ring: "shadow-[0_0_32px_rgba(245,158,11,0.45)]" },
-  vehicle: { dot: "bg-cyan-400", chip: "border-cyan-500/30 bg-cyan-500/10 text-cyan-200", ring: "shadow-[0_0_32px_rgba(34,211,238,0.45)]" },
-  base: { dot: "bg-violet-500", chip: "border-violet-500/30 bg-violet-500/10 text-violet-200", ring: "shadow-[0_0_32px_rgba(139,92,246,0.45)]" },
-  danger: { dot: "bg-orange-600", chip: "border-orange-500/30 bg-orange-500/10 text-orange-200", ring: "shadow-[0_0_32px_rgba(234,88,12,0.55)]" },
-  town: { dot: "bg-zinc-300", chip: "border-zinc-500/30 bg-zinc-500/10 text-zinc-200", ring: "shadow-[0_0_32px_rgba(212,212,216,0.35)]" },
-  military: { dot: "bg-rose-500", chip: "border-rose-500/30 bg-rose-500/10 text-rose-200", ring: "shadow-[0_0_32px_rgba(244,63,94,0.5)]" },
+  bunker: {
+    dot: "bg-red-600",
+    chip: "border-red-500/30 bg-red-500/10 text-red-200",
+    ring: "shadow-[0_0_32px_rgba(220,38,38,0.6)]",
+  },
+  trader: {
+    dot: "bg-emerald-500",
+    chip: "border-emerald-500/30 bg-emerald-500/10 text-emerald-200",
+    ring: "shadow-[0_0_32px_rgba(16,185,129,0.5)]",
+  },
+  loot: {
+    dot: "bg-amber-400",
+    chip: "border-amber-500/30 bg-amber-500/10 text-amber-200",
+    ring: "shadow-[0_0_32px_rgba(245,158,11,0.5)]",
+  },
+  vehicle: {
+    dot: "bg-cyan-400",
+    chip: "border-cyan-500/30 bg-cyan-500/10 text-cyan-200",
+    ring: "shadow-[0_0_32px_rgba(34,211,238,0.5)]",
+  },
+  base: {
+    dot: "bg-violet-500",
+    chip: "border-violet-500/30 bg-violet-500/10 text-violet-200",
+    ring: "shadow-[0_0_32px_rgba(139,92,246,0.5)]",
+  },
+  danger: {
+    dot: "bg-orange-600",
+    chip: "border-orange-500/30 bg-orange-500/10 text-orange-200",
+    ring: "shadow-[0_0_32px_rgba(234,88,12,0.6)]",
+  },
+  town: {
+    dot: "bg-zinc-200",
+    chip: "border-zinc-500/30 bg-zinc-500/10 text-zinc-200",
+    ring: "shadow-[0_0_32px_rgba(212,212,216,0.45)]",
+  },
+  military: {
+    dot: "bg-rose-500",
+    chip: "border-rose-500/30 bg-rose-500/10 text-rose-200",
+    ring: "shadow-[0_0_32px_rgba(244,63,94,0.55)]",
+  },
 };
 
 const riskStyles: Record<MapMarker["risk"], string> = {
@@ -50,11 +91,21 @@ const riskStyles: Record<MapMarker["risk"], string> = {
 
 const categories = Object.keys(mapCategoryLabels) as MapMarkerCategory[];
 
+type ZoomLevel = "fit" | "wide" | "full";
+
+const zoomClasses: Record<ZoomLevel, string> = {
+  fit: "max-w-[980px]",
+  wide: "max-w-[1180px]",
+  full: "max-w-none",
+};
+
 export function InteractiveMap() {
   const [query, setQuery] = useState("");
   const [activeCategories, setActiveCategories] = useState<MapMarkerCategory[]>(categories);
   const [selectedId, setSelectedId] = useState(mapMarkers[0]?.id ?? "");
   const [risk, setRisk] = useState<"all" | MapMarker["risk"]>("all");
+  const [zoom, setZoom] = useState<ZoomLevel>("wide");
+  const [showSectorOverlay, setShowSectorOverlay] = useState(true);
 
   const selectedMarker = mapMarkers.find((marker) => marker.id === selectedId) ?? mapMarkers[0]!;
 
@@ -88,23 +139,33 @@ export function InteractiveMap() {
     setRisk("all");
     setActiveCategories(categories);
     setSelectedId(mapMarkers[0]?.id ?? "");
+    setZoom("wide");
+    setShowSectorOverlay(true);
+  }
+
+  function zoomIn() {
+    setZoom((current) => (current === "fit" ? "wide" : "full"));
+  }
+
+  function zoomOut() {
+    setZoom((current) => (current === "full" ? "wide" : "fit"));
   }
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12">
-      <div className="mb-6 grid gap-4 lg:grid-cols-[1fr_0.35fr]">
+    <section className="mx-auto max-w-[1500px] px-4 py-12">
+      <div className="mb-6 grid gap-4 xl:grid-cols-[1fr_0.32fr]">
         <div className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-5">
           <div className="mb-4 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-red-300">
-            <Filter size={16} /> Фильтры карты
+            <Filter size={16} /> Фильтры настоящей карты SCUM
           </div>
 
-          <div className="grid gap-4 lg:grid-cols-[1fr_0.35fr]">
+          <div className="grid gap-4 lg:grid-cols-[1fr_220px_190px]">
             <label className="relative block">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={18} />
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Поиск: бункер, лут, транспорт, сектор, база..."
+                placeholder="Поиск: C2, остров, аэродром, город, транспорт, база..."
                 className="w-full rounded-2xl border border-zinc-800 bg-black px-11 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-red-500/60"
               />
             </label>
@@ -120,6 +181,14 @@ export function InteractiveMap() {
               <option value="Высокий">Высокий риск</option>
               <option value="Экстрим">Экстрим</option>
             </select>
+
+            <button
+              type="button"
+              onClick={() => setShowSectorOverlay((value) => !value)}
+              className="rounded-2xl border border-zinc-800 bg-black px-4 py-3 text-sm font-bold text-zinc-300 transition hover:border-zinc-600 hover:text-white"
+            >
+              {showSectorOverlay ? "Скрыть сетку" : "Показать сетку"}
+            </button>
           </div>
 
           <div className="mt-4 flex flex-wrap gap-2">
@@ -133,7 +202,11 @@ export function InteractiveMap() {
                   key={category}
                   type="button"
                   onClick={() => toggleCategory(category)}
-                  className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold transition ${active ? style.chip : "border-zinc-800 bg-black text-zinc-500 hover:text-zinc-300"}`}
+                  className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold transition ${
+                    active
+                      ? style.chip
+                      : "border-zinc-800 bg-black text-zinc-500 hover:text-zinc-300"
+                  }`}
                 >
                   <Icon size={14} /> {mapCategoryLabels[category]}
                 </button>
@@ -153,53 +226,101 @@ export function InteractiveMap() {
         <div className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-5">
           <div className="text-sm text-zinc-500">Найдено точек</div>
           <div className="mt-1 text-4xl font-black text-white">{filteredMarkers.length}</div>
-          <p className="mt-2 text-sm text-zinc-400">Метки можно включать и выключать. Координаты редактируются в src/data/mapMarkers.ts.</p>
+          <p className="mt-2 text-sm text-zinc-400">
+            Карта сделана по твоему изображению. Координаты меток меняются в src/data/mapMarkers.ts.
+          </p>
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.45fr_0.55fr]">
-        <div className="relative min-h-[680px] overflow-hidden rounded-3xl border border-zinc-800 bg-[#080808] shadow-2xl">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.16),transparent_30rem)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(245,158,11,0.12),transparent_18rem)]" />
-          <div className="absolute inset-0 map-grid opacity-90" />
-          <div className="absolute inset-0 map-terrain opacity-60" />
-
-          <div className="absolute left-0 top-0 grid h-full w-full grid-cols-4 grid-rows-4 text-xs font-black text-zinc-700/80">
-            {Array.from({ length: 16 }).map((_, index) => (
-              <div key={index} className="border border-zinc-800/70 p-3">
-                {String.fromCharCode(65 + (index % 4))}{Math.floor(index / 4) + 1}
+      <div className="grid gap-6 xl:grid-cols-[1fr_390px]">
+        <div className="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950 p-3 shadow-2xl">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3 px-1">
+            <div>
+              <div className="flex items-center gap-2 text-sm font-black text-white">
+                <Target size={16} className="text-red-400" /> SCUM current tactical map
               </div>
-            ))}
-          </div>
+              <div className="mt-1 text-xs text-zinc-500">Сектора D4 → Z0, метки поверх реальной карты</div>
+            </div>
 
-          <div className="absolute left-5 top-5 z-10 rounded-2xl border border-zinc-800 bg-black/80 px-4 py-3 backdrop-blur">
-            <div className="flex items-center gap-2 text-sm font-black text-white"><Target size={16} className="text-red-400" /> SCUM Tactical Map</div>
-            <div className="mt-1 text-xs text-zinc-500">v4 interactive overlay</div>
-          </div>
-
-          {filteredMarkers.map((marker) => {
-            const Icon = categoryIcons[marker.category];
-            const style = categoryStyles[marker.category];
-            const isSelected = marker.id === selectedMarker.id;
-
-            return (
+            <div className="flex gap-2">
               <button
-                key={marker.id}
                 type="button"
-                onClick={() => setSelectedId(marker.id)}
-                className="group absolute z-20 -translate-x-1/2 -translate-y-1/2 text-left"
-                style={{ left: `${marker.x}%`, top: `${marker.y}%` }}
-                title={marker.description}
+                onClick={zoomOut}
+                className="inline-flex items-center gap-2 rounded-xl border border-zinc-800 bg-black px-3 py-2 text-xs font-bold text-zinc-300 transition hover:border-zinc-600 hover:text-white"
               >
-                <span className={`grid h-9 w-9 place-items-center rounded-full border-2 border-white/80 ${style.dot} ${style.ring} transition group-hover:scale-110 ${isSelected ? "scale-125" : ""}`}>
-                  <Icon size={17} className="text-black" />
-                </span>
-                <span className={`mt-2 block whitespace-nowrap rounded-xl border px-3 py-1.5 text-xs font-black backdrop-blur transition ${isSelected ? "border-red-400 bg-black text-white" : "border-zinc-700 bg-black/80 text-zinc-200 group-hover:border-zinc-500"}`}>
-                  {marker.name}
-                </span>
+                <ZoomOut size={14} /> -
               </button>
-            );
-          })}
+              <button
+                type="button"
+                onClick={zoomIn}
+                className="inline-flex items-center gap-2 rounded-xl border border-zinc-800 bg-black px-3 py-2 text-xs font-bold text-zinc-300 transition hover:border-zinc-600 hover:text-white"
+              >
+                <ZoomIn size={14} /> +
+              </button>
+            </div>
+          </div>
+
+          <div className="custom-scrollbar overflow-auto rounded-2xl border border-zinc-800 bg-black">
+            <div className={`relative mx-auto aspect-square w-full min-w-[760px] ${zoomClasses[zoom]}`}>
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.22)), url('/images/scum-current-map.png')",
+                }}
+              />
+
+              {showSectorOverlay && (
+                <div className="pointer-events-none absolute inset-0 grid grid-cols-5 grid-rows-5">
+                  {mapRows.map((row) =>
+                    mapColumns.map((column) => (
+                      <div
+                        key={`${row}${column}`}
+                        className="border border-white/12 p-2 text-2xl font-black text-white/80 drop-shadow-[0_2px_2px_rgba(0,0,0,1)] sm:text-3xl"
+                      >
+                        {row}
+                        {column}
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+
+              {filteredMarkers.map((marker) => {
+                const Icon = categoryIcons[marker.category];
+                const style = categoryStyles[marker.category];
+                const isSelected = marker.id === selectedMarker.id;
+
+                return (
+                  <button
+                    key={marker.id}
+                    type="button"
+                    onClick={() => setSelectedId(marker.id)}
+                    className="group absolute z-20 -translate-x-1/2 -translate-y-1/2 text-left"
+                    style={{ left: `${marker.x}%`, top: `${marker.y}%` }}
+                    title={marker.description}
+                  >
+                    <span
+                      className={`grid h-9 w-9 place-items-center rounded-full border-2 border-white ${style.dot} ${style.ring} transition group-hover:scale-110 ${
+                        isSelected ? "scale-125 ring-4 ring-white/30" : ""
+                      }`}
+                    >
+                      <Icon size={17} className="text-black" />
+                    </span>
+                    <span
+                      className={`mt-2 hidden whitespace-nowrap rounded-xl border px-3 py-1.5 text-xs font-black backdrop-blur transition md:block ${
+                        isSelected
+                          ? "border-red-400 bg-black text-white"
+                          : "border-zinc-700 bg-black/80 text-zinc-200 group-hover:border-zinc-500"
+                      }`}
+                    >
+                      {marker.name}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         <aside className="space-y-4">
@@ -236,7 +357,9 @@ export function InteractiveMap() {
                 <div className="text-sm font-black text-white">Подходит для</div>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {selectedMarker.bestFor.map((item) => (
-                    <span key={item} className="rounded-full border border-zinc-800 bg-black/50 px-3 py-1 text-xs text-zinc-300">{item}</span>
+                    <span key={item} className="rounded-full border border-zinc-800 bg-black/50 px-3 py-1 text-xs text-zinc-300">
+                      {item}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -245,34 +368,46 @@ export function InteractiveMap() {
                 <div className="text-sm font-black text-white">Что взять</div>
                 <ul className="mt-2 space-y-2 text-sm text-zinc-300">
                   {selectedMarker.recommendedKit.map((item) => (
-                    <li key={item} className="flex gap-2"><MapPin size={16} className="mt-0.5 shrink-0 text-red-400" /> {item}</li>
+                    <li key={item} className="flex gap-2">
+                      <MapPin size={16} className="mt-0.5 shrink-0 text-red-400" /> {item}
+                    </li>
                   ))}
                 </ul>
               </div>
 
               {selectedMarker.linkedHref && (
-                <Link href={selectedMarker.linkedHref} className="mt-5 block rounded-2xl bg-red-600 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-red-500">
+                <Link
+                  href={selectedMarker.linkedHref}
+                  className="mt-5 block rounded-2xl bg-red-600 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-red-500"
+                >
                   Открыть связанный раздел →
                 </Link>
               )}
             </div>
           )}
 
-          <div className="max-h-[560px] space-y-3 overflow-auto pr-2">
-            {filteredMarkers.map((marker) => (
-              <button
-                key={marker.id}
-                type="button"
-                onClick={() => setSelectedId(marker.id)}
-                className={`w-full rounded-2xl border p-4 text-left transition hover:border-red-500/40 ${marker.id === selectedMarker.id ? "border-red-500/50 bg-red-500/10" : "border-zinc-800 bg-zinc-950/80"}`}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <div className="font-black text-white">{marker.name}</div>
-                  <span className="text-xs text-zinc-500">{marker.sector}</span>
-                </div>
-                <p className="mt-2 text-sm text-zinc-400">{marker.short}</p>
-              </button>
-            ))}
+          <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-5">
+            <div className="text-sm font-black text-white">Быстрый список</div>
+            <div className="mt-3 max-h-[420px] space-y-2 overflow-auto pr-1 custom-scrollbar">
+              {filteredMarkers.map((marker) => (
+                <button
+                  key={marker.id}
+                  type="button"
+                  onClick={() => setSelectedId(marker.id)}
+                  className={`w-full rounded-2xl border p-3 text-left transition ${
+                    marker.id === selectedMarker.id
+                      ? "border-red-500/50 bg-red-500/10"
+                      : "border-zinc-800 bg-black/40 hover:border-zinc-600"
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="font-black text-white">{marker.name}</div>
+                    <div className="text-xs text-zinc-500">{marker.sector}</div>
+                  </div>
+                  <div className="mt-1 text-xs text-zinc-400">{marker.short}</div>
+                </button>
+              ))}
+            </div>
           </div>
         </aside>
       </div>
