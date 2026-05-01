@@ -4,27 +4,41 @@ import { RaidKits } from "@/components/RaidKits";
 import { bunkers } from "@/data/bunkers";
 
 export default function BunkersPage() {
-  const highRisk = bunkers.filter((bunker) => bunker.risk === "Высокий" || bunker.risk === "Экстремальный").length;
-  const beginner = bunkers.filter((bunker) => bunker.beginnerFriendly).length;
+  const regular = bunkers.filter((bunker) => bunker.type === "Обычный бункер").length;
+  const abandoned = bunkers.filter((bunker) => bunker.type === "Заброшенный бункер").length;
+  const withMaps = bunkers.filter((bunker) => bunker.mapImages?.length).length;
 
   return (
     <main>
-      <PageHeader title="Бункеры" description="SCUM DB PRO v3: поиск, фильтры, маршруты зачистки, подготовка, угрозы, ошибки и список ценного лута." />
+      <PageHeader
+        title="Бункеры"
+        description="Обновленная вкладка бункеров: только подтвержденные точки с твоих скринов, обычные бункеры, заброшенные бункеры и карты уровней -01/-02 для заброшенных объектов."
+      />
 
       <section className="mx-auto max-w-7xl px-4 pt-10">
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-4">
           <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
             <div className="text-4xl font-black text-white">{bunkers.length}</div>
-            <div className="mt-2 text-sm text-zinc-500">маршрутов в базе v3</div>
+            <div className="mt-2 text-sm text-zinc-500">бункеров в базе</div>
           </div>
           <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
-            <div className="text-4xl font-black text-red-400">{highRisk}</div>
-            <div className="mt-2 text-sm text-zinc-500">опасных маршрута</div>
+            <div className="text-4xl font-black text-white">{regular}</div>
+            <div className="mt-2 text-sm text-zinc-500">обычных бункеров</div>
           </div>
           <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
-            <div className="text-4xl font-black text-white">{beginner}</div>
-            <div className="mt-2 text-sm text-zinc-500">подходят новичку</div>
+            <div className="text-4xl font-black text-red-400">{abandoned}</div>
+            <div className="mt-2 text-sm text-zinc-500">заброшенных бункеров</div>
           </div>
+          <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
+            <div className="text-4xl font-black text-emerald-400">{withMaps}</div>
+            <div className="mt-2 text-sm text-zinc-500">с картами уровней</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pt-6">
+        <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-6 text-sm leading-7 text-zinc-300">
+          <b className="text-red-300">Важно:</b> координаты бункеров на карте берутся только из твоих отправленных скриншотов. Остальные старые примерные точки не используются, чтобы карта была чище и точнее.
         </div>
       </section>
 

@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { Shield, Search, Swords, Users, MapPin } from "lucide-react";
+import { Shield, Search, Swords, Users, MapPin, Layers } from "lucide-react";
 import { bunkers } from "@/data/bunkers";
 import { cn } from "@/lib/utils";
 
 const riskOptions = ["Все", "Низкий", "Средний", "Высокий", "Экстремальный"];
-const typeOptions = ["Все", "Старый бункер", "Заброшенный бункер", "Военная зона", "Тренировочный маршрут"];
+const typeOptions = ["Все", "Обычный бункер", "Заброшенный бункер"];
 const lootOptions = ["Все", "B", "A", "S", "S+"];
 
 export function BunkerFilters() {
@@ -15,7 +15,7 @@ export function BunkerFilters() {
   const [risk, setRisk] = useState("Все");
   const [type, setType] = useState("Все");
   const [lootTier, setLootTier] = useState("Все");
-  const [onlyBeginner, setOnlyBeginner] = useState(false);
+  const [onlyWithMap, setOnlyWithMap] = useState(false);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -27,25 +27,25 @@ export function BunkerFilters() {
       const matchesRisk = risk === "Все" || bunker.risk === risk;
       const matchesType = type === "Все" || bunker.type === type;
       const matchesLoot = lootTier === "Все" || bunker.lootTier === lootTier;
-      const matchesBeginner = !onlyBeginner || bunker.beginnerFriendly;
-      return matchesQuery && matchesRisk && matchesType && matchesLoot && matchesBeginner;
+      const matchesMap = !onlyWithMap || Boolean(bunker.mapImages?.length);
+      return matchesQuery && matchesRisk && matchesType && matchesLoot && matchesMap;
     });
-  }, [query, risk, type, lootTier, onlyBeginner]);
+  }, [query, risk, type, lootTier, onlyWithMap]);
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-12">
       <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-5 md:p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h2 className="text-2xl font-black text-white">Поиск по бункерам</h2>
-            <p className="mt-2 text-sm text-zinc-500">Фильтруй по риску, типу, качеству лута и готовности для новичка.</p>
+            <h2 className="text-2xl font-black text-white">База бункеров</h2>
+            <p className="mt-2 text-sm text-zinc-500">Оставлены только подтвержденные тобой точки: обычные и заброшенные бункеры.</p>
           </div>
           <div className="relative w-full lg:max-w-md">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={18} />
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="A1, ремкомплект, MP5, высокий риск..."
+              placeholder="A1, Z2, заброшенный, оружейная..."
               className="w-full rounded-2xl border border-zinc-800 bg-black py-3 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-red-500"
             />
           </div>
@@ -56,24 +56,25 @@ export function BunkerFilters() {
           <SelectPill title="Тип" value={type} setValue={setType} options={typeOptions} />
           <SelectPill title="Лут" value={lootTier} setValue={setLootTier} options={lootOptions} />
           <button
-            onClick={() => setOnlyBeginner((value) => !value)}
+            onClick={() => setOnlyWithMap((value) => !value)}
             className={cn(
               "rounded-2xl border px-4 py-3 text-left text-sm font-black transition",
-              onlyBeginner ? "border-red-500 bg-red-500/10 text-red-300" : "border-zinc-800 bg-black text-zinc-400 hover:border-zinc-600"
+              onlyWithMap ? "border-red-500 bg-red-500/10 text-red-300" : "border-zinc-800 bg-black text-zinc-400 hover:border-zinc-600"
             )}
           >
-            Только для новичка: {onlyBeginner ? "Да" : "Нет"}
+            Только с картой: {onlyWithMap ? "Да" : "Нет"}
           </button>
         </div>
       </div>
 
       <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {filtered.map((bunker) => (
-          <Link key={bunker.slug} href={`/bunkers/${bunker.slug}`} className="group rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6 transition hover:-translate-y-1 hover:border-red-500/50 hover:bg-zinc-900">
+          <Link key={bunker.slug} href={`/bunkers/${bunker.slug}`} className="group rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6 transition hover:border-red-500/50 hover:bg-zinc-900">
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-red-500/10 px-3 py-1 text-xs font-black text-red-300">Сектор {bunker.sector}</span>
               <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-400">{bunker.type}</span>
               <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-400">Tier {bunker.lootTier}</span>
+              {bunker.mapImages?.length ? <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-300">карта уровней</span> : null}
             </div>
 
             <h3 className="mt-5 text-2xl font-black text-white">{bunker.name}</h3>
@@ -84,9 +85,10 @@ export function BunkerFilters() {
               <div className="flex items-center gap-2"><Swords size={16} className="text-red-400" /> {bunker.recommendedWeapons.slice(0, 3).join(" • ")}</div>
               <div className="flex items-center gap-2"><Users size={16} className="text-red-400" /> Дуо: {bunker.duoFriendly ? "удобно" : "сложно"}</div>
               <div className="flex items-center gap-2"><MapPin size={16} className="text-red-400" /> {bunker.recommendedTime}</div>
+              {bunker.mapImages?.length ? <div className="flex items-center gap-2"><Layers size={16} className="text-red-400" /> Добавлены карты уровней -01 и -02</div> : null}
             </div>
 
-            <div className="mt-6 text-sm font-black text-red-400 transition group-hover:text-red-300">Открыть маршрут →</div>
+            <div className="mt-6 text-sm font-black text-red-400 transition group-hover:text-red-300">Открыть бункер →</div>
           </Link>
         ))}
       </div>
