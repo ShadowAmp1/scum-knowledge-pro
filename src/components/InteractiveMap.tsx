@@ -13,6 +13,7 @@ import {
   Package,
   Search,
   Shield,
+  Skull,
   Store,
   Target,
   X,
@@ -28,6 +29,7 @@ import {
 
 const categoryIcons: Record<MapMarkerCategory, ElementType> = {
   bunker: Shield,
+  abandonedBunker: Skull,
   trader: Store,
   loot: Package,
   vehicle: Car,
@@ -42,6 +44,11 @@ const categoryStyles: Record<MapMarkerCategory, { dot: string; chip: string; rin
     dot: "bg-red-600",
     chip: "border-red-500/30 bg-red-500/10 text-red-200",
     ring: "shadow-[0_0_32px_rgba(220,38,38,0.6)]",
+  },
+  abandonedBunker: {
+    dot: "bg-purple-600",
+    chip: "border-purple-500/30 bg-purple-500/10 text-purple-200",
+    ring: "shadow-[0_0_32px_rgba(147,51,234,0.65)]",
   },
   trader: {
     dot: "bg-emerald-500",
@@ -99,7 +106,7 @@ const zoomClasses: Record<ZoomLevel, string> = {
 
 export function InteractiveMap() {
   const [query, setQuery] = useState("");
-  const [activeCategories, setActiveCategories] = useState<MapMarkerCategory[]>(["bunker"]);
+  const [activeCategories, setActiveCategories] = useState<MapMarkerCategory[]>(["bunker", "abandonedBunker"]);
   const [selectedId, setSelectedId] = useState(mapMarkers[0]?.id ?? "");
   const [risk, setRisk] = useState<"all" | MapMarker["risk"]>("all");
   const [zoom, setZoom] = useState<ZoomLevel>("wide");
@@ -134,7 +141,7 @@ export function InteractiveMap() {
   function resetFilters() {
     setQuery("");
     setRisk("all");
-    setActiveCategories(["bunker"]);
+    setActiveCategories(["bunker", "abandonedBunker"]);
     setSelectedId(mapMarkers[0]?.id ?? "");
     setZoom("wide");
   }
@@ -152,7 +159,7 @@ export function InteractiveMap() {
       <div className="mb-6 grid gap-4 xl:grid-cols-[1fr_0.32fr]">
         <div className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-5">
           <div className="mb-4 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-red-300">
-            <Filter size={16} /> Фильтры карты SCUM — все бункеры
+            <Filter size={16} /> Фильтры карты SCUM — обычные и заброшенные бункеры
           </div>
 
           <div className="grid gap-4 lg:grid-cols-[1fr_220px]">
@@ -216,7 +223,7 @@ export function InteractiveMap() {
           <div className="text-sm text-zinc-500">Найдено точек</div>
           <div className="mt-1 text-4xl font-black text-white">{filteredMarkers.length}</div>
           <p className="mt-2 text-sm text-zinc-400">
-            Сетка отключена. По умолчанию показаны только бункеры; остальные POI можно включить фильтрами.
+            Сетка отключена. По умолчанию показаны обычные и заброшенные бункеры; остальные POI можно включить фильтрами.
           </p>
         </div>
       </div>
