@@ -40,7 +40,7 @@ export const lootRarities: LootRarity[] = ["Обычный", "Ценный", "Р
 export const lootPriorities: LootPriority[] = ["Низкий", "Средний", "Высокий", "Максимальный"];
 export const lootWeights: LootWeight[] = ["Легкий", "Средний", "Тяжелый"];
 
-export const l[
+export const lootItems: LootItem[] = [
   {
     "slug": "weapon-cleaning-kit",
     "name": "Оружейный ремкомплект",
@@ -2741,9 +2741,6 @@ export const l[
       "Торговля"
     ],
     "serverNote": "Спавн, цена и доступность предмета могут отличаться в зависимости от настроек сервера."
-  }
-] "Торговля"
-    ]
   }
 ];
 
