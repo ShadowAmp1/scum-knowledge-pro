@@ -1,25 +1,36 @@
-import Link from "next/link";
 import { PageHeader } from "@/components/PageHeader";
+import { WeaponFilters } from "@/components/WeaponFilters";
 import { weapons } from "@/data/weapons";
 
 export default function WeaponsPage() {
+  const sTierCount = weapons.filter((weapon) => weapon.tier === "S").length;
+  const bunkerTop = [...weapons].sort((a, b) => b.rating.bunker - a.rating.bunker).slice(0, 3);
+
   return (
     <main>
-      <PageHeader title="Оружие" description="Карточки оружия SCUM: патроны, редкость, лучший билд, где искать, плюсы и минусы." />
-      <section className="mx-auto grid max-w-7xl gap-5 px-4 py-12 md:grid-cols-2 lg:grid-cols-3">
-        {weapons.map((weapon) => (
-          <Link key={weapon.slug} href={`/weapons/${weapon.slug}`} className="group rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6 transition hover:-translate-y-1 hover:border-red-500/50 hover:bg-zinc-900">
-            <div className="flex items-center justify-between gap-4">
-              <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-black text-red-300">{weapon.type}</span>
-              <span className="text-xs font-bold text-zinc-500">{weapon.rarity}</span>
-            </div>
-            <h2 className="mt-5 text-2xl font-black text-white">{weapon.name}</h2>
-            <p className="mt-3 text-sm leading-6 text-zinc-400">{weapon.summary}</p>
-            <div className="mt-5 rounded-2xl bg-black/40 p-4 text-sm text-zinc-300">Патрон: <b className="text-white">{weapon.ammo}</b></div>
-            <div className="mt-5 text-sm font-black text-red-400">Подробнее →</div>
-          </Link>
-        ))}
+      <PageHeader
+        title="Оружие"
+        description="SCUM DB PRO v2: поиск, фильтры, tier-лист, лучшие билды, патроны, модули и рекомендации для PvE/PvP."
+      />
+
+      <section className="mx-auto max-w-7xl px-4 pt-10">
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
+            <div className="text-4xl font-black text-white">{weapons.length}</div>
+            <div className="mt-2 text-sm text-zinc-500">оружий в базе v2</div>
+          </div>
+          <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
+            <div className="text-4xl font-black text-red-400">{sTierCount}</div>
+            <div className="mt-2 text-sm text-zinc-500">S-tier вариантов</div>
+          </div>
+          <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
+            <div className="text-sm font-black uppercase tracking-[0.25em] text-red-400">Топ для бункера</div>
+            <div className="mt-3 text-sm text-zinc-300">{bunkerTop.map((weapon) => weapon.name).join(" • ")}</div>
+          </div>
+        </div>
       </section>
+
+      <WeaponFilters />
     </main>
   );
 }
