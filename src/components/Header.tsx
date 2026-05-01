@@ -5,6 +5,7 @@ const navItems = [
   { title: "Оружие", href: "/weapons" },
   { title: "Бункеры", href: "/bunkers" },
   { title: "Лут", href: "/loot" },
+  { title: "Подготовка", href: "/preparation" },
   { title: "Карта", href: "/map" },
   { title: "Гайды", href: "/guides" }
 ];
@@ -19,7 +20,7 @@ export function Header() {
           </div>
           <div>
             <div className="text-lg font-black tracking-wide text-white">SCUM DB PRO</div>
-            <div className="text-xs text-zinc-500">Knowledge Base</div>
+            <div className="text-xs text-zinc-500">Knowledge Base v3</div>
           </div>
         </Link>
 

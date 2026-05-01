@@ -1,78 +1,83 @@
-# SCUM Knowledge PRO v2
+# SCUM DB PRO
 
-Готовый фан-сайт-база знаний по SCUM: оружие, бункеры, лут, карта, базы, транспорт и гайды.
+Фан-сайт база знаний по игре SCUM. Версия v3: оружие, бункеры, лут, подготовка к рейдам, гайды, карта и PRO-фундамент под будущую админку.
 
-## Что нового в v2
+## Стек
 
-- Новый раздел **Оружие**.
-- Поиск по названию, типу, патронам и описанию.
-- Фильтры по типу оружия, редкости, режиму и Tier.
-- Сортировка по Tier, урону, PvP, бункерам и экономности.
-- Расширенные карточки оружия.
-- Отдельная страница каждого оружия.
-- Рейтинги: урон, контроль, дистанция, экономность, бункеры, PvP.
-- Блоки: лучший билд, модули, патроны, где найти, плюсы, минусы и советы.
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- Lucide React
+- Render-ready конфигурация
 
-## Запуск на Windows
+## Разделы
+
+- Главная страница
+- Оружие: поиск, фильтры, tier-list, отдельные страницы оружия
+- Бункеры: поиск, фильтры, риск, маршруты, подготовка, враги, лут
+- Лут: поиск, категории, редкость, приоритет, места фарма
+- Подготовка: raid-kit чек-листы
+- Карта: демо-метки
+- Базы
+- Транспорт
+- Гайды
+- PRO roadmap
+
+## Запуск на ПК
 
 ```bash
 npm install
 npm run dev
 ```
 
-Открой: http://localhost:3000
+Открыть:
+
+```txt
+http://localhost:3000
+```
 
 ## Проверка сборки
 
 ```bash
 npm run build
+```
+
+## Render
+
+В Render выбирай **Web Service**.
+
+Build Command:
+
+```bash
+npm install && npm run build
+```
+
+Start Command:
+
+```bash
 npm run start
 ```
 
-## Загрузка на GitHub
+Environment Variable:
 
-```bash
-git init
-git add .
-git commit -m "SCUM DB PRO v2"
-git branch -M main
-git remote add origin https://github.com/YOUR_NAME/scum-knowledge-pro.git
-git push -u origin main
+```txt
+NODE_VERSION=22
 ```
 
-## Запуск на Render
+Если Node 22 не подойдет, можно поставить:
 
-### Вариант 1: через Web Service
+```txt
+NODE_VERSION=20
+```
 
-- New + → Web Service
-- Repository: твой GitHub-репозиторий
-- Runtime: Node
-- Build Command: `npm install && npm run build`
-- Start Command: `npm run start`
-- Environment Variable: `NODE_VERSION=22.16.0`
+## Обновление через GitHub
 
-### Вариант 2: через Blueprint
+```bash
+git add .
+git commit -m "Update SCUM DB PRO"
+git push
+```
 
-В проекте уже есть `render.yaml`, поэтому можно выбрать **Blueprint** и дать Render самому прочитать настройки.
+## Что делать дальше
 
-## Где редактировать данные
-
-- `src/data/weapons.ts` — оружие и вся логика карточек
-- `src/data/bunkers.ts` — бункеры
-- `src/data/loot.ts` — лут
-- `src/data/guides.ts` — гайды
-- `src/data/mapMarkers.ts` — метки карты
-- `src/data/vehicles.ts` — транспорт
-
-## Главные файлы v2
-
-- `src/app/weapons/page.tsx` — страница оружия
-- `src/app/weapons/[slug]/page.tsx` — страница конкретного оружия
-- `src/components/WeaponFilters.tsx` — поиск, фильтры и сортировка
-- `src/components/StatBar.tsx` — полосы рейтинга
-- `src/components/WeaponBadge.tsx` — бейджи Tier и редкости
-- `src/data/weapons.ts` — база оружия
-
-## Важно
-
-Это статическая PRO-версия без базы данных. Ее можно сразу залить на GitHub и запустить на Render. Следующий этап — добавить PostgreSQL, Prisma и админ-панель для редактирования через сайт.
+Следующий крупный этап — v4: настоящая интерактивная карта с метками, фильтрами, карточками точек и маршрутами фарма.

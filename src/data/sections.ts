@@ -1,9 +1,10 @@
-import { BookOpen, Car, Crosshair, Home, Map, Package, Shield, Swords } from "lucide-react";
+import { BookOpen, Car, Crosshair, Home, Map, Package, Shield, Swords, Backpack } from "lucide-react";
 
 export const sections = [
   { title: "Оружие", description: "Билды, патроны, модули, плюсы, минусы и советы по применению.", href: "/weapons", icon: Crosshair, badge: "Weapons" },
-  { title: "Бункеры", description: "Подготовка, риск, маршруты, враги и ценный лут в бункерах.", href: "/bunkers", icon: Shield, badge: "Bunkers" },
-  { title: "Лут", description: "Ценные предметы, где искать и что хранить на базе.", href: "/loot", icon: Package, badge: "Loot" },
+  { title: "Бункеры", description: "Поиск, фильтры, риск, маршруты, враги и ценный лут в бункерах.", href: "/bunkers", icon: Shield, badge: "Bunkers v3" },
+  { title: "Лут", description: "Фильтры по ценности, редкости, приоритету и местам фарма.", href: "/loot", icon: Package, badge: "Loot v3" },
+  { title: "Подготовка", description: "Готовые наборы перед рейдом: оружие, броня, медицина и инструменты.", href: "/preparation", icon: Backpack, badge: "Raid kits" },
   { title: "Карта", description: "Визуальные метки бункеров, фарма, транспорта и мест под базу.", href: "/map", icon: Map, badge: "Map" },
   { title: "Базы", description: "PvE/PvP идеи, хай-тек базы, гаражи и планировка для дуо.", href: "/bases", icon: Home, badge: "Base" },
   { title: "Транспорт", description: "Машины, мотоциклы, вертолеты, ремонт и советы по хранению.", href: "/vehicles", icon: Car, badge: "Vehicles" },
