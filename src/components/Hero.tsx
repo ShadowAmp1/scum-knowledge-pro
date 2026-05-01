@@ -17,7 +17,7 @@ export function Hero() {
             Выживай умнее. <span className="text-red-500">Фарми быстрее.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
-            Оружие, бункеры, лут, базы, транспорт, карта и гайды в одном готовом сайте, который можно залить на GitHub и запустить на Render.
+            Оружие, бункеры, лут, базы, транспорт, карта и гайды в одном готовом сайте.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link href="/weapons" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-red-600 px-6 py-3 font-black text-white shadow-danger transition hover:bg-red-500">
