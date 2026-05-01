@@ -23,9 +23,7 @@ import {
   MapMarker,
   MapMarkerCategory,
   mapCategoryLabels,
-  mapColumns,
   mapMarkers,
-  mapRows,
 } from "@/data/mapMarkers";
 
 const categoryIcons: Record<MapMarkerCategory, ElementType> = {
@@ -101,11 +99,10 @@ const zoomClasses: Record<ZoomLevel, string> = {
 
 export function InteractiveMap() {
   const [query, setQuery] = useState("");
-  const [activeCategories, setActiveCategories] = useState<MapMarkerCategory[]>(categories);
+  const [activeCategories, setActiveCategories] = useState<MapMarkerCategory[]>(["bunker"]);
   const [selectedId, setSelectedId] = useState(mapMarkers[0]?.id ?? "");
   const [risk, setRisk] = useState<"all" | MapMarker["risk"]>("all");
   const [zoom, setZoom] = useState<ZoomLevel>("wide");
-  const [showSectorOverlay, setShowSectorOverlay] = useState(true);
 
   const selectedMarker = mapMarkers.find((marker) => marker.id === selectedId) ?? mapMarkers[0]!;
 
@@ -137,10 +134,9 @@ export function InteractiveMap() {
   function resetFilters() {
     setQuery("");
     setRisk("all");
-    setActiveCategories(categories);
+    setActiveCategories(["bunker"]);
     setSelectedId(mapMarkers[0]?.id ?? "");
     setZoom("wide");
-    setShowSectorOverlay(true);
   }
 
   function zoomIn() {
@@ -156,10 +152,10 @@ export function InteractiveMap() {
       <div className="mb-6 grid gap-4 xl:grid-cols-[1fr_0.32fr]">
         <div className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-5">
           <div className="mb-4 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-red-300">
-            <Filter size={16} /> Фильтры настоящей карты SCUM
+            <Filter size={16} /> Фильтры карты SCUM — все бункеры
           </div>
 
-          <div className="grid gap-4 lg:grid-cols-[1fr_220px_190px]">
+          <div className="grid gap-4 lg:grid-cols-[1fr_220px]">
             <label className="relative block">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={18} />
               <input
@@ -182,13 +178,6 @@ export function InteractiveMap() {
               <option value="Экстрим">Экстрим</option>
             </select>
 
-            <button
-              type="button"
-              onClick={() => setShowSectorOverlay((value) => !value)}
-              className="rounded-2xl border border-zinc-800 bg-black px-4 py-3 text-sm font-bold text-zinc-300 transition hover:border-zinc-600 hover:text-white"
-            >
-              {showSectorOverlay ? "Скрыть сетку" : "Показать сетку"}
-            </button>
           </div>
 
           <div className="mt-4 flex flex-wrap gap-2">
@@ -227,7 +216,7 @@ export function InteractiveMap() {
           <div className="text-sm text-zinc-500">Найдено точек</div>
           <div className="mt-1 text-4xl font-black text-white">{filteredMarkers.length}</div>
           <p className="mt-2 text-sm text-zinc-400">
-            Карта сделана по твоему изображению. Координаты меток меняются в src/data/mapMarkers.ts.
+            Сетка отключена. По умолчанию показаны только бункеры; остальные POI можно включить фильтрами.
           </p>
         </div>
       </div>
@@ -270,22 +259,6 @@ export function InteractiveMap() {
                 }}
               />
 
-              {showSectorOverlay && (
-                <div className="pointer-events-none absolute inset-0 grid grid-cols-5 grid-rows-5">
-                  {mapRows.map((row) =>
-                    mapColumns.map((column) => (
-                      <div
-                        key={`${row}${column}`}
-                        className="border border-white/12 p-2 text-2xl font-black text-white/80 drop-shadow-[0_2px_2px_rgba(0,0,0,1)] sm:text-3xl"
-                      >
-                        {row}
-                        {column}
-                      </div>
-                    ))
-                  )}
-                </div>
-              )}
-
               {filteredMarkers.map((marker) => {
                 const Icon = categoryIcons[marker.category];
                 const style = categoryStyles[marker.category];
@@ -301,17 +274,17 @@ export function InteractiveMap() {
                     title={marker.description}
                   >
                     <span
-                      className={`grid h-9 w-9 place-items-center rounded-full border-2 border-white ${style.dot} ${style.ring} transition group-hover:scale-110 ${
+                      className={`grid h-7 w-7 place-items-center rounded-full border-2 border-white ${style.dot} ${style.ring} transition group-hover:scale-110 ${
                         isSelected ? "scale-125 ring-4 ring-white/30" : ""
                       }`}
                     >
-                      <Icon size={17} className="text-black" />
+                      <Icon size={14} className="text-black" />
                     </span>
                     <span
-                      className={`mt-2 hidden whitespace-nowrap rounded-xl border px-3 py-1.5 text-xs font-black backdrop-blur transition md:block ${
+                      className={`pointer-events-none mt-2 whitespace-nowrap rounded-xl border px-3 py-1.5 text-xs font-black backdrop-blur transition ${
                         isSelected
-                          ? "border-red-400 bg-black text-white"
-                          : "border-zinc-700 bg-black/80 text-zinc-200 group-hover:border-zinc-500"
+                          ? "block border-red-400 bg-black text-white"
+                          : "hidden border-zinc-700 bg-black/80 text-zinc-200 group-hover:block group-hover:border-zinc-500"
                       }`}
                     >
                       {marker.name}
