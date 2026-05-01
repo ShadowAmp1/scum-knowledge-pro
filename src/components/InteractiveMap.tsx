@@ -276,19 +276,17 @@ export function InteractiveMap() {
                     key={marker.id}
                     type="button"
                     onClick={() => setSelectedId(marker.id)}
-                    className="group absolute z-20 -translate-x-1/2 -translate-y-1/2 text-left"
+                    className="group absolute z-20 h-8 w-8 -translate-x-1/2 -translate-y-1/2 text-left"
                     style={{ left: `${marker.x}%`, top: `${marker.y}%` }}
                     title={marker.description}
                   >
                     <span
-                      className={`grid h-7 w-7 place-items-center rounded-full border-2 border-white ${style.dot} ${style.ring} transition group-hover:scale-110 ${
-                        isSelected ? "scale-125 ring-4 ring-white/30" : ""
-                      }`}
+                      className={`grid h-7 w-7 place-items-center rounded-full border-2 border-white ${style.dot} ${style.ring} transition ${isSelected ? "ring-4 ring-white/30" : ""}`}
                     >
                       <Icon size={14} className="text-black" />
                     </span>
                     <span
-                      className={`pointer-events-none mt-2 whitespace-nowrap rounded-xl border px-3 py-1.5 text-xs font-black backdrop-blur transition ${
+                      className={`pointer-events-none absolute left-1/2 top-8 -translate-x-1/2 whitespace-nowrap rounded-xl border px-3 py-1.5 text-xs font-black backdrop-blur transition ${
                         isSelected
                           ? "block border-red-400 bg-black text-white"
                           : "hidden border-zinc-700 bg-black/80 text-zinc-200 group-hover:block group-hover:border-zinc-500"
