@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #020202;
+  --foreground: #ffffff;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(220, 38, 38, 0.18), transparent 36rem),
+    radial-gradient(circle at bottom right, rgba(113, 63, 18, 0.18), transparent 28rem),
+    var(--background);
+  color: var(--foreground);
+}
+::selection { background: #dc2626; color: #fff; }
+.noise {
+  background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
