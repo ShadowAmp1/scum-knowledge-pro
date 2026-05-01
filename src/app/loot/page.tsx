@@ -9,13 +9,13 @@ export default function LootPage() {
 
   return (
     <main>
-      <PageHeader title="Лут" description="SCUM DB PRO v3: поиск по предметам, приоритет хранения, места фарма, ценность, категории и быстрые советы." />
+      <PageHeader title="Лут" description="Полноценная база лута SCUM: карточки предметов, поиск, категории, приоритет хранения, лучшие места фарма и советы что продавать или оставлять." />
 
       <section className="mx-auto max-w-7xl px-4 pt-10">
         <div className="grid gap-4 md:grid-cols-3">
           <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
             <div className="text-4xl font-black text-white">{lootItems.length}</div>
-            <div className="mt-2 text-sm text-zinc-500">предметов в базе v3</div>
+            <div className="mt-2 text-sm text-zinc-500">предметов в базе</div>
           </div>
           <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
             <div className="text-4xl font-black text-red-400">{maxPriority}</div>
@@ -34,7 +34,7 @@ export default function LootPage() {
         <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-6">
           <h2 className="text-2xl font-black text-white">Правило сортировки лута</h2>
           <p className="mt-3 max-w-3xl text-zinc-400">
-            В бункере не забивай рюкзак дешевыми вещами. Сначала бери ремонт, патроны под свое оружие, медицину, редкую оптику, NVG и инструменты. Тяжелые предметы бери только если они нужны базе или транспорту.
+            Не забивай рюкзак дешевыми тяжелыми вещами. Сначала бери ремкомплекты, патроны под свое оружие, медицину, редкую электронику, NVG, ключ-карты, инструменты и легкие ценные предметы. Тяжелые предметы бери только если они нужны базе, транспорту или конкретному крафту.
           </p>
         </div>
       </section>
