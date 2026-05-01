@@ -5,7 +5,7 @@ export const sections = [
   { title: "Бункеры", description: "Поиск, фильтры, риск, маршруты, враги и ценный лут в бункерах.", href: "/bunkers", icon: Shield, badge: "Bunkers v3" },
   { title: "Лут", description: "Фильтры по ценности, редкости, приоритету и местам фарма.", href: "/loot", icon: Package, badge: "Loot v3" },
   { title: "Подготовка", description: "Готовые наборы перед рейдом: оружие, броня, медицина и инструменты.", href: "/preparation", icon: Backpack, badge: "Raid kits" },
-  { title: "Карта", description: "Визуальные метки бункеров, фарма, транспорта и мест под базу.", href: "/map", icon: Map, badge: "Map" },
+  { title: "Карта", description: "Интерактивные метки, поиск, фильтры, риск, tier лута и маршруты.", href: "/map", icon: Map, badge: "Map v4" },
   { title: "Базы", description: "PvE/PvP идеи, хай-тек базы, гаражи и планировка для дуо.", href: "/bases", icon: Home, badge: "Base" },
   { title: "Транспорт", description: "Машины, мотоциклы, вертолеты, ремонт и советы по хранению.", href: "/vehicles", icon: Car, badge: "Vehicles" },
   { title: "Гайды", description: "Старт с нуля, прокачка, заработок и маршруты выживания.", href: "/guides", icon: BookOpen, badge: "Guides" },

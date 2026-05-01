@@ -20,7 +20,7 @@ export function Header() {
           </div>
           <div>
             <div className="text-lg font-black tracking-wide text-white">SCUM DB PRO</div>
-            <div className="text-xs text-zinc-500">Knowledge Base v3</div>
+            <div className="text-xs text-zinc-500">Knowledge Base v4</div>
           </div>
         </Link>
 

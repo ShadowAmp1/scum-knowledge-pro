@@ -1,25 +1,24 @@
-SCUM DB PRO v3
+SCUM DB PRO v4 files overview
 
-Главные новые файлы:
-- src/data/bunkers.ts
-- src/data/loot.ts
-- src/data/preparation.ts
-- src/components/BunkerFilters.tsx
-- src/components/LootFilters.tsx
-- src/components/RaidKits.tsx
+Core:
+- package.json
+- render.yaml
+- README.md
+- CHANGELOG_V2.md
+- CHANGELOG_V3.md
+- CHANGELOG_V4.md
+
+App pages:
+- src/app/page.tsx
+- src/app/weapons/page.tsx
+- src/app/weapons/[slug]/page.tsx
 - src/app/bunkers/page.tsx
 - src/app/bunkers/[slug]/page.tsx
 - src/app/loot/page.tsx
 - src/app/preparation/page.tsx
-- CHANGELOG_V3.md
+- src/app/map/page.tsx
 
-Команды:
-- npm install
-- npm run dev
-- npm run build
-- npm run start
-
-Render:
-- Web Service
-- Build Command: npm install && npm run build
-- Start Command: npm run start
+New in v4:
+- src/components/InteractiveMap.tsx
+- src/data/mapMarkers.ts
+- map styles in src/app/globals.css
