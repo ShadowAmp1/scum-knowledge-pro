@@ -36,12 +36,6 @@ export default function BunkersPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pt-6">
-        <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-6 text-sm leading-7 text-zinc-300">
-          <b className="text-red-300">Важно:</b> координаты бункеров на карте берутся только из твоих отправленных скриншотов. Для обычных бункеров добавлены схемы Z0, Z2, A2, B0, B4, C1, D0 и D3. Остальные старые примерные точки не используются, чтобы карта была чище и точнее.
-        </div>
-      </section>
-
       <BunkerFilters />
       <RaidKits />
     </main>

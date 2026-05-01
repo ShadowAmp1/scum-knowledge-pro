@@ -69,7 +69,7 @@ function bunker(
       `Бункер ${sector}. Метка выставлена на текущую карту из твоего скрина. Это обычный high-tech bunker: снаружи обычно есть опасная зона, внутри военный лут, шкафчики, оружие, патроны и расходники.`,
     bestFor: ["Военный лут", "Оружие", "Патроны", "Броня", "Рейд"],
     recommendedKit: bunkerKit,
-    linkedHref: `/bunkers/${sector.toLowerCase()}`,
+    linkedHref: `/bunkers/${sector.toLowerCase()}-regular-bunker`,
   };
 }
 
@@ -99,7 +99,7 @@ function abandonedBunker(
       "отмычки, отвертки и место в рюкзаке",
       "план отхода и транспорт недалеко от входа",
     ],
-    linkedHref: `/bunkers/${sector.toLowerCase()}`,
+    linkedHref: `/bunkers/${sector.toLowerCase()}-abandoned-bunker`,
   };
 }
 
