@@ -41,8 +41,8 @@ export default function BunkerPage({ params }: { params: { slug: string } }) {
         <section className="mt-8 rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
           <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.25em] text-red-400">карты заброшенного бункера</p>
-              <h2 className="mt-2 text-3xl font-black text-white">Уровни -01 и -02</h2>
+              <p className="text-sm font-black uppercase tracking-[0.25em] text-red-400">карты и схемы</p>
+              <h2 className="mt-2 text-3xl font-black text-white">Планировка бункера</h2>
             </div>
             <p className="max-w-xl text-sm leading-6 text-zinc-500">Кликни правой кнопкой по изображению и открой в новой вкладке, если нужно рассмотреть детали крупнее.</p>
           </div>

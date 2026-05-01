@@ -92,6 +92,73 @@ const abandonedMaps: BunkerMap[] = [
   }
 ];
 
+const regularMapBySector: Record<string, BunkerMap[]> = {
+  Z0: [
+    {
+      title: "Карта бункера Z0",
+      image: "/images/bunker-z0-map.png",
+      description: "Схема обычного бункера Z0 с двумя уровнями. На карте отмечены killbox, оружейная, хранилища, офисы, медблок, лаборатория и точки входа/лестницы.",
+      keyRooms: ["Killbox", "Оружейная", "Хранилища", "Пункт управления", "Офисы", "Медблок", "Лаборатория"]
+    }
+  ],
+  Z2: [
+    {
+      title: "Карта бункера Z2",
+      image: "/images/bunker-z2-map.png",
+      description: "Схема обычного бункера Z2 с уровнями 1 и 2. Полезна для поиска хранилищ, смотровых, медблока, офисов и безопасного прохода между уровнями.",
+      keyRooms: ["Killbox", "Хранилища", "Смотровая", "Медблок", "Офисы", "Пункт управления", "Оружейные"]
+    }
+  ],
+  A2: [
+    {
+      title: "Карта бункера A2",
+      image: "/images/bunker-a2-map.png",
+      description: "Схема бункера A2 с двумя уровнями. На ней видно расположение медблока, смотровой, лабораторий, оружейных, хранилищ и killbox-зоны.",
+      keyRooms: ["Killbox", "Медблок", "Смотровая", "Лаборатории", "Хранилища", "Оружейные", "Пункт управления"]
+    }
+  ],
+  B0: [
+    {
+      title: "Карта бункера B0",
+      image: "/images/bunker-b0-map.png",
+      description: "Классическая схема B0 с большим центральным блоком, лабораториями, медблоком, несколькими хранилищами, killbox и комнатой управления.",
+      keyRooms: ["Killbox", "Лаборатории", "Медблок", "Хранилища", "Офис", "Пункт управления", "Лестницы"]
+    }
+  ],
+  B4: [
+    {
+      title: "Карта бункера B4",
+      image: "/images/bunker-b4-map.png",
+      description: "Карта B4 показывает оба уровня и компактную структуру: центральный пункт управления, killbox, медблок, лабораторию, оружейную и хранилища.",
+      keyRooms: ["Killbox", "Пункт управления", "Хранилища", "Оружейная", "Медблок", "Лаборатория", "Лестницы"]
+    }
+  ],
+  C1: [
+    {
+      title: "Карта бункера C1",
+      image: "/images/bunker-c1-map.png",
+      description: "Развернутая схема C1 с отдельными блоками на первом и втором уровнях. Видны killbox, смотровые, медблок, лаборатории, оружейные, офис и хранилища.",
+      keyRooms: ["Killbox", "Смотровые", "Медблок", "Лаборатории", "Хранилища", "Оружейные", "Офис"]
+    }
+  ],
+  D3: [
+    {
+      title: "Карта бункера D3",
+      image: "/images/bunker-d3-map.png",
+      description: "Одноуровневая карта D3 с длинным маршрутом от входа к killbox. Полезна для понимания последовательности комнат: офисы, оружейные, медблок, лаборатория и пункт управления.",
+      keyRooms: ["Killbox", "Пункт управления", "Офисы", "Оружейные", "Медблок", "Лаборатория", "Смотровая"]
+    }
+  ],
+  D0: [
+    {
+      title: "Карта бункера D0",
+      image: "/images/bunker-d0-map.png",
+      description: "Схема обычного бункера D0 с двумя уровнями. На карте отмечены офисы, оружейные, склады, медблок, лаборатории, лестницы, комната управления и killbox.",
+      keyRooms: ["Killbox", "Оружейные", "Склады", "Комната управления", "Офисы", "Медблок", "Лаборатории"]
+    }
+  ],
+};
+
 function regularBunker(slug: string, sector: string, risk: BunkerRisk, lootTier: Bunker["lootTier"], note: string): Bunker {
   return {
     slug,
@@ -103,7 +170,7 @@ function regularBunker(slug: string, sector: string, risk: BunkerRisk, lootTier:
     beginnerFriendly: risk === "Средний",
     duoFriendly: true,
     recommendedTime: risk === "Высокий" ? "25–40 минут" : "18–30 минут",
-    short: `${note} Обычный военный бункер для стабильного фарма патронов, оружия, модулей, брони и ремонтных предметов.`,
+    short: `${note} Обычный военный бункер для стабильного фарма патронов, оружия, модулей, брони и ремонтных предметов.${regularMapBySector[sector]?.length ? " Для этого бункера добавлена карта уровней." : ""}`,
     preparation: regularPrep,
     recommendedWeapons: risk === "Высокий" ? ["AKM", "AK-15", "MP5", "SDASS 12M", "SVD"] : ["MP5", "UMP45", "AKM", "SDASS 12M"],
     loot: regularLoot,
@@ -112,7 +179,8 @@ function regularBunker(slug: string, sector: string, risk: BunkerRisk, lootTier:
     dangerZones: regularDanger,
     mistakes: regularMistakes,
     soloTips: regularSolo,
-    duoTips: regularDuo
+    duoTips: regularDuo,
+    mapImages: regularMapBySector[sector]
   };
 }
 
@@ -127,7 +195,7 @@ function abandonedBunker(slug: string, sector: string, note: string): Bunker {
     beginnerFriendly: false,
     duoFriendly: true,
     recommendedTime: "45–90 минут",
-    short: `${note} Заброшенный бункер — самый опасный тип подземного объекта: несколько уровней, лаборатории, оружейные, генераторные блоки, killbox и зона Бреннера.`,
+    short: `${note} Заброшенный бункер — самый опасный тип подземного объекта: несколько уровней, лаборатории, оружейные, генераторные блоки, killbox и зона Бреннера. Для него добавлены карты уровней -01 и -02.`,
     preparation: [
       "Автомат или пулемет для плотной зачистки",
       "SMG/дробовик для коридоров",
