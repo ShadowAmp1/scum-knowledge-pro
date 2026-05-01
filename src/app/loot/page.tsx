@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Лут SCUM | SCUM DB PRO",
+  description: "Предметы лута SCUM: где искать, что хранить, что продавать, приоритеты и советы по серверам.",
+};
+
 import { PageHeader } from "@/components/PageHeader";
 import { LootFilters } from "@/components/LootFilters";
 import { lootItems } from "@/data/loot";

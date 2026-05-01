@@ -38,6 +38,7 @@ export default function LootItemPage({ params }: { params: { slug: string } }) {
           <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-400">{item.rarity}</span>
           <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-400">{item.priority}</span>
           <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-400">{item.weight}</span>
+          <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-200">{item.usefulness}</span>
         </div>
 
         <p className="mt-6 text-sm font-black uppercase tracking-[0.3em] text-red-400">Карточка предмета</p>
@@ -49,10 +50,17 @@ export default function LootItemPage({ params }: { params: { slug: string } }) {
           <Metric label="Ценность" value={item.value} />
           <Metric label="Вес" value={item.weight} />
           <Metric label="Приоритет" value={item.priority} />
+          <Metric label="Полезность" value={item.usefulness} />
         </div>
       </article>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.85fr]">
+        <InfoCard title="Кому и когда полезно">
+          <div className="space-y-3 leading-7 text-zinc-300">
+            <p><b className="text-white">Этап:</b> {item.stage}</p>
+            <p><b className="text-white">Кому:</b> {item.forWhom}</p>
+          </div>
+        </InfoCard>
         <InfoCard title="Где лучше искать">
           <ul className="space-y-2">
             {item.bestLocations.map((place) => (

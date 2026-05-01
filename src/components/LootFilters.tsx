@@ -7,6 +7,7 @@ import {
   lootCategories,
   lootItems,
   lootPriorities,
+  lootUsefulnessLevels,
   lootRarities,
   lootWeights,
   type LootPriority,
@@ -43,6 +44,7 @@ export function LootFilters() {
   const [category, setCategory] = useState(all);
   const [rarity, setRarity] = useState(all);
   const [priority, setPriority] = useState(all);
+  const [usefulness, setUsefulness] = useState(all);
   const [weight, setWeight] = useState(all);
   const [sort, setSort] = useState<SortMode>("priority");
 
@@ -62,6 +64,9 @@ export function LootFilters() {
             item.value,
             item.rarity,
             item.priority,
+            item.usefulness,
+            item.stage,
+            item.forWhom,
             ...item.locations,
             ...item.bestLocations,
             ...item.tips,
@@ -76,6 +81,7 @@ export function LootFilters() {
           (category === all || item.category === category) &&
           (rarity === all || item.rarity === rarity) &&
           (priority === all || item.priority === priority) &&
+          (usefulness === all || item.usefulness === usefulness) &&
           (weight === all || item.weight === weight)
         );
       })
@@ -85,13 +91,14 @@ export function LootFilters() {
         if (sort === "weight") return weightOrder[a.weight] - weightOrder[b.weight];
         return priorityWeight[b.priority] - priorityWeight[a.priority] || rarityWeight[b.rarity] - rarityWeight[a.rarity];
       });
-  }, [query, category, rarity, priority, weight, sort]);
+  }, [query, category, rarity, priority, usefulness, weight, sort]);
 
   function resetFilters() {
     setQuery("");
     setCategory(all);
     setRarity(all);
     setPriority(all);
+    setUsefulness(all);
     setWeight(all);
     setSort("priority");
   }
@@ -115,7 +122,7 @@ export function LootFilters() {
           </button>
         </div>
 
-        <div className="mt-6 grid gap-3 lg:grid-cols-[1.4fr_repeat(5,1fr)]">
+        <div className="mt-6 grid gap-3 lg:grid-cols-[1.4fr_repeat(6,1fr)]">
           <label className="relative block">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={18} />
             <input
@@ -129,6 +136,7 @@ export function LootFilters() {
           <Select title="Категория" value={category} setValue={setCategory} options={[all, ...lootCategories]} />
           <Select title="Редкость" value={rarity} setValue={setRarity} options={[all, ...lootRarities]} />
           <Select title="Приоритет" value={priority} setValue={setPriority} options={[all, ...lootPriorities]} />
+          <Select title="Полезность" value={usefulness} setValue={setUsefulness} options={[all, ...lootUsefulnessLevels]} />
           <Select title="Вес" value={weight} setValue={setWeight} options={[all, ...lootWeights]} />
           <label className="block">
             <span className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Сортировка</span>
@@ -161,6 +169,7 @@ export function LootFilters() {
               <span className="rounded-full bg-red-500/10 px-3 py-1 text-xs font-black text-red-300">{item.category}</span>
               <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-400">{item.rarity}</span>
               <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-400">{item.weight}</span>
+              <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-200">{item.usefulness}</span>
             </div>
 
             <h3 className="mt-5 text-2xl font-black text-white">{item.name}</h3>
@@ -169,6 +178,9 @@ export function LootFilters() {
             <div className="mt-5 space-y-3 text-sm text-zinc-400">
               <div className="flex items-start gap-2"><Star size={16} className="mt-0.5 text-red-400" /> Приоритет: {item.priority}</div>
               <div className="flex items-start gap-2"><Package size={16} className="mt-0.5 text-red-400" /> {item.keepOrSell}</div>
+              <div className="rounded-2xl border border-zinc-800 bg-black/40 p-3 text-xs leading-5 text-zinc-400">
+                <b className="text-zinc-200">Этап:</b> {item.stage}
+              </div>
               <div className="flex items-start gap-2"><MapPin size={16} className="mt-0.5 text-red-400" /> Лучше искать: {item.bestLocations.slice(0, 3).join(" • ")}</div>
             </div>
 

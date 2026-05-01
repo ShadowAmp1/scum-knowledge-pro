@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Оружие SCUM | SCUM DB PRO",
+  description: "Оружие SCUM, лучшие билды, патроны, обвесы, фильтры, роли и советы для PvE/PvP.",
+};
+
 import Link from "next/link";
 import { Puzzle } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";

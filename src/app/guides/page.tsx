@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Гайды SCUM | SCUM DB PRO",
+  description: "Практичные гайды SCUM: старт, прокачка, деньги, бункеры, оружие, база, транспорт и маршруты фарма.",
+};
+
 import { PageHeader } from "@/components/PageHeader";
 import { GuideFilters } from "@/components/GuideFilters";
 import { guides } from "@/data/guides";

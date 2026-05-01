@@ -64,6 +64,15 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
           </InfoCard>
         </div>
 
+        {(guide.suitsFor?.length || guide.stepPlan?.length || guide.bring?.length || guide.expectedResult?.length) ? (
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            {guide.suitsFor?.length ? <InfoCard title="Кому подходит"><ul className="space-y-2">{guide.suitsFor.map((item) => <li key={item}>✓ {item}</li>)}</ul></InfoCard> : null}
+            {guide.bring?.length ? <InfoCard title="Что взять с собой"><ul className="space-y-2">{guide.bring.map((item) => <li key={item}>• {item}</li>)}</ul></InfoCard> : null}
+            {guide.stepPlan?.length ? <InfoCard title="Пошаговый план"><ol className="list-decimal space-y-2 pl-5">{guide.stepPlan.map((item) => <li key={item}>{item}</li>)}</ol></InfoCard> : null}
+            {guide.expectedResult?.length ? <InfoCard title="Что получишь в итоге"><ul className="space-y-2">{guide.expectedResult.map((item) => <li key={item}>→ {item}</li>)}</ul></InfoCard> : null}
+          </div>
+        ) : null}
+
         <section className="mt-8 space-y-5">
           {guide.sections.map((section, index) => (
             <div key={section.heading} className="rounded-3xl border border-zinc-800 bg-black/40 p-6">

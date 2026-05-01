@@ -47,6 +47,12 @@ export default function BunkerPage({ params }: { params: { slug: string } }) {
         <h1 className="mt-5 text-5xl font-black text-white">{bunker.name}</h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-zinc-400">{bunker.short}</p>
 
+        {bunker.serverNote ? (
+          <div className="mt-6 rounded-2xl border border-amber-500/20 bg-amber-500/10 p-4 text-sm leading-6 text-amber-100">
+            {bunker.serverNote}
+          </div>
+        ) : null}
+
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl bg-black/50 p-4 text-sm text-zinc-400">Риск<br /><b className="text-xl text-red-400">{bunker.risk}</b></div>
           <div className="rounded-2xl bg-black/50 p-4 text-sm text-zinc-400">Новичку<br /><b className="text-xl text-white">{bunker.beginnerFriendly ? "Можно" : "Сложно"}</b></div>

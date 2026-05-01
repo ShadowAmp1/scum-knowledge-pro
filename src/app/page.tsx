@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "SCUM DB PRO — оружие, лут, бункеры и карта",
+  description: "Русская база знаний SCUM: оружие, обвесы, лут, бункеры, интерактивная карта, гайды и подготовка к рейдам.",
+};
+
 import { Hero } from "@/components/Hero";
 import { SectionCard } from "@/components/SectionCard";
 import { sections } from "@/data/sections";

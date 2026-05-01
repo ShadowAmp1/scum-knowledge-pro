@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Обвесы SCUM | SCUM DB PRO",
+  description: "Магазины, прицелы, глушители, фонарики и совместимое оружие в базе SCUM DB PRO.",
+};
+
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { AttachmentFilters } from "@/components/AttachmentFilters";

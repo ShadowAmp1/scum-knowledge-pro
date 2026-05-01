@@ -29,9 +29,11 @@ export default function WeaponPage({ params }: { params: { slug: string } }) {
     .filter((item) => item.slug !== weapon.slug && (item.category === weapon.category || item.ammo === weapon.ammo))
     .slice(0, 3);
 
+  const recommendedAttachmentSlugs = new Set(weapon.recommendedAttachmentSlugs ?? []);
   const compatibleAttachments = attachments
-    .filter((attachment) => attachment.compatibleWeaponSlugs.includes(weapon.slug))
-    .slice(0, 8);
+    .filter((attachment) => attachment.compatibleWeaponSlugs.includes(weapon.slug) || recommendedAttachmentSlugs.has(attachment.slug))
+    .sort((a, b) => Number(recommendedAttachmentSlugs.has(b.slug)) - Number(recommendedAttachmentSlugs.has(a.slug)))
+    .slice(0, 10);
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-12">
@@ -51,6 +53,11 @@ export default function WeaponPage({ params }: { params: { slug: string } }) {
         <h1 className="mt-3 text-5xl font-black text-white md:text-6xl">{weapon.name}</h1>
         <p className="mt-3 text-lg font-bold text-red-200">{weapon.shortRole}</p>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-zinc-400">{weapon.summary}</p>
+        {weapon.serverNote ? (
+          <div className="mt-5 max-w-3xl rounded-2xl border border-amber-500/20 bg-amber-500/10 p-4 text-sm leading-6 text-amber-100">
+            {weapon.serverNote}
+          </div>
+        ) : null}
 
         <div className="mt-8 grid gap-3 md:grid-cols-4">
           <Metric label="Патрон" value={weapon.ammo} />

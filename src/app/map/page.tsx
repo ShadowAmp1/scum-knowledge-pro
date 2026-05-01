@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Интерактивная карта SCUM | SCUM DB PRO",
+  description: "Интерактивная карта SCUM с маркерами лута, транспорта, баз, опасных зон, городов, военных зон, торговцев и бункеров.",
+};
+
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { PageHeader } from "@/components/PageHeader";
 

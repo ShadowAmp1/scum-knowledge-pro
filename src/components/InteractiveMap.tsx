@@ -94,7 +94,9 @@ const riskStyles: Record<MapMarker["risk"], string> = {
   "Экстрим": "border-red-500/30 bg-red-500/10 text-red-200",
 };
 
-const categories = Object.keys(mapCategoryLabels) as MapMarkerCategory[];
+const categories = (Object.keys(mapCategoryLabels) as MapMarkerCategory[]).filter((category) =>
+  mapMarkers.some((marker) => marker.category === category)
+);
 
 type ZoomLevel = "fit" | "wide" | "full";
 
@@ -106,7 +108,8 @@ const zoomClasses: Record<ZoomLevel, string> = {
 
 export function InteractiveMap() {
   const [query, setQuery] = useState("");
-  const [activeCategories, setActiveCategories] = useState<MapMarkerCategory[]>(["bunker", "abandonedBunker", "trader"]);
+  const defaultCategories = categories.filter((category) => ["bunker", "abandonedBunker", "trader"].includes(category));
+  const [activeCategories, setActiveCategories] = useState<MapMarkerCategory[]>(defaultCategories);
   const [selectedId, setSelectedId] = useState(mapMarkers[0]?.id ?? "");
   const [risk, setRisk] = useState<"all" | MapMarker["risk"]>("all");
   const [zoom, setZoom] = useState<ZoomLevel>("wide");
@@ -141,7 +144,7 @@ export function InteractiveMap() {
   function resetFilters() {
     setQuery("");
     setRisk("all");
-    setActiveCategories(["bunker", "abandonedBunker", "trader"]);
+    setActiveCategories(defaultCategories);
     setSelectedId(mapMarkers[0]?.id ?? "");
     setZoom("wide");
   }
@@ -341,6 +344,33 @@ export function InteractiveMap() {
                   ))}
                 </div>
               </div>
+
+              {selectedMarker.searchFor?.length ? (
+                <div className="mt-4">
+                  <div className="text-sm font-black text-white">Что искать</div>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {selectedMarker.searchFor.map((item) => (
+                      <span key={item} className="rounded-full border border-zinc-800 bg-black/50 px-3 py-1 text-xs text-zinc-300">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              {selectedMarker.dangerNotes?.length ? (
+                <div className="mt-4 rounded-2xl border border-orange-500/20 bg-orange-500/10 p-4">
+                  <div className="text-sm font-black text-orange-100">Чем опасна зона</div>
+                  <ul className="mt-2 space-y-1 text-sm text-orange-100/80">
+                    {selectedMarker.dangerNotes.map((item) => <li key={item}>• {item}</li>)}
+                  </ul>
+                </div>
+              ) : null}
+
+              {(selectedMarker.playerFit || selectedMarker.newbieAdvice) ? (
+                <div className="mt-4 rounded-2xl border border-zinc-800 bg-black/50 p-4 text-sm leading-6 text-zinc-300">
+                  {selectedMarker.playerFit ? <p><b className="text-white">Кому подходит:</b> {selectedMarker.playerFit}</p> : null}
+                  {selectedMarker.newbieAdvice ? <p className="mt-2"><b className="text-white">Новичку:</b> {selectedMarker.newbieAdvice}</p> : null}
+                </div>
+              ) : null}
 
               <div className="mt-4">
                 <div className="text-sm font-black text-white">Что взять</div>

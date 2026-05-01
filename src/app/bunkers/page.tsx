@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Бункеры SCUM | SCUM DB PRO",
+  description: "Обычные и заброшенные бункеры SCUM: риск, подготовка, карты уровней и советы для соло/дуо.",
+};
+
 import { PageHeader } from "@/components/PageHeader";
 import { BunkerFilters } from "@/components/BunkerFilters";
 import { RaidKits } from "@/components/RaidKits";

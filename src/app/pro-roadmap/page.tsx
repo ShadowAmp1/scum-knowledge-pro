@@ -1,21 +1,36 @@
 import { PageHeader } from "@/components/PageHeader";
 
+export const metadata = {
+  title: "Что добавить дальше | Roadmap SCUM DB PRO",
+  description: "План развития SCUM DB PRO: контент, карта, бункеры, оружие, лут, админ-панель, база данных, аккаунты, избранное и версии патчей.",
+};
+
 const roadmap = [
-  { title: "Этап 1 — готово", items: ["Главная", "Разделы", "Оружие", "Бункеры", "Лут", "Карта", "Гайды", "Render config"] },
-  { title: "Этап 2 — база данных", items: ["PostgreSQL", "Prisma", "Миграции", "Seed данные"] },
-  { title: "Этап 3 — админка", items: ["Логин админа", "Добавление оружия", "Редактирование гайдов", "Загрузка изображений"] },
-  { title: "Этап 4 — PRO функции", items: ["Поиск", "Фильтры", "Избранное", "Комментарии", "Калькулятор базы"] }
+  { title: "Контент", items: ["Расширить карточки предметов по версиям SCUM", "Добавить больше проверенных маршрутов", "Разделить советы для PvE и PvP"] },
+  { title: "Карта", items: ["Точные координаты после ручной проверки", "Слои маркеров и пользовательские заметки", "Импорт/экспорт меток"] },
+  { title: "Бункеры", items: ["Больше схем обычных бункеров", "Отдельные маршруты соло/дуо", "Чек-листы подготовки под риск"] },
+  { title: "Оружие", items: ["Больше билдов под стиль игры", "Сравнение калибров без выдуманных чисел", "Фильтр по совместимым обвесам"] },
+  { title: "Лут", items: ["Экономика продажи по серверам", "Списки хранить/продавать", "Маршруты под инструменты, медицину, патроны"] },
+  { title: "Технические улучшения", items: ["Поиск по всему сайту", "PWA/offline режим", "Больше автотестов и визуальных проверок"] },
+  { title: "Будущая админ-панель", items: ["Авторизация админа", "CRUD оружия, лута, бункеров", "Загрузка изображений и предпросмотр"] },
+  { title: "База данных", items: ["PostgreSQL + Prisma", "Seed-данные", "Версионирование контента"] },
+  { title: "Аккаунты пользователей", items: ["Профили", "Персональные настройки", "Синхронизация избранного"] },
+  { title: "Избранное", items: ["Сохранение оружия и предметов", "Личные маршруты", "Списки подготовки к рейду"] },
+  { title: "Комментарии/заметки", items: ["Заметки к маркерам", "Комментарии к гайдам", "Модерация пользовательского контента"] },
+  { title: "Версии патчей SCUM", items: ["Хронология изменений", "Пометки устаревших данных", "Сравнение механик по версиям"] },
 ];
 
 export default function RoadmapPage() {
   return (
     <main>
-      <PageHeader title="PRO Roadmap" description="План развития проекта после статической версии: база данных, админка, авторизация и настоящая интерактивная карта." />
-      <section className="mx-auto grid max-w-7xl gap-5 px-4 py-12 md:grid-cols-2 lg:grid-cols-4">
+      <PageHeader title="Что добавить дальше" description="Roadmap для SCUM DB PRO v5: больше контента, точнее карта, база данных, админка, аккаунты, избранное и патчи SCUM." />
+      <section className="mx-auto grid max-w-7xl gap-5 px-4 py-12 md:grid-cols-2 xl:grid-cols-3">
         {roadmap.map((block) => (
-          <article key={block.title} className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6">
+          <article key={block.title} className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6 transition hover:border-red-500/40 hover:bg-zinc-900/70">
             <h2 className="text-xl font-black text-white">{block.title}</h2>
-            <ul className="mt-5 space-y-2 text-sm text-zinc-400">{block.items.map((x) => <li key={x}>✓ {x}</li>)}</ul>
+            <ul className="mt-5 space-y-2 text-sm leading-6 text-zinc-400">
+              {block.items.map((item) => <li key={item}>✓ {item}</li>)}
+            </ul>
           </article>
         ))}
       </section>

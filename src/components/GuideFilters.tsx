@@ -32,6 +32,10 @@ export function GuideFilters() {
           guide.intro,
           guide.goals.join(" "),
           guide.checklist.join(" "),
+          guide.suitsFor?.join(" ") ?? "",
+          guide.stepPlan?.join(" ") ?? "",
+          guide.bring?.join(" ") ?? "",
+          guide.expectedResult?.join(" ") ?? "",
           guide.sections.map((section) => `${section.heading} ${section.body} ${section.bullets.join(" ")}`).join(" "),
         ]
           .join(" ")
