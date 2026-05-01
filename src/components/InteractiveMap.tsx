@@ -106,7 +106,7 @@ const zoomClasses: Record<ZoomLevel, string> = {
 
 export function InteractiveMap() {
   const [query, setQuery] = useState("");
-  const [activeCategories, setActiveCategories] = useState<MapMarkerCategory[]>(["bunker", "abandonedBunker"]);
+  const [activeCategories, setActiveCategories] = useState<MapMarkerCategory[]>(["bunker", "abandonedBunker", "trader"]);
   const [selectedId, setSelectedId] = useState(mapMarkers[0]?.id ?? "");
   const [risk, setRisk] = useState<"all" | MapMarker["risk"]>("all");
   const [zoom, setZoom] = useState<ZoomLevel>("wide");
@@ -141,7 +141,7 @@ export function InteractiveMap() {
   function resetFilters() {
     setQuery("");
     setRisk("all");
-    setActiveCategories(["bunker", "abandonedBunker"]);
+    setActiveCategories(["bunker", "abandonedBunker", "trader"]);
     setSelectedId(mapMarkers[0]?.id ?? "");
     setZoom("wide");
   }
@@ -159,7 +159,7 @@ export function InteractiveMap() {
       <div className="mb-6 grid gap-4 xl:grid-cols-[1fr_0.32fr]">
         <div className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-5">
           <div className="mb-4 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-red-300">
-            <Filter size={16} /> Фильтры карты SCUM — обычные и заброшенные бункеры
+            <Filter size={16} /> Фильтры карты SCUM — бункеры, торговцы и POI
           </div>
 
           <div className="grid gap-4 lg:grid-cols-[1fr_220px]">
@@ -223,7 +223,7 @@ export function InteractiveMap() {
           <div className="text-sm text-zinc-500">Найдено точек</div>
           <div className="mt-1 text-4xl font-black text-white">{filteredMarkers.length}</div>
           <p className="mt-2 text-sm text-zinc-400">
-            Сетка отключена. По умолчанию показаны обычные и заброшенные бункеры; остальные POI можно включить фильтрами.
+            Сетка отключена. По умолчанию показаны обычные бункеры, заброшенные бункеры и торговцы; остальные POI можно включить фильтрами.
           </p>
         </div>
       </div>
