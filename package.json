@@ -1,12 +1,13 @@
 {
   "name": "scum-knowledge-pro",
-  "version": "4.19.0",
+  "version": "4.20.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "validate:data": "node scripts/validate-data.mjs"
   },
   "dependencies": {
     "@next/env": "14.2.23",

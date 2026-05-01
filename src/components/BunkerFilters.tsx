@@ -38,7 +38,7 @@ export function BunkerFilters() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h2 className="text-2xl font-black text-white">База бункеров</h2>
-            <p className="mt-2 text-sm text-zinc-500">Оставлены только подтвержденные тобой точки: обычные и заброшенные бункеры.</p>
+            <p className="mt-2 text-sm text-zinc-500">Показаны добавленные в базу точки: обычные и заброшенные бункеры.</p>
           </div>
           <div className="relative w-full lg:max-w-md">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={18} />
@@ -85,7 +85,7 @@ export function BunkerFilters() {
               <div className="flex items-center gap-2"><Swords size={16} className="text-red-400" /> {bunker.recommendedWeapons.slice(0, 3).join(" • ")}</div>
               <div className="flex items-center gap-2"><Users size={16} className="text-red-400" /> Дуо: {bunker.duoFriendly ? "удобно" : "сложно"}</div>
               <div className="flex items-center gap-2"><MapPin size={16} className="text-red-400" /> {bunker.recommendedTime}</div>
-              {bunker.mapImages?.length ? <div className="flex items-center gap-2"><Layers size={16} className="text-red-400" /> Добавлены карты уровней -01 и -02</div> : null}
+              {bunker.mapImages?.length ? <div className="flex items-center gap-2"><Layers size={16} className="text-red-400" /> Добавлены карты уровней и схемы</div> : null}
             </div>
 
             <div className="mt-6 text-sm font-black text-red-400 transition group-hover:text-red-300">Открыть бункер →</div>

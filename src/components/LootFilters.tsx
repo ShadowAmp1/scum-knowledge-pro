@@ -58,6 +58,7 @@ export function LootFilters() {
             item.category,
             item.usage,
             item.keepOrSell,
+            item.serverNote ?? "",
             item.value,
             item.rarity,
             item.priority,

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -6,6 +7,22 @@ import { bunkers } from "@/data/bunkers";
 
 export function generateStaticParams() {
   return bunkers.map((bunker) => ({ slug: bunker.slug }));
+}
+
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const bunker = bunkers.find((item) => item.slug === params.slug);
+  if (!bunker) {
+    return {
+      title: "Бункер не найден | SCUM DB PRO",
+      description: "Запрошенный бункер не найден в базе SCUM DB PRO.",
+    };
+  }
+
+  return {
+    title: `${bunker.name} | Бункеры | SCUM DB PRO`,
+    description: `${bunker.name}: сектор ${bunker.sector}, тип ${bunker.type}, риск ${bunker.risk}, лут ${bunker.lootTier}. Подготовка, маршрут, угрозы и карты уровней.`,
+  };
 }
 
 export default function BunkerPage({ params }: { params: { slug: string } }) {

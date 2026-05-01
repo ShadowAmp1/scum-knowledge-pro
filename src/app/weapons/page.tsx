@@ -20,7 +20,7 @@ export default function WeaponsPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
             <div className="text-4xl font-black text-white">{weapons.length}</div>
-            <div className="mt-2 text-sm text-zinc-500">оружий в базе</div>
+            <div className="mt-2 text-sm text-zinc-500">видов оружия в базе</div>
           </div>
           <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
             <div className="text-4xl font-black text-red-400">{sTierCount}</div>

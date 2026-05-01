@@ -4,12 +4,13 @@ import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://scum-knowledge-pro.onrender.com"),
   title: "SCUM DB PRO — база знаний по SCUM",
-  description: "Оружие, бункеры, лут, базы, транспорт, карта и гайды по SCUM.",
+  description: "Оружие, обвесы, лут, обычные и заброшенные бункеры, карты уровней, интерактивная карта и гайды по SCUM.",
   keywords: ["SCUM", "SCUM база знаний", "SCUM оружие", "SCUM бункеры", "SCUM карта"],
   openGraph: {
     title: "SCUM DB PRO",
-    description: "PRO база знаний по игре SCUM",
+    description: "PRO база знаний по игре SCUM: оружие, обвесы, лут, бункеры, карта и гайды.",
     type: "website"
   }
 };

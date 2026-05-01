@@ -7,8 +7,8 @@ import { lootItems } from "@/data/loot";
 
 export default function HomePage() {
   const stats = [
-    { label: "Оружия", value: weapons.length },
-    { label: "Бункера", value: bunkers.length },
+    { label: "Единиц оружия", value: weapons.length },
+    { label: "Бункеров", value: bunkers.length },
     { label: "Предметов лута", value: lootItems.length },
     { label: "Разделов", value: sections.length }
   ];

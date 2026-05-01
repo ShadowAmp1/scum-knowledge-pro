@@ -75,6 +75,12 @@ export default function LootItemPage({ params }: { params: { slug: string } }) {
           <p className="leading-7 text-zinc-300">{item.keepOrSell}</p>
         </InfoCard>
 
+        {item.serverNote ? (
+          <InfoCard title="Важно про сервер">
+            <p className="leading-7 text-amber-100">{item.serverNote}</p>
+          </InfoCard>
+        ) : null}
+
         <InfoCard title="Связанные темы">
           <div className="flex flex-wrap gap-2">
             {item.related.length ? item.related.map((tag) => (
