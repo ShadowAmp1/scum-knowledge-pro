@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Skull, X } from "lucide-react";
+import { Menu, Skull, X, Heart } from "lucide-react";
 import { useState } from "react";
+import { useFavorites } from "@/lib/useFavorites";
 
 const navItems = [
   { title: "Главная", href: "/" },
@@ -17,6 +18,7 @@ const navItems = [
   { title: "Транспорт", href: "/vehicles" },
   { title: "Подготовка", href: "/preparation" },
   { title: "Гайды", href: "/guides" },
+  { title: "Избранное", href: "/favorites" },
 ];
 
 function isActiveLink(pathname: string, href: string) {
@@ -33,6 +35,7 @@ function navLinkClass(active: boolean) {
 export function Header() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const { count } = useFavorites();
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-black/80 backdrop-blur-xl">
@@ -56,6 +59,14 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
+          <Link href="/favorites" className="relative rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-2 text-sm font-bold text-zinc-300 transition hover:border-red-500/50 hover:text-white">
+            <Heart className="inline h-4 w-4" />
+            {count > 0 && (
+              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-black text-white">
+                {count > 9 ? "9+" : count}
+              </span>
+            )}
+          </Link>
           <Link href="/admin" className="rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-2 text-sm font-bold text-zinc-300 transition hover:border-red-500/50 hover:text-white">
             Admin
           </Link>

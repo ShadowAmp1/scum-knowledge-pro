@@ -12,9 +12,32 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const item = getLootBySlug(params.slug);
   if (!item) return { title: "Лут не найден | SCUM DB PRO" };
 
+  const title = `${item.name} | SCUM DB PRO`;
+  const description = `${item.name} (${item.category}): ${item.usage}. Приоритет: ${item.priority}, редкость: ${item.rarity}. Где искать, хранить или продавать, советы по использованию.`;
+
   return {
-    title: `${item.name} | SCUM DB PRO`,
-    description: `${item.name}: где искать, зачем нужен, хранить или продавать, советы по использованию.`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `https://scumdbpro.duckdns.org/loot/${item.slug}`,
+      images: [
+        {
+          url: "/og-image.svg",
+          width: 1200,
+          height: 630,
+          alt: `${item.name} - SCUM DB PRO`
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og-image.svg"]
+    }
   };
 }
 

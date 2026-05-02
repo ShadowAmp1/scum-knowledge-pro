@@ -12,9 +12,32 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const guide = getGuideBySlug(params.slug);
   if (!guide) return { title: "Гайд не найден | SCUM DB PRO" };
 
+  const title = `${guide.title} | SCUM DB PRO`;
+  const description = `${guide.summary} Категория: ${guide.category}, сложность: ${guide.difficulty}, время: ${guide.minutes} мин.`;
+
   return {
-    title: `${guide.title} | SCUM DB PRO`,
-    description: guide.summary,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `https://scumdbpro.duckdns.org/guides/${guide.slug}`,
+      images: [
+        {
+          url: "/og-image.svg",
+          width: 1200,
+          height: 630,
+          alt: `${guide.title} - SCUM DB PRO`
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og-image.svg"]
+    }
   };
 }
 

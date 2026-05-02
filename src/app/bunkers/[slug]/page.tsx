@@ -19,9 +19,32 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     };
   }
 
+  const title = `${bunker.name} | Бункеры | SCUM DB PRO`;
+  const description = `${bunker.name}: сектор ${bunker.sector}, тип ${bunker.type}, риск ${bunker.risk}, лут ${bunker.lootTier}. Подготовка, маршрут, угрозы и карты уровней.`;
+
   return {
-    title: `${bunker.name} | Бункеры | SCUM DB PRO`,
-    description: `${bunker.name}: сектор ${bunker.sector}, тип ${bunker.type}, риск ${bunker.risk}, лут ${bunker.lootTier}. Подготовка, маршрут, угрозы и карты уровней.`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `https://scumdbpro.duckdns.org/bunkers/${bunker.slug}`,
+      images: [
+        {
+          url: "/og-image.svg",
+          width: 1200,
+          height: 630,
+          alt: `${bunker.name} - SCUM DB PRO`
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og-image.svg"]
+    }
   };
 }
 

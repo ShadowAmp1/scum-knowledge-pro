@@ -10,6 +10,7 @@ import {
   type GuideCategory,
   type GuideDifficulty,
 } from "@/data/guides";
+import { FavoriteButton } from "@/components/FavoriteButton";
 
 const allCategories = "Все категории";
 const allDifficulty = "Любая сложность";
@@ -114,8 +115,12 @@ export function GuideFilters() {
           <Link
             key={guide.slug}
             href={`/guides/${guide.slug}`}
-            className="group rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6 transition hover:-translate-y-1 hover:border-red-500/50 hover:bg-zinc-900"
+            className="group relative rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6 transition hover:-translate-y-1 hover:border-red-500/50 hover:bg-zinc-900"
           >
+            <div className="absolute right-4 top-4">
+              <FavoriteButton type="guide" slug={guide.slug} />
+            </div>
+
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-red-500/10 px-3 py-1 text-xs font-black text-red-300">{guide.category}</span>
               <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-400">{guide.difficulty}</span>

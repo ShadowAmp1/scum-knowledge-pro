@@ -14,6 +14,7 @@ import {
   type LootRarity,
   type LootWeight,
 } from "@/data/loot";
+import { FavoriteButton } from "@/components/FavoriteButton";
 
 const all = "Все";
 
@@ -163,8 +164,12 @@ export function LootFilters() {
           <Link
             key={item.slug}
             href={`/loot/${item.slug}`}
-            className="group rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6 transition hover:-translate-y-1 hover:border-red-500/50 hover:bg-zinc-900"
+            className="group relative rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6 transition hover:-translate-y-1 hover:border-red-500/50 hover:bg-zinc-900"
           >
+            <div className="absolute right-4 top-4">
+              <FavoriteButton type="loot" slug={item.slug} />
+            </div>
+
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full bg-red-500/10 px-3 py-1 text-xs font-black text-red-300">{item.category}</span>
               <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-400">{item.rarity}</span>

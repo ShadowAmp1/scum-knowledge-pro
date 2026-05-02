@@ -15,6 +15,7 @@ import {
   type WeaponTier,
 } from "@/data/weapons";
 import { RarityBadge, TierBadge } from "@/components/WeaponBadge";
+import { FavoriteButton } from "@/components/FavoriteButton";
 
 type SortMode = "tier" | "name" | "damage" | "bunker" | "pvp" | "economy";
 
@@ -146,8 +147,12 @@ export function WeaponFilters() {
             <Link
               key={weapon.slug}
               href={`/weapons/${weapon.slug}`}
-              className="group flex h-full flex-col rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6 transition hover:-translate-y-1 hover:border-red-500/50 hover:bg-zinc-900"
+              className="group relative flex h-full flex-col rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6 transition hover:-translate-y-1 hover:border-red-500/50 hover:bg-zinc-900"
             >
+              <div className="absolute right-4 top-4">
+                <FavoriteButton type="weapon" slug={weapon.slug} />
+              </div>
+
               <div className="flex flex-wrap items-center gap-2">
                 <TierBadge tier={weapon.tier} />
                 <RarityBadge rarity={weapon.rarity} />

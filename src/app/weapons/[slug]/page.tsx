@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { InfoCard } from "@/components/InfoCard";
 import { RarityBadge, TierBadge } from "@/components/WeaponBadge";
 import { StatBar } from "@/components/StatBar";
+import { FavoriteButton } from "@/components/FavoriteButton";
 import { getWeaponBySlug, weapons } from "@/data/weapons";
 import { attachmentCategories, attachments } from "@/data/attachments";
 
@@ -15,9 +16,32 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const weapon = getWeaponBySlug(params.slug);
   if (!weapon) return { title: "Оружие не найдено | SCUM DB PRO" };
 
+  const title = `${weapon.name} | SCUM DB PRO`;
+  const description = `${weapon.name} (${weapon.category}): ${weapon.shortRole}. Tier ${weapon.tier}, патрон ${weapon.ammo}. Лучший билд, обвесы, где найти, плюсы и минусы.`;
+
   return {
-    title: `${weapon.name} | SCUM DB PRO`,
-    description: `${weapon.name}: лучший билд, патроны, модули, где найти, плюсы и минусы.`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `https://scumdbpro.duckdns.org/weapons/${weapon.slug}`,
+      images: [
+        {
+          url: "/og-image.svg",
+          width: 1200,
+          height: 630,
+          alt: `${weapon.name} - SCUM DB PRO`
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og-image.svg"]
+    }
   };
 }
 
@@ -52,11 +76,14 @@ export default function WeaponPage({ params }: { params: { slug: string } }) {
       </Link>
 
       <div className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-8 shadow-2xl shadow-black/30">
-        <div className="flex flex-wrap items-center gap-2">
-          <TierBadge tier={weapon.tier} />
-          <RarityBadge rarity={weapon.rarity} />
-          <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-500">{weapon.category}</span>
-          <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-500">{weapon.mode}</span>
+        <div className="mb-6 flex items-start justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <TierBadge tier={weapon.tier} />
+            <RarityBadge rarity={weapon.rarity} />
+            <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-500">{weapon.category}</span>
+            <span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-500">{weapon.mode}</span>
+          </div>
+          <FavoriteButton type="weapon" slug={weapon.slug} showLabel />
         </div>
 
         <p className="mt-6 text-sm font-black uppercase tracking-[0.3em] text-red-400">{weapon.type}</p>
