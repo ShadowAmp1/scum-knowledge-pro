@@ -43,7 +43,7 @@ export function Header() {
           </div>
           <div className="min-w-0">
             <div className="truncate text-lg font-black tracking-wide text-white">SCUM DB PRO</div>
-            <div className="text-xs text-zinc-500">Knowledge Base v4</div>
+            <div className="text-xs text-zinc-500">Knowledge Base v4.23</div>
           </div>
         </Link>
 
@@ -100,7 +100,7 @@ export function Header() {
               onClick={() => setIsOpen(false)}
               className="rounded-2xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm font-black text-zinc-200 transition hover:border-red-500/50 hover:text-white sm:col-span-2"
             >
-              Admin Lite
+              Admin
             </Link>
             <Link
               href="/pro-roadmap"
