@@ -234,6 +234,24 @@ function checkParsedRelations() {
   }
 }
 
+function checkDatabaseSetup() {
+  const packageJson = JSON.parse(read("package.json"));
+  if (!packageJson.dependencies?.pg) addError("package.json: dependency pg отсутствует");
+  if (!packageJson.devDependencies?.["@types/pg"]) addWarning("package.json: @types/pg отсутствует в devDependencies");
+  for (const script of ["db:migrate", "db:seed"]) {
+    if (!packageJson.scripts?.[script]) addError(`package.json: отсутствует script ${script}`);
+  }
+  for (const file of ["src/lib/database.ts", "scripts/migrate-db.mjs", "scripts/seed-db.mjs", "src/app/api/admin/data/route.ts", "src/app/api/admin/seed/route.ts"]) {
+    if (!fs.existsSync(path.join(root, file))) addError(`DB setup: отсутствует файл ${file}`);
+  }
+  const render = read("render.yaml");
+  for (const fragment of ["databases:", "fromDatabase:", "DATABASE_URL", "preDeployCommand", "npm run db:migrate", "npm run db:seed"]) {
+    if (!render.includes(fragment)) addError(`render.yaml: отсутствует ${fragment}`);
+  }
+  const databaseLib = read("src/lib/database.ts");
+  if (!databaseLib.includes("pg")) addError("src/lib/database.ts: не найдено подключение pg");
+}
+
 function checkArchiveSafety() {
   const gitignore = read(".gitignore");
   if (!gitignore.includes("node_modules")) addError(".gitignore должен исключать node_modules");
@@ -259,6 +277,7 @@ checkParsedRelations();
 checkMapData();
 checkInternalLinks();
 checkArchiveSafety();
+checkDatabaseSetup();
 
 if (warnings.length) {
   console.log("Предупреждения:");
