@@ -96,8 +96,45 @@ function replaceArray(source: string, config: Config, items: unknown) {
     `export const ${config.constName}: ${config.typeName} = ${JSON.stringify(items, null, 2)};`,
   );
 }
+
+async function saveToDatabase(
+  entity: Entity,
+  items: Record<string, unknown>[],
+  username?: string,
+) {
+  const config = configs[entity];
+  const keys = items.map((item) => String(item[config.key] ?? "").trim());
+
+  for (const item of items) {
+    const key = String(item[config.key] ?? "").trim();
+    await dbQuery(
+      `INSERT INTO content_items(entity, key, data)
+       VALUES ($1, $2, $3::jsonb)
+       ON CONFLICT (entity, key)
+       DO UPDATE SET data = EXCLUDED.data`,
+      [entity, key, JSON.stringify(item)],
+    );
+  }
+
+  await dbQuery(
+    "DELETE FROM content_items WHERE entity = $1 AND NOT (key = ANY($2::text[]))",
+    [entity, keys],
+  );
+
+  await dbQuery(
+    "INSERT INTO admin_audit_log(action, entity, username, meta) VALUES ($1, $2, $3, $4::jsonb)",
+    [
+      "save-from-admin",
+      entity,
+      username ?? "unknown",
+      JSON.stringify({ count: items.length, keys }),
+    ],
+  );
+}
+
 export async function PUT(request: Request) {
-  if (!getAdminSession())
+  const session = getAdminSession();
+  if (!session)
     return NextResponse.json(
       { ok: false, message: "Нужен вход в админ-панель" },
       { status: 401 },
@@ -115,7 +152,7 @@ export async function PUT(request: Request) {
     validate(body.entity, body.items);
     const items = body.items as Record<string, unknown>[];
     if (hasDatabaseUrl()) {
-      await saveToDatabase(body.entity, items, getAdminSession()?.username);
+      await saveToDatabase(body.entity, items, session.username);
       return NextResponse.json({
         ok: true,
         storage: "database",
