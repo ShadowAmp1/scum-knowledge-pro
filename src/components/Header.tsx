@@ -7,6 +7,7 @@ import { useState } from "react";
 
 const navItems = [
   { title: "Главная", href: "/" },
+  { title: "Поиск", href: "/search" },
   { title: "Оружие", href: "/weapons" },
   { title: "Обвесы", href: "/weapons/attachments" },
   { title: "Лут", href: "/loot" },
@@ -55,6 +56,9 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
+          <Link href="/admin" className="rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-2 text-sm font-bold text-zinc-300 transition hover:border-red-500/50 hover:text-white">
+            Admin
+          </Link>
           <Link href="/pro-roadmap" className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-bold text-red-200 transition hover:bg-red-500/20">
             PRO roadmap
           </Link>
@@ -91,6 +95,13 @@ export function Header() {
                 </Link>
               );
             })}
+            <Link
+              href="/admin"
+              onClick={() => setIsOpen(false)}
+              className="rounded-2xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm font-black text-zinc-200 transition hover:border-red-500/50 hover:text-white sm:col-span-2"
+            >
+              Admin Lite
+            </Link>
             <Link
               href="/pro-roadmap"
               onClick={() => setIsOpen(false)}

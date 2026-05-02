@@ -103,7 +103,7 @@ function checkRatings() {
 }
 
 function checkInternalLinks() {
-  const existingRoutes = new Set(["/", "/weapons", "/weapons/attachments", "/loot", "/bunkers", "/map", "/bases", "/vehicles", "/preparation", "/guides", "/pro-roadmap"]);
+  const existingRoutes = new Set(["/", "/search", "/weapons", "/weapons/compare", "/weapons/attachments", "/loot", "/bunkers", "/map", "/bases", "/vehicles", "/preparation", "/guides", "/admin", "/pro-roadmap"]);
   for (const slug of collectQuotedSlugs("src/data/weapons.ts")) existingRoutes.add(`/weapons/${slug}`);
   for (const slug of collectQuotedSlugs("src/data/attachments.ts")) existingRoutes.add(`/weapons/attachments/${slug}`);
   for (const slug of collectQuotedSlugs("src/data/loot.ts")) existingRoutes.add(`/loot/${slug}`);

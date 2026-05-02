@@ -4,7 +4,7 @@ export const metadata = {
 };
 
 import Link from "next/link";
-import { Puzzle } from "lucide-react";
+import { BarChart3, Puzzle } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { WeaponFilters } from "@/components/WeaponFilters";
 import { weapons } from "@/data/weapons";
@@ -45,6 +45,7 @@ export default function WeaponsPage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href="/weapons" className="rounded-full border border-red-500/40 bg-red-500/10 px-5 py-2 text-sm font-black text-red-200">Оружие</Link>
           <Link href="/weapons/attachments" className="rounded-full border border-zinc-800 bg-black px-5 py-2 text-sm font-black text-zinc-300 transition hover:border-red-500/50 hover:text-white">Обвесы</Link>
+          <Link href="/weapons/compare" className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-black px-5 py-2 text-sm font-black text-zinc-300 transition hover:border-red-500/50 hover:text-white"><BarChart3 size={16} /> Сравнение оружия</Link>
         </div>
       </section>
 

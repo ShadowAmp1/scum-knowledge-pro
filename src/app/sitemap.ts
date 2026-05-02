@@ -10,7 +10,9 @@ const baseUrl = "https://scum-knowledge-pro.onrender.com";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
+    "/search",
     "/weapons",
+    "/weapons/compare",
     "/weapons/attachments",
     "/loot",
     "/bunkers",
@@ -19,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/vehicles",
     "/preparation",
     "/guides",
+    "/admin",
     "/pro-roadmap",
   ];
 

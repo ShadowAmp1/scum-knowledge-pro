@@ -128,3 +128,11 @@ y: 40,
 ## v4.21 final polish
 
 Версия v4.21 расширяет контент по луту, оружию, обвесам, карте, бункерам и гайдам. Для Render используется `npm ci && npm run validate:data && npm run build`, архив должен поставляться без `node_modules` и `.next`.
+
+## v4.22-lite
+
+- Глобальный поиск: `/search`
+- Сравнение оружия: `/weapons/compare`
+- Admin Lite: `/admin` — локальные JSON-черновики для оружия, лута, карты и гайдов без базы данных.
+
+Admin Lite не меняет файлы на Render напрямую. Чтобы добавить контент в production, скопируйте JSON из админки в соответствующий файл `src/data/*`, затем выполните `npm run validate:data` и `npm run build`.
