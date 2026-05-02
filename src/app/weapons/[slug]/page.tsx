@@ -5,7 +5,7 @@ import { InfoCard } from "@/components/InfoCard";
 import { RarityBadge, TierBadge } from "@/components/WeaponBadge";
 import { StatBar } from "@/components/StatBar";
 import { getWeaponBySlug, weapons } from "@/data/weapons";
-import { attachments } from "@/data/attachments";
+import { attachmentCategories, attachments } from "@/data/attachments";
 
 export function generateStaticParams() {
   return weapons.map((weapon) => ({ slug: weapon.slug }));
@@ -32,8 +32,18 @@ export default function WeaponPage({ params }: { params: { slug: string } }) {
   const recommendedAttachmentSlugs = new Set(weapon.recommendedAttachmentSlugs ?? []);
   const compatibleAttachments = attachments
     .filter((attachment) => attachment.compatibleWeaponSlugs.includes(weapon.slug) || recommendedAttachmentSlugs.has(attachment.slug))
-    .sort((a, b) => Number(recommendedAttachmentSlugs.has(b.slug)) - Number(recommendedAttachmentSlugs.has(a.slug)))
-    .slice(0, 10);
+    .sort((a, b) => {
+      const recommendedDiff = Number(recommendedAttachmentSlugs.has(b.slug)) - Number(recommendedAttachmentSlugs.has(a.slug));
+      if (recommendedDiff !== 0) return recommendedDiff;
+
+      return attachmentCategories.indexOf(a.category) - attachmentCategories.indexOf(b.category) || a.name.localeCompare(b.name, "ru");
+    });
+  const groupedCompatibleAttachments = attachmentCategories
+    .map((category) => ({
+      category,
+      items: compatibleAttachments.filter((attachment) => attachment.category === category),
+    }))
+    .filter((group) => group.items.length > 0);
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-12">
@@ -148,28 +158,56 @@ export default function WeaponPage({ params }: { params: { slug: string } }) {
         </div>
       </div>
 
-      {compatibleAttachments.length > 0 && (
-        <section className="mt-10 rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <h2 className="text-2xl font-black text-white">Подходящие обвесы</h2>
-              <p className="mt-2 text-sm text-zinc-500">Обвесы из базы, которые связаны с этим оружием.</p>
-            </div>
-            <Link href="/weapons/attachments" className="rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-black text-red-200 transition hover:bg-red-500/20">
-              Все обвесы →
-            </Link>
+      <section className="mt-10 rounded-3xl border border-zinc-800 bg-zinc-950 p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-2xl font-black text-white">Подходящие обвесы</h2>
+            <p className="mt-2 text-sm text-zinc-500">
+              Показаны все обвесы из базы, у которых в совместимости указан {weapon.name}. Найдено: <b className="text-white">{compatibleAttachments.length}</b>.
+            </p>
           </div>
-          <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {compatibleAttachments.map((attachment) => (
-              <Link key={attachment.slug} href={`/weapons/attachments/${attachment.slug}`} className="rounded-2xl border border-zinc-800 bg-black p-4 transition hover:border-red-500/50">
-                <div className="text-xs font-black uppercase tracking-widest text-red-400">{attachment.category}</div>
-                <div className="mt-2 font-black text-white">{attachment.name}</div>
-                <div className="mt-2 text-xs text-zinc-500">{attachment.subcategory}</div>
-              </Link>
+          <Link href="/weapons/attachments" className="rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-black text-red-200 transition hover:bg-red-500/20">
+            Все обвесы →
+          </Link>
+        </div>
+
+        {groupedCompatibleAttachments.length > 0 ? (
+          <div className="mt-6 space-y-6">
+            {groupedCompatibleAttachments.map((group) => (
+              <div key={group.category}>
+                <div className="mb-3 flex items-center gap-3">
+                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-red-400">{group.category}</h3>
+                  <span className="rounded-full border border-zinc-800 px-2 py-0.5 text-xs font-bold text-zinc-500">{group.items.length}</span>
+                </div>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                  {group.items.map((attachment) => {
+                    const isRecommended = recommendedAttachmentSlugs.has(attachment.slug);
+
+                    return (
+                      <Link key={attachment.slug} href={`/weapons/attachments/${attachment.slug}`} className="rounded-2xl border border-zinc-800 bg-black p-4 transition hover:border-red-500/50">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-xs font-black uppercase tracking-widest text-red-400">{attachment.subcategory}</span>
+                          {isRecommended ? (
+                            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-emerald-300">
+                              Рекомендовано
+                            </span>
+                          ) : null}
+                        </div>
+                        <div className="mt-2 font-black text-white">{attachment.name}</div>
+                        <p className="mt-2 line-clamp-3 text-xs leading-5 text-zinc-500">{attachment.role}</p>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
             ))}
           </div>
-        </section>
-      )}
+        ) : (
+          <div className="mt-5 rounded-2xl border border-zinc-800 bg-black p-5 text-sm leading-6 text-zinc-400">
+            Для этого оружия в базе пока нет устанавливаемых обвесов. Это нормально для ближнего боя, гранат, взрывчатки и части самодельного оружия. Если сервер добавляет модовые обвесы, их лучше вынести отдельной карточкой.
+          </div>
+        )}
+      </section>
 
       {similarWeapons.length > 0 && (
         <section className="mt-10">

@@ -129,6 +129,9 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "glushitel-12-kalibra"
     ]
   },
   {
@@ -197,6 +200,9 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "glushitel-12-kalibra"
     ]
   },
   {
@@ -265,6 +271,16 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "korob-m249",
+      "glushitel-mk18",
+      "samodelnyi-glushitel-iz-maslyanogo-filtra",
+      "xps-golograficheskii-pricel",
+      "opticheskii-pricel-p-223",
+      "pricel-acog",
+      "pricel-mro-red-dot",
+      "pricel-red-dot"
     ]
   },
   {
@@ -333,6 +349,16 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-mp5",
+      "glushitel-mp5",
+      "planka-mp5",
+      "samodelnyi-glushitel-iz-banki",
+      "samodelnyi-glushitel-iz-butylki",
+      "xps-golograficheskii-pricel",
+      "pricel-aimpro-red-dot",
+      "pricel-red-dot"
     ]
   },
   {
@@ -401,6 +427,11 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-mp5",
+      "glushitel-mp5",
+      "planka-mp5"
     ]
   },
   {
@@ -469,6 +500,11 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-mp5",
+      "glushitel-mp5",
+      "planka-mp5"
     ]
   },
   {
@@ -537,6 +573,9 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "glushitel-12-kalibra"
     ]
   },
   {
@@ -605,6 +644,9 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "glushitel-12-kalibra"
     ]
   },
   {
@@ -673,6 +715,16 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-ump-45",
+      "samodelnyi-glushitel-iz-banki",
+      "pricel-aimpro-red-dot",
+      "pricel-red-dot",
+      "pricel-sentry-rdrs",
+      "pricel-verteks-shark",
+      "pricel-verteks-snake",
+      "pricel-verteks-wasp"
     ]
   },
   {
@@ -741,6 +793,16 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-ak-15",
+      "glushitel-ak-15",
+      "samodelnyi-glushitel-iz-butylki",
+      "samodelnyi-glushitel-iz-maslyanogo-filtra",
+      "okp-golograficheskii-pricel",
+      "v3-golograficheskii-pricel",
+      "opticheskii-pricel-posp-4x24v",
+      "pricel-acog"
     ]
   },
   {
@@ -807,7 +869,8 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
-    ]
+    ],
+    "recommendedAttachmentSlugs": []
   },
   {
     "slug": "as-val",
@@ -875,6 +938,10 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-as-val",
+      "fonarik-dlya-as-val-vss"
     ]
   },
   {
@@ -943,6 +1010,11 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-awm",
+      "glushitel-308",
+      "glushitel-338"
     ]
   },
   {
@@ -1011,6 +1083,11 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-awp",
+      "glushitel-308",
+      "glushitel-338"
     ]
   },
   {
@@ -1079,6 +1156,14 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-carbon-hunter",
+      "glushitel-hunter",
+      "glushitel-308",
+      "ohotnichii-pricel",
+      "samodelnyi-opticheskii-pricel",
+      "samodelnaya-vintovochnaya-planka"
     ]
   },
   {
@@ -1147,6 +1232,15 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-hunter85",
+      "glushitel-hunter",
+      "glushitel-30-06",
+      "glushitel-308",
+      "ohotnichii-pricel",
+      "samodelnyi-opticheskii-pricel",
+      "samodelnaya-vintovochnaya-planka"
     ]
   },
   {
@@ -1215,6 +1309,13 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "glushitel-kar98",
+      "opticheskii-pricel-zf39",
+      "ohotnichii-pricel",
+      "samodelnyi-opticheskii-pricel",
+      "samodelnaya-vintovochnaya-planka"
     ]
   },
   {
@@ -1283,6 +1384,13 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "oboima-m1",
+      "glushitel-30-06",
+      "glushitel-m1",
+      "pricel-m1",
+      "pricel-m1-eksperimentalnyi"
     ]
   },
   {
@@ -1351,6 +1459,13 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "glushitel-m1891",
+      "opticheskii-pricel-zf39",
+      "ohotnichii-pricel",
+      "samodelnyi-opticheskii-pricel",
+      "samodelnaya-vintovochnaya-planka"
     ]
   },
   {
@@ -1419,6 +1534,13 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-m82a1",
+      "glushitel-m82-qdl",
+      "opticheskii-pricel-m82-pesochnyi",
+      "opticheskii-pricel-m82-snezhnyi",
+      "opticheskii-pricel-m82-chernyi"
     ]
   },
   {
@@ -1487,6 +1609,13 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-svd",
+      "glushitel-svd",
+      "opticheskii-pricel-posp-4x24v",
+      "pricel-nochnogo-videniya-vampyr",
+      "dlinnaya-samodelnaya-planka"
     ]
   },
   {
@@ -1555,6 +1684,9 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "fonarik-dlya-as-val-vss"
     ]
   },
   {
@@ -1618,7 +1750,8 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Открытая местность",
       "Основной билд"
-    ]
+    ],
+    "recommendedAttachmentSlugs": []
   },
   {
     "slug": "sawed-off-dt11b",
@@ -1686,7 +1819,8 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
-    ]
+    ],
+    "recommendedAttachmentSlugs": []
   },
   {
     "slug": "sawed-off-m1887",
@@ -1754,7 +1888,8 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
-    ]
+    ],
+    "recommendedAttachmentSlugs": []
   },
   {
     "slug": "bay-riffer-block-21",
@@ -1822,6 +1957,15 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-block-21",
+      "pistoletnyi-glushitel",
+      "pricel-aimpro-red-dot",
+      "pricel-verteks-snake",
+      "pricel-verteks-wasp",
+      "fonarik-dlya-m9",
+      "samodelnyi-fonarik"
     ]
   },
   {
@@ -1890,6 +2034,15 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-block-21",
+      "pistoletnyi-glushitel",
+      "pricel-aimpro-red-dot",
+      "pricel-verteks-snake",
+      "pricel-verteks-wasp",
+      "fonarik-dlya-m9",
+      "samodelnyi-fonarik"
     ]
   },
   {
@@ -1958,6 +2111,11 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-deagle-50",
+      "pricel-desert-eagle-red-dot",
+      "fonarik-dlya-deagle"
     ]
   },
   {
@@ -2026,7 +2184,8 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
-    ]
+    ],
+    "recommendedAttachmentSlugs": []
   },
   {
     "slug": "krueger-pistol",
@@ -2094,6 +2253,16 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-krueger",
+      "pistoletnyi-glushitel",
+      "samodelnyi-glushitel-iz-banki",
+      "pricel-aimpro-red-dot",
+      "pricel-verteks-snake",
+      "pricel-verteks-wasp",
+      "fonarik-dlya-m9",
+      "samodelnyi-fonarik"
     ]
   },
   {
@@ -2162,6 +2331,11 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-m1911",
+      "planka-m1911",
+      "pistoletnyi-glushitel"
     ]
   },
   {
@@ -2230,6 +2404,11 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-m1911",
+      "planka-m1911",
+      "pistoletnyi-glushitel"
     ]
   },
   {
@@ -2298,6 +2477,11 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-m1911",
+      "planka-m1911",
+      "pistoletnyi-glushitel"
     ]
   },
   {
@@ -2366,6 +2550,11 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-m1911",
+      "planka-m1911",
+      "pistoletnyi-glushitel"
     ]
   },
   {
@@ -2434,7 +2623,8 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
-    ]
+    ],
+    "recommendedAttachmentSlugs": []
   },
   {
     "slug": "serpent-357",
@@ -2502,6 +2692,9 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-deagle-357"
     ]
   },
   {
@@ -2570,6 +2763,10 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "planka-viper-m357",
+      "magazin-deagle-357"
     ]
   },
   {
@@ -2638,6 +2835,16 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
+    ],
+    "recommendedAttachmentSlugs": [
+      "barabannyi-magazin-rpk",
+      "glushitel-5-45x39",
+      "samodelnyi-glushitel-iz-butylki",
+      "samodelnyi-glushitel-iz-maslyanogo-filtra",
+      "okp-golograficheskii-pricel",
+      "v3-golograficheskii-pricel",
+      "opticheskii-pricel-posp-4x24v",
+      "pricel-acog"
     ]
   },
   {
@@ -2706,7 +2913,8 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Основной билд"
-    ]
+    ],
+    "recommendedAttachmentSlugs": []
   },
   {
     "slug": "improvised-pistol-50",
@@ -2774,1313 +2982,1355 @@ export const weapons: Weapon[] = [
       "Фарм",
       "Бункеры",
       "Запасное оружие"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-deagle-50"
     ]
   },
   {
-      "slug": "akm",
-      "name": "AKM",
-      "category": "Штурмовые",
-      "type": "Автомат",
-      "ammo": "7.62x39mm",
-      "rarity": "Редкая",
-      "mode": "PvE/PvP",
-      "tier": "A",
-      "difficulty": "Средняя",
-      "range": "Универсальная",
-      "shortRole": "Сильный универсальный автомат под 7.62x39",
-      "summary": "AKM — практичный автомат для бункеров, PvE и PvP. Хорош там, где нужен урон и надёжность, но требует контроля отдачи и нормального запаса магазинов.",
-      "rating": {
-          "damage": 8,
-          "control": 6,
-          "range": 7,
-          "economy": 7,
-          "bunker": 8,
-          "pvp": 8
-      },
-      "bestBuild": [
-          "Магазины AK/AK-47",
-          "Коллиматор/ACOG по ситуации",
-          "Глушитель совместимого калибра при наличии",
-          "Оружейный ремкомплект"
-      ],
-      "attachments": [
-          "magazin-ak-47",
-          "pricel-red-dot",
-          "pricel-acog",
-          "okp-golograficheskii-pricel"
-      ],
-      "recommendedAttachmentSlugs": [
-          "Magazines AK/AK-47",
-          "Red dot / ACOG",
-          "Suppressor if compatible",
-          "Weapon repair kit"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 7.62x39mm.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Военные зоны",
-          "Обычные бункеры",
-          "Заброшенные бункеры",
-          "Аирдропы",
-          "Торговцы на серверах с продажей"
-      ],
-      "pros": [
-          "Высокий урон для автомата",
-          "Хорош для бункеров и открытых зон",
-          "Патроны часто полезны в базе"
-      ],
-      "cons": [
-          "Отдача выше, чем у 5.56",
-          "Без магазинов бесполезен",
-          "Громкий без глушителя"
-      ],
-      "tips": [
-          "Стреляй короткими очередями.",
-          "В бункере держи ближние углы и не жми длинную очередь.",
-          "Всегда имей запасной магазин."
-      ],
-      "recommendedFor": [
-          "Бункеры",
-          "PvE",
-          "PvP",
-          "Дуо"
-      ]
+    "slug": "akm",
+    "name": "AKM",
+    "category": "Штурмовые",
+    "type": "Автомат",
+    "ammo": "7.62x39mm",
+    "rarity": "Редкая",
+    "mode": "PvE/PvP",
+    "tier": "A",
+    "difficulty": "Средняя",
+    "range": "Универсальная",
+    "shortRole": "Сильный универсальный автомат под 7.62x39",
+    "summary": "AKM — практичный автомат для бункеров, PvE и PvP. Хорош там, где нужен урон и надёжность, но требует контроля отдачи и нормального запаса магазинов.",
+    "rating": {
+      "damage": 8,
+      "control": 6,
+      "range": 7,
+      "economy": 7,
+      "bunker": 8,
+      "pvp": 8
+    },
+    "bestBuild": [
+      "Магазины AK/AK-47",
+      "Коллиматор/ACOG по ситуации",
+      "Глушитель совместимого калибра при наличии",
+      "Оружейный ремкомплект"
+    ],
+    "attachments": [
+      "magazin-ak-47",
+      "pricel-red-dot",
+      "pricel-acog",
+      "okp-golograficheskii-pricel"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-ak-47",
+      "glushitel-ak-15",
+      "samodelnyi-glushitel-iz-butylki",
+      "samodelnyi-glushitel-iz-maslyanogo-filtra",
+      "okp-golograficheskii-pricel",
+      "v3-golograficheskii-pricel",
+      "opticheskii-pricel-posp-4x24v",
+      "pricel-acog"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 7.62x39mm.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Военные зоны",
+      "Обычные бункеры",
+      "Заброшенные бункеры",
+      "Аирдропы",
+      "Торговцы на серверах с продажей"
+    ],
+    "pros": [
+      "Высокий урон для автомата",
+      "Хорош для бункеров и открытых зон",
+      "Патроны часто полезны в базе"
+    ],
+    "cons": [
+      "Отдача выше, чем у 5.56",
+      "Без магазинов бесполезен",
+      "Громкий без глушителя"
+    ],
+    "tips": [
+      "Стреляй короткими очередями.",
+      "В бункере держи ближние углы и не жми длинную очередь.",
+      "Всегда имей запасной магазин."
+    ],
+    "recommendedFor": [
+      "Бункеры",
+      "PvE",
+      "PvP",
+      "Дуо"
+    ]
   },
   {
-      "slug": "ak-47",
-      "name": "AK-47",
-      "category": "Штурмовые",
-      "type": "Автомат",
-      "ammo": "7.62x39mm",
-      "rarity": "Редкая",
-      "mode": "PvE/PvP",
-      "tier": "A",
-      "difficulty": "Средняя",
-      "range": "Универсальная",
-      "shortRole": "Классический автомат для грубой силы",
-      "summary": "AK-47 — понятный и мощный автомат для игрока, который готов мириться с отдачей ради урона и универсальности. Отличается стабильной полезностью на большинстве серверов.",
-      "rating": {
-          "damage": 8,
-          "control": 5,
-          "range": 7,
-          "economy": 6,
-          "bunker": 8,
-          "pvp": 8
-      },
-      "bestBuild": [
-          "Магазин АК-47",
-          "Быстрый прицел",
-          "Запас 7.62x39",
-          "Ремкомплект"
-      ],
-      "attachments": [
-          "magazin-ak-47",
-          "pricel-red-dot",
-          "okp-golograficheskii-pricel"
-      ],
-      "recommendedAttachmentSlugs": [
-          "АК-магазины",
-          "Red dot / holographic",
-          "Совместимый глушитель при наличии"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 7.62x39mm.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Военные зоны",
-          "Обычные бункеры",
-          "Заброшенные бункеры",
-          "Аирдропы",
-          "Торговцы на серверах с продажей"
-      ],
-      "pros": [
-          "Сильный урон",
-          "Универсальная роль",
-          "Хорошо работает в дуо"
-      ],
-      "cons": [
-          "Требует контроля отдачи",
-          "Вес боезапаса ощутим",
-          "Редкие обвесы могут быть дорогими"
-      ],
-      "tips": [
-          "Не стреляй длинными очередями без необходимости.",
-          "Сначала найди магазины, потом набирай патроны.",
-          "Для новичка лучше тренироваться на PvE-целях."
-      ],
-      "recommendedFor": [
-          "PvE",
-          "PvP",
-          "Бункеры"
-      ]
+    "slug": "ak-47",
+    "name": "AK-47",
+    "category": "Штурмовые",
+    "type": "Автомат",
+    "ammo": "7.62x39mm",
+    "rarity": "Редкая",
+    "mode": "PvE/PvP",
+    "tier": "A",
+    "difficulty": "Средняя",
+    "range": "Универсальная",
+    "shortRole": "Классический автомат для грубой силы",
+    "summary": "AK-47 — понятный и мощный автомат для игрока, который готов мириться с отдачей ради урона и универсальности. Отличается стабильной полезностью на большинстве серверов.",
+    "rating": {
+      "damage": 8,
+      "control": 5,
+      "range": 7,
+      "economy": 6,
+      "bunker": 8,
+      "pvp": 8
+    },
+    "bestBuild": [
+      "Магазин АК-47",
+      "Быстрый прицел",
+      "Запас 7.62x39",
+      "Ремкомплект"
+    ],
+    "attachments": [
+      "magazin-ak-47",
+      "pricel-red-dot",
+      "okp-golograficheskii-pricel"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-ak-47",
+      "glushitel-ak-15",
+      "samodelnyi-glushitel-iz-butylki",
+      "samodelnyi-glushitel-iz-maslyanogo-filtra",
+      "okp-golograficheskii-pricel",
+      "v3-golograficheskii-pricel",
+      "opticheskii-pricel-posp-4x24v",
+      "pricel-acog"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 7.62x39mm.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Военные зоны",
+      "Обычные бункеры",
+      "Заброшенные бункеры",
+      "Аирдропы",
+      "Торговцы на серверах с продажей"
+    ],
+    "pros": [
+      "Сильный урон",
+      "Универсальная роль",
+      "Хорошо работает в дуо"
+    ],
+    "cons": [
+      "Требует контроля отдачи",
+      "Вес боезапаса ощутим",
+      "Редкие обвесы могут быть дорогими"
+    ],
+    "tips": [
+      "Не стреляй длинными очередями без необходимости.",
+      "Сначала найди магазины, потом набирай патроны.",
+      "Для новичка лучше тренироваться на PvE-целях."
+    ],
+    "recommendedFor": [
+      "PvE",
+      "PvP",
+      "Бункеры"
+    ]
   },
   {
-      "slug": "aks-74u",
-      "name": "AKS-74U",
-      "category": "Штурмовые",
-      "type": "Укороченный автомат",
-      "ammo": "5.45x39mm",
-      "rarity": "Редкая",
-      "mode": "PvE/PvP",
-      "tier": "B",
-      "difficulty": "Средняя",
-      "range": "Ближняя",
-      "shortRole": "Компактный автомат для городов и коридоров",
-      "summary": "AKS-74U удобен в тесных помещениях, городских маршрутах и коридорах. Он не заменяет полноценную винтовку на дальних дистанциях, зато хорош как мобильный боевой вариант.",
-      "rating": {
-          "damage": 6,
-          "control": 7,
-          "range": 5,
-          "economy": 7,
-          "bunker": 7,
-          "pvp": 7
-      },
-      "bestBuild": [
-          "Магазин АКС-74У",
-          "Коллиматор",
-          "Глушитель 5.45 при наличии",
-          "Лёгкий комплект брони"
-      ],
-      "attachments": [
-          "magazin-aks-74u",
-          "pricel-red-dot",
-          "glushitel-5-45x39"
-      ],
-      "recommendedAttachmentSlugs": [
-          "АКС-магазины",
-          "Red dot",
-          "5.45 suppressor if available"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 5.45x39mm.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Военные зоны",
-          "Обычные бункеры",
-          "Заброшенные бункеры",
-          "Аирдропы",
-          "Торговцы на серверах с продажей"
-      ],
-      "pros": [
-          "Компактный",
-          "Удобен в помещениях",
-          "Контроль проще, чем у 7.62"
-      ],
-      "cons": [
-          "Слабее на дальних дистанциях",
-          "Нужны подходящие магазины",
-          "Не лучший против тяжёлой брони"
-      ],
-      "tips": [
-          "Используй как оружие коридоров.",
-          "Держи дистанцию ближе к средней.",
-          "Не пытайся перестреливать снайперки."
-      ],
-      "recommendedFor": [
-          "Города",
-          "Бункеры",
-          "Мобильный PvP"
-      ]
+    "slug": "aks-74u",
+    "name": "AKS-74U",
+    "category": "Штурмовые",
+    "type": "Укороченный автомат",
+    "ammo": "5.45x39mm",
+    "rarity": "Редкая",
+    "mode": "PvE/PvP",
+    "tier": "B",
+    "difficulty": "Средняя",
+    "range": "Ближняя",
+    "shortRole": "Компактный автомат для городов и коридоров",
+    "summary": "AKS-74U удобен в тесных помещениях, городских маршрутах и коридорах. Он не заменяет полноценную винтовку на дальних дистанциях, зато хорош как мобильный боевой вариант.",
+    "rating": {
+      "damage": 6,
+      "control": 7,
+      "range": 5,
+      "economy": 7,
+      "bunker": 7,
+      "pvp": 7
+    },
+    "bestBuild": [
+      "Магазин АКС-74У",
+      "Коллиматор",
+      "Глушитель 5.45 при наличии",
+      "Лёгкий комплект брони"
+    ],
+    "attachments": [
+      "magazin-aks-74u",
+      "pricel-red-dot",
+      "glushitel-5-45x39"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-aks-74u",
+      "glushitel-5-45x39",
+      "samodelnyi-glushitel-iz-butylki",
+      "okp-golograficheskii-pricel",
+      "pricel-red-dot",
+      "pricel-sentry-rdrs",
+      "pricel-verteks-shark",
+      "pricel-nochnogo-videniya-vampyr"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 5.45x39mm.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Военные зоны",
+      "Обычные бункеры",
+      "Заброшенные бункеры",
+      "Аирдропы",
+      "Торговцы на серверах с продажей"
+    ],
+    "pros": [
+      "Компактный",
+      "Удобен в помещениях",
+      "Контроль проще, чем у 7.62"
+    ],
+    "cons": [
+      "Слабее на дальних дистанциях",
+      "Нужны подходящие магазины",
+      "Не лучший против тяжёлой брони"
+    ],
+    "tips": [
+      "Используй как оружие коридоров.",
+      "Держи дистанцию ближе к средней.",
+      "Не пытайся перестреливать снайперки."
+    ],
+    "recommendedFor": [
+      "Города",
+      "Бункеры",
+      "Мобильный PvP"
+    ]
   },
   {
-      "slug": "m16a4",
-      "name": "M16A4",
-      "category": "Штурмовые",
-      "type": "Винтовка/автомат",
-      "ammo": "5.56x45mm",
-      "rarity": "Редкая",
-      "mode": "PvE/PvP",
-      "tier": "A",
-      "difficulty": "Средняя",
-      "range": "Средняя",
-      "shortRole": "Точная 5.56 платформа для контроля дистанции",
-      "summary": "M16A4 хороша для аккуратной стрельбы на средней дистанции, бункеров и маршрутов с контролем углов. Лучше раскрывается с нормальной оптикой и запасом магазинов.",
-      "rating": {
-          "damage": 7,
-          "control": 7,
-          "range": 8,
-          "economy": 6,
-          "bunker": 8,
-          "pvp": 8
-      },
-      "bestBuild": [
-          "Магазин M16",
-          "ACOG/P-223 или коллиматор",
-          "Складной/штатный прицел по ситуации",
-          "5.56 запас"
-      ],
-      "attachments": [
-          "magazin-m16",
-          "skladnoi-pricel-m16a4",
-          "pricel-acog",
-          "opticheskii-pricel-p-223",
-          "pricel-red-dot"
-      ],
-      "recommendedAttachmentSlugs": [
-          "M16 magazines",
-          "ACOG / P-223",
-          "Red dot",
-          "Flashlight if available"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 5.56x45mm.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Военные зоны",
-          "Обычные бункеры",
-          "Заброшенные бункеры",
-          "Аирдропы",
-          "Торговцы на серверах с продажей"
-      ],
-      "pros": [
-          "Хорошая точность",
-          "Универсальная 5.56 экономика",
-          "Удобна для дуо"
-      ],
-      "cons": [
-          "Не лучший выбор для панической ближней очереди",
-          "Нужны магазины",
-          "Без оптики теряет часть силы"
-      ],
-      "tips": [
-          "Играй от укрытий и одиночных/коротких серий.",
-          "В бункере заранее меняй магазин.",
-          "Не тащи 5.56 без совместимого оружия."
-      ],
-      "recommendedFor": [
-          "Бункеры",
-          "Дуо",
-          "Средняя дистанция"
-      ]
+    "slug": "m16a4",
+    "name": "M16A4",
+    "category": "Штурмовые",
+    "type": "Винтовка/автомат",
+    "ammo": "5.56x45mm",
+    "rarity": "Редкая",
+    "mode": "PvE/PvP",
+    "tier": "A",
+    "difficulty": "Средняя",
+    "range": "Средняя",
+    "shortRole": "Точная 5.56 платформа для контроля дистанции",
+    "summary": "M16A4 хороша для аккуратной стрельбы на средней дистанции, бункеров и маршрутов с контролем углов. Лучше раскрывается с нормальной оптикой и запасом магазинов.",
+    "rating": {
+      "damage": 7,
+      "control": 7,
+      "range": 8,
+      "economy": 6,
+      "bunker": 8,
+      "pvp": 8
+    },
+    "bestBuild": [
+      "Магазин M16",
+      "ACOG/P-223 или коллиматор",
+      "Складной/штатный прицел по ситуации",
+      "5.56 запас"
+    ],
+    "attachments": [
+      "magazin-m16",
+      "skladnoi-pricel-m16a4",
+      "pricel-acog",
+      "opticheskii-pricel-p-223",
+      "pricel-red-dot"
+    ],
+    "recommendedAttachmentSlugs": [
+      "skladnoi-pricel-m16a4",
+      "magazin-m16",
+      "glushitel-mk18",
+      "samodelnyi-glushitel-iz-maslyanogo-filtra",
+      "v3-golograficheskii-pricel",
+      "xps-golograficheskii-pricel",
+      "opticheskii-pricel-p-223",
+      "pricel-acog"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 5.56x45mm.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Военные зоны",
+      "Обычные бункеры",
+      "Заброшенные бункеры",
+      "Аирдропы",
+      "Торговцы на серверах с продажей"
+    ],
+    "pros": [
+      "Хорошая точность",
+      "Универсальная 5.56 экономика",
+      "Удобна для дуо"
+    ],
+    "cons": [
+      "Не лучший выбор для панической ближней очереди",
+      "Нужны магазины",
+      "Без оптики теряет часть силы"
+    ],
+    "tips": [
+      "Играй от укрытий и одиночных/коротких серий.",
+      "В бункере заранее меняй магазин.",
+      "Не тащи 5.56 без совместимого оружия."
+    ],
+    "recommendedFor": [
+      "Бункеры",
+      "Дуо",
+      "Средняя дистанция"
+    ]
   },
   {
-      "slug": "vhs-2",
-      "name": "VHS-2",
-      "category": "Штурмовые",
-      "type": "Автомат bullpup",
-      "ammo": "5.56x45mm",
-      "rarity": "Очень редкая",
-      "mode": "PvE/PvP",
-      "tier": "S",
-      "difficulty": "Средняя",
-      "range": "Универсальная",
-      "shortRole": "Топовый 5.56 автомат для серьёзных рейдов",
-      "summary": "VHS-2 — сильный современный автомат для игроков, которым нужен баланс контроля, темпа и универсальности. Ценность высокая, поэтому его стоит беречь и обслуживать.",
-      "rating": {
-          "damage": 7,
-          "control": 8,
-          "range": 8,
-          "economy": 5,
-          "bunker": 9,
-          "pvp": 9
-      },
-      "bestBuild": [
-          "Магазины VHS-2",
-          "Быстрый прицел или ACOG",
-          "Глушитель при наличии",
-          "Ремкомплект оружия"
-      ],
-      "attachments": [
-          "magazin-vhs-2",
-          "pricel-red-dot",
-          "pricel-acog",
-          "xps-golograficheskii-pricel"
-      ],
-      "recommendedAttachmentSlugs": [
-          "VHS-2 magazines",
-          "ACOG / holographic",
-          "Weapon repair kit"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 5.56x45mm.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Военные зоны",
-          "Обычные бункеры",
-          "Заброшенные бункеры",
-          "Аирдропы",
-          "Торговцы на серверах с продажей"
-      ],
-      "pros": [
-          "Отличный контроль",
-          "Сильна в бункерах и PvP",
-          "Универсальна"
-      ],
-      "cons": [
-          "Редкая",
-          "Потеря болезненна",
-          "Нужны магазины и обслуживание"
-      ],
-      "tips": [
-          "Не бери в рискованный рейд без плана отхода.",
-          "Держи ремкомплект на базе.",
-          "Используй с бронёй и медициной."
-      ],
-      "recommendedFor": [
-          "Опытные игроки",
-          "Бункеры",
-          "PvP"
-      ]
+    "slug": "vhs-2",
+    "name": "VHS-2",
+    "category": "Штурмовые",
+    "type": "Автомат bullpup",
+    "ammo": "5.56x45mm",
+    "rarity": "Очень редкая",
+    "mode": "PvE/PvP",
+    "tier": "S",
+    "difficulty": "Средняя",
+    "range": "Универсальная",
+    "shortRole": "Топовый 5.56 автомат для серьёзных рейдов",
+    "summary": "VHS-2 — сильный современный автомат для игроков, которым нужен баланс контроля, темпа и универсальности. Ценность высокая, поэтому его стоит беречь и обслуживать.",
+    "rating": {
+      "damage": 7,
+      "control": 8,
+      "range": 8,
+      "economy": 5,
+      "bunker": 9,
+      "pvp": 9
+    },
+    "bestBuild": [
+      "Магазины VHS-2",
+      "Быстрый прицел или ACOG",
+      "Глушитель при наличии",
+      "Ремкомплект оружия"
+    ],
+    "attachments": [
+      "magazin-vhs-2",
+      "pricel-red-dot",
+      "pricel-acog",
+      "xps-golograficheskii-pricel"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-vhs-2",
+      "glushitel-mk18",
+      "v3-golograficheskii-pricel",
+      "xps-golograficheskii-pricel",
+      "opticheskii-pricel-p-223",
+      "pricel-acog",
+      "pricel-aimpro-red-dot",
+      "pricel-mro-red-dot"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 5.56x45mm.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Военные зоны",
+      "Обычные бункеры",
+      "Заброшенные бункеры",
+      "Аирдропы",
+      "Торговцы на серверах с продажей"
+    ],
+    "pros": [
+      "Отличный контроль",
+      "Сильна в бункерах и PvP",
+      "Универсальна"
+    ],
+    "cons": [
+      "Редкая",
+      "Потеря болезненна",
+      "Нужны магазины и обслуживание"
+    ],
+    "tips": [
+      "Не бери в рискованный рейд без плана отхода.",
+      "Держи ремкомплект на базе.",
+      "Используй с бронёй и медициной."
+    ],
+    "recommendedFor": [
+      "Опытные игроки",
+      "Бункеры",
+      "PvP"
+    ]
   },
   {
-      "slug": "mk18",
-      "name": "MK18",
-      "category": "Штурмовые",
-      "type": "Карабин",
-      "ammo": "5.56x45mm",
-      "rarity": "Очень редкая",
-      "mode": "PvE/PvP",
-      "tier": "S",
-      "difficulty": "Средняя",
-      "range": "Ближняя",
-      "shortRole": "Компактный 5.56 карабин для агрессивной игры",
-      "summary": "MK18 отлично чувствует себя в городах, коридорах и динамичном PvP. Хорош как дорогой рабочий карабин, но требует дисциплины с боезапасом.",
-      "rating": {
-          "damage": 7,
-          "control": 8,
-          "range": 7,
-          "economy": 5,
-          "bunker": 9,
-          "pvp": 9
-      },
-      "bestBuild": [
-          "Магазин M16/MK18",
-          "Red dot/XPS",
-          "Глушитель MK18",
-          "Фонарик по ситуации"
-      ],
-      "attachments": [
-          "magazin-m16",
-          "pricel-red-dot",
-          "xps-golograficheskii-pricel",
-          "glushitel-mk18"
-      ],
-      "recommendedAttachmentSlugs": [
-          "M16/MK18 magazines",
-          "Red dot / XPS",
-          "MK18 suppressor",
-          "Light if available"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 5.56x45mm.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Военные зоны",
-          "Обычные бункеры",
-          "Заброшенные бункеры",
-          "Аирдропы",
-          "Торговцы на серверах с продажей"
-      ],
-      "pros": [
-          "Очень удобен в CQB",
-          "Хороший контроль",
-          "Силен в PvP"
-      ],
-      "cons": [
-          "Редкий и дорогой",
-          "Быстро расходует 5.56",
-          "Не лучший для дальних одиночных целей"
-      ],
-      "tips": [
-          "Работай короткими сериями.",
-          "В бункере держи фонарь/быстрый прицел.",
-          "Не забывай о весе магазинов."
-      ],
-      "recommendedFor": [
-          "PvP",
-          "Бункеры",
-          "Города"
-      ]
+    "slug": "mk18",
+    "name": "MK18",
+    "category": "Штурмовые",
+    "type": "Карабин",
+    "ammo": "5.56x45mm",
+    "rarity": "Очень редкая",
+    "mode": "PvE/PvP",
+    "tier": "S",
+    "difficulty": "Средняя",
+    "range": "Ближняя",
+    "shortRole": "Компактный 5.56 карабин для агрессивной игры",
+    "summary": "MK18 отлично чувствует себя в городах, коридорах и динамичном PvP. Хорош как дорогой рабочий карабин, но требует дисциплины с боезапасом.",
+    "rating": {
+      "damage": 7,
+      "control": 8,
+      "range": 7,
+      "economy": 5,
+      "bunker": 9,
+      "pvp": 9
+    },
+    "bestBuild": [
+      "Магазин M16/MK18",
+      "Red dot/XPS",
+      "Глушитель MK18",
+      "Фонарик по ситуации"
+    ],
+    "attachments": [
+      "magazin-m16",
+      "pricel-red-dot",
+      "xps-golograficheskii-pricel",
+      "glushitel-mk18"
+    ],
+    "recommendedAttachmentSlugs": [
+      "glushitel-mk18",
+      "magazin-m16",
+      "samodelnyi-glushitel-iz-maslyanogo-filtra",
+      "v3-golograficheskii-pricel",
+      "xps-golograficheskii-pricel",
+      "opticheskii-pricel-p-223",
+      "pricel-acog",
+      "pricel-aimpro-red-dot"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 5.56x45mm.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Военные зоны",
+      "Обычные бункеры",
+      "Заброшенные бункеры",
+      "Аирдропы",
+      "Торговцы на серверах с продажей"
+    ],
+    "pros": [
+      "Очень удобен в CQB",
+      "Хороший контроль",
+      "Силен в PvP"
+    ],
+    "cons": [
+      "Редкий и дорогой",
+      "Быстро расходует 5.56",
+      "Не лучший для дальних одиночных целей"
+    ],
+    "tips": [
+      "Работай короткими сериями.",
+      "В бункере держи фонарь/быстрый прицел.",
+      "Не забывай о весе магазинов."
+    ],
+    "recommendedFor": [
+      "PvP",
+      "Бункеры",
+      "Города"
+    ]
   },
   {
-      "slug": "m9",
-      "name": "M9",
-      "category": "Пистолеты",
-      "type": "Пистолет",
-      "ammo": "9x19mm",
-      "rarity": "Обычная",
-      "mode": "PvE/PvP",
-      "tier": "B",
-      "difficulty": "Легкая",
-      "range": "Ближняя",
-      "shortRole": "Надёжный стартовый пистолет",
-      "summary": "M9 — удобный пистолет для старта, защиты от одиночных зомби и роли запасного оружия. Становится полезным только с магазином и патронами.",
-      "rating": {
-          "damage": 4,
-          "control": 8,
-          "range": 3,
-          "economy": 9,
-          "bunker": 5,
-          "pvp": 5
-      },
-      "bestBuild": [
-          "Магазин M9",
-          "Глушитель M9/пистолетный",
-          "Фонарик M9",
-          "Запас 9mm"
-      ],
-      "attachments": [
-          "magazin-m9",
-          "glushitel-m9",
-          "pistoletnyi-glushitel",
-          "fonarik-dlya-m9"
-      ],
-      "recommendedAttachmentSlugs": [
-          "M9 magazine",
-          "Pistol suppressor",
-          "M9 flashlight"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 9x19mm.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Полиция",
-          "Города",
-          "Дома",
-          "Военные зоны",
-          "Торговцы"
-      ],
-      "pros": [
-          "Дешёвый калибр",
-          "Лёгкий",
-          "Хорош как запасной"
-      ],
-      "cons": [
-          "Слаб против брони",
-          "Нужен магазин",
-          "Не заменяет автомат"
-      ],
-      "tips": [
-          "Держи как второе оружие.",
-          "Целься в голову.",
-          "Не заходи с одним пистолетом в сложный бункер."
-      ],
-      "recommendedFor": [
-          "Новички",
-          "Запасное оружие",
-          "Города"
-      ]
+    "slug": "m9",
+    "name": "M9",
+    "category": "Пистолеты",
+    "type": "Пистолет",
+    "ammo": "9x19mm",
+    "rarity": "Обычная",
+    "mode": "PvE/PvP",
+    "tier": "B",
+    "difficulty": "Легкая",
+    "range": "Ближняя",
+    "shortRole": "Надёжный стартовый пистолет",
+    "summary": "M9 — удобный пистолет для старта, защиты от одиночных зомби и роли запасного оружия. Становится полезным только с магазином и патронами.",
+    "rating": {
+      "damage": 4,
+      "control": 8,
+      "range": 3,
+      "economy": 9,
+      "bunker": 5,
+      "pvp": 5
+    },
+    "bestBuild": [
+      "Магазин M9",
+      "Глушитель M9/пистолетный",
+      "Фонарик M9",
+      "Запас 9mm"
+    ],
+    "attachments": [
+      "magazin-m9",
+      "glushitel-m9",
+      "pistoletnyi-glushitel",
+      "fonarik-dlya-m9"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-m9",
+      "glushitel-m9",
+      "pistoletnyi-glushitel",
+      "samodelnyi-glushitel-iz-banki",
+      "samodelnyi-glushitel-iz-butylki",
+      "pricel-aimpro-red-dot",
+      "pricel-verteks-snake",
+      "pricel-verteks-wasp"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 9x19mm.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Полиция",
+      "Города",
+      "Дома",
+      "Военные зоны",
+      "Торговцы"
+    ],
+    "pros": [
+      "Дешёвый калибр",
+      "Лёгкий",
+      "Хорош как запасной"
+    ],
+    "cons": [
+      "Слаб против брони",
+      "Нужен магазин",
+      "Не заменяет автомат"
+    ],
+    "tips": [
+      "Держи как второе оружие.",
+      "Целься в голову.",
+      "Не заходи с одним пистолетом в сложный бункер."
+    ],
+    "recommendedFor": [
+      "Новички",
+      "Запасное оружие",
+      "Города"
+    ]
   },
   {
-      "slug": "hs-9",
-      "name": "HS-9",
-      "category": "Пистолеты",
-      "type": "Пистолет",
-      "ammo": "9x19mm",
-      "rarity": "Обычная",
-      "mode": "PvE/PvP",
-      "tier": "B",
-      "difficulty": "Легкая",
-      "range": "Ближняя",
-      "shortRole": "Практичный 9mm пистолет",
-      "summary": "HS-9 — простой и экономный вариант для ранней игры, добивания зомби и тихой зачистки с глушителем. Главное — найти магазин.",
-      "rating": {
-          "damage": 4,
-          "control": 8,
-          "range": 3,
-          "economy": 9,
-          "bunker": 5,
-          "pvp": 5
-      },
-      "bestBuild": [
-          "Магазин HS-9",
-          "Пистолетный глушитель",
-          "Фонарик/кобура",
-          "9mm запас"
-      ],
-      "attachments": [
-          "magazin-hs-9",
-          "pistoletnyi-glushitel"
-      ],
-      "recommendedAttachmentSlugs": [
-          "HS-9 magazine",
-          "Pistol suppressor",
-          "Holster"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 9x19mm.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Города",
-          "Полиция",
-          "Дома",
-          "Военные зоны"
-      ],
-      "pros": [
-          "Экономный",
-          "Лёгкий",
-          "Подходит новичку"
-      ],
-      "cons": [
-          "Слабый урон по броне",
-          "Зависит от магазина",
-          "Плох на дистанции"
-      ],
-      "tips": [
-          "Используй против одиночных целей.",
-          "Не вступай в длинный бой против автоматов.",
-          "Бери патроны только если есть магазин."
-      ],
-      "recommendedFor": [
-          "Новички",
-          "PvE",
-          "Запасное оружие"
-      ]
+    "slug": "hs-9",
+    "name": "HS-9",
+    "category": "Пистолеты",
+    "type": "Пистолет",
+    "ammo": "9x19mm",
+    "rarity": "Обычная",
+    "mode": "PvE/PvP",
+    "tier": "B",
+    "difficulty": "Легкая",
+    "range": "Ближняя",
+    "shortRole": "Практичный 9mm пистолет",
+    "summary": "HS-9 — простой и экономный вариант для ранней игры, добивания зомби и тихой зачистки с глушителем. Главное — найти магазин.",
+    "rating": {
+      "damage": 4,
+      "control": 8,
+      "range": 3,
+      "economy": 9,
+      "bunker": 5,
+      "pvp": 5
+    },
+    "bestBuild": [
+      "Магазин HS-9",
+      "Пистолетный глушитель",
+      "Фонарик/кобура",
+      "9mm запас"
+    ],
+    "attachments": [
+      "magazin-hs-9",
+      "pistoletnyi-glushitel"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-hs-9",
+      "pistoletnyi-glushitel",
+      "samodelnyi-glushitel-iz-banki",
+      "samodelnyi-glushitel-iz-butylki",
+      "pricel-aimpro-red-dot",
+      "pricel-verteks-snake",
+      "pricel-verteks-wasp",
+      "fonarik-dlya-m9"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 9x19mm.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Города",
+      "Полиция",
+      "Дома",
+      "Военные зоны"
+    ],
+    "pros": [
+      "Экономный",
+      "Лёгкий",
+      "Подходит новичку"
+    ],
+    "cons": [
+      "Слабый урон по броне",
+      "Зависит от магазина",
+      "Плох на дистанции"
+    ],
+    "tips": [
+      "Используй против одиночных целей.",
+      "Не вступай в длинный бой против автоматов.",
+      "Бери патроны только если есть магазин."
+    ],
+    "recommendedFor": [
+      "Новички",
+      "PvE",
+      "Запасное оружие"
+    ]
   },
   {
-      "slug": "hs-sf19",
-      "name": "HS SF19",
-      "category": "Пистолеты",
-      "type": "Пистолет",
-      "ammo": "9x19mm",
-      "rarity": "Редкая",
-      "mode": "PvE/PvP",
-      "tier": "B",
-      "difficulty": "Легкая",
-      "range": "Ближняя",
-      "shortRole": "Улучшенный 9mm пистолет под запасной слот",
-      "summary": "HS SF19 хорошо подходит как запасной пистолет для рейда: лёгкий, экономный и удобный. Важнее всего найти совместимый магазин.",
-      "rating": {
-          "damage": 4,
-          "control": 8,
-          "range": 4,
-          "economy": 8,
-          "bunker": 5,
-          "pvp": 6
-      },
-      "bestBuild": [
-          "Магазин HS SF19",
-          "Пистолетный глушитель",
-          "Кобура",
-          "9mm запас"
-      ],
-      "attachments": [
-          "magazin-hs-sf19",
-          "pistoletnyi-glushitel"
-      ],
-      "recommendedAttachmentSlugs": [
-          "HS SF19 magazine",
-          "Pistol suppressor",
-          "Holster"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 9x19mm.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Полиция",
-          "Города",
-          "Военные зоны",
-          "Аирдропы"
-      ],
-      "pros": [
-          "Удобный контроль",
-          "Экономный калибр",
-          "Хорош запасным"
-      ],
-      "cons": [
-          "Не основной ствол",
-          "Нужен магазин",
-          "Ограниченная дистанция"
-      ],
-      "tips": [
-          "Держи на случай пустого автомата.",
-          "Не трать весь 9mm запас в бункере.",
-          "Лучше с глушителем для PvE."
-      ],
-      "recommendedFor": [
-          "Запасное оружие",
-          "PvE",
-          "Города"
-      ]
+    "slug": "hs-sf19",
+    "name": "HS SF19",
+    "category": "Пистолеты",
+    "type": "Пистолет",
+    "ammo": "9x19mm",
+    "rarity": "Редкая",
+    "mode": "PvE/PvP",
+    "tier": "B",
+    "difficulty": "Легкая",
+    "range": "Ближняя",
+    "shortRole": "Улучшенный 9mm пистолет под запасной слот",
+    "summary": "HS SF19 хорошо подходит как запасной пистолет для рейда: лёгкий, экономный и удобный. Важнее всего найти совместимый магазин.",
+    "rating": {
+      "damage": 4,
+      "control": 8,
+      "range": 4,
+      "economy": 8,
+      "bunker": 5,
+      "pvp": 6
+    },
+    "bestBuild": [
+      "Магазин HS SF19",
+      "Пистолетный глушитель",
+      "Кобура",
+      "9mm запас"
+    ],
+    "attachments": [
+      "magazin-hs-sf19",
+      "pistoletnyi-glushitel"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-hs-sf19",
+      "pistoletnyi-glushitel",
+      "samodelnyi-glushitel-iz-banki",
+      "samodelnyi-glushitel-iz-butylki",
+      "pricel-aimpro-red-dot",
+      "pricel-verteks-snake",
+      "pricel-verteks-wasp",
+      "fonarik-dlya-m9"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 9x19mm.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Полиция",
+      "Города",
+      "Военные зоны",
+      "Аирдропы"
+    ],
+    "pros": [
+      "Удобный контроль",
+      "Экономный калибр",
+      "Хорош запасным"
+    ],
+    "cons": [
+      "Не основной ствол",
+      "Нужен магазин",
+      "Ограниченная дистанция"
+    ],
+    "tips": [
+      "Держи на случай пустого автомата.",
+      "Не трать весь 9mm запас в бункере.",
+      "Лучше с глушителем для PvE."
+    ],
+    "recommendedFor": [
+      "Запасное оружие",
+      "PvE",
+      "Города"
+    ]
   },
   {
-      "slug": "deagle-357",
-      "name": "Desert Eagle .357",
-      "category": "Пистолеты",
-      "type": "Крупнокалиберный пистолет",
-      "ammo": ".357 Magnum",
-      "rarity": "Редкая",
-      "mode": "PvE/PvP",
-      "tier": "A",
-      "difficulty": "Средняя",
-      "range": "Ближняя",
-      "shortRole": "Мощный пистолет под .357",
-      "summary": "Desert Eagle .357 — тяжёлый пистолет с высоким уроном для ближней и средней дистанции. Хорош как сильное второе оружие, но требует редких патронов и аккуратной стрельбы.",
-      "rating": {
-          "damage": 7,
-          "control": 5,
-          "range": 4,
-          "economy": 4,
-          "bunker": 6,
-          "pvp": 7
-      },
-      "bestBuild": [
-          "Магазин Deagle .357",
-          "Desert Eagle Red Dot",
-          "Фонарик Deagle",
-          ".357 запас"
-      ],
-      "attachments": [
-          "magazin-deagle-357",
-          "pricel-desert-eagle-red-dot",
-          "fonarik-dlya-deagle"
-      ],
-      "recommendedAttachmentSlugs": [
-          "Deagle .357 magazine",
-          "Deagle red dot",
-          "Deagle light"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: .357 Magnum.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Полиция",
-          "Военные зоны",
-          "Бункеры",
-          "Торговцы"
-      ],
-      "pros": [
-          "Высокий урон",
-          "Пугающий запасной ствол",
-          "Хорош против одиночных целей"
-      ],
-      "cons": [
-          "Дорогие патроны",
-          "Сильная отдача",
-          "Не заменяет автомат"
-      ],
-      "tips": [
-          "Стреляй точно, не спамь.",
-          "Не носи без запасного магазина.",
-          "Храни патроны отдельно от 9mm."
-      ],
-      "recommendedFor": [
-          "PvP",
-          "Запасное оружие",
-          "Охрана базы"
-      ]
+    "slug": "deagle-357",
+    "name": "Desert Eagle .357",
+    "category": "Пистолеты",
+    "type": "Крупнокалиберный пистолет",
+    "ammo": ".357 Magnum",
+    "rarity": "Редкая",
+    "mode": "PvE/PvP",
+    "tier": "A",
+    "difficulty": "Средняя",
+    "range": "Ближняя",
+    "shortRole": "Мощный пистолет под .357",
+    "summary": "Desert Eagle .357 — тяжёлый пистолет с высоким уроном для ближней и средней дистанции. Хорош как сильное второе оружие, но требует редких патронов и аккуратной стрельбы.",
+    "rating": {
+      "damage": 7,
+      "control": 5,
+      "range": 4,
+      "economy": 4,
+      "bunker": 6,
+      "pvp": 7
+    },
+    "bestBuild": [
+      "Магазин Deagle .357",
+      "Desert Eagle Red Dot",
+      "Фонарик Deagle",
+      ".357 запас"
+    ],
+    "attachments": [
+      "magazin-deagle-357",
+      "pricel-desert-eagle-red-dot",
+      "fonarik-dlya-deagle"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-deagle-357",
+      "pricel-desert-eagle-red-dot",
+      "fonarik-dlya-deagle"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: .357 Magnum.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Полиция",
+      "Военные зоны",
+      "Бункеры",
+      "Торговцы"
+    ],
+    "pros": [
+      "Высокий урон",
+      "Пугающий запасной ствол",
+      "Хорош против одиночных целей"
+    ],
+    "cons": [
+      "Дорогие патроны",
+      "Сильная отдача",
+      "Не заменяет автомат"
+    ],
+    "tips": [
+      "Стреляй точно, не спамь.",
+      "Не носи без запасного магазина.",
+      "Храни патроны отдельно от 9mm."
+    ],
+    "recommendedFor": [
+      "PvP",
+      "Запасное оружие",
+      "Охрана базы"
+    ]
   },
   {
-      "slug": "tec01-m9",
-      "name": "TEC01 M9",
-      "category": "Пистолеты",
-      "type": "Пистолет",
-      "ammo": "9x19mm",
-      "rarity": "Редкая",
-      "mode": "PvE/PvP",
-      "tier": "B",
-      "difficulty": "Легкая",
-      "range": "Ближняя",
-      "shortRole": "Вариант M9 для экономной игры",
-      "summary": "TEC01 M9 — практичный пистолет под распространённый 9mm. Полезен как раннее оружие, запасной ствол или тихий инструмент для PvE.",
-      "rating": {
-          "damage": 4,
-          "control": 8,
-          "range": 3,
-          "economy": 9,
-          "bunker": 5,
-          "pvp": 5
-      },
-      "bestBuild": [
-          "Магазин M9",
-          "Глушитель M9",
-          "Фонарик M9",
-          "9mm запас"
-      ],
-      "attachments": [
-          "magazin-m9",
-          "glushitel-m9",
-          "fonarik-dlya-m9"
-      ],
-      "recommendedAttachmentSlugs": [
-          "M9 magazine",
-          "M9 suppressor",
-          "M9 flashlight"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 9x19mm.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Города",
-          "Полиция",
-          "Дома",
-          "Военные зоны"
-      ],
-      "pros": [
-          "Дешёвый калибр",
-          "Простое обслуживание",
-          "Хорош запасным"
-      ],
-      "cons": [
-          "Ограниченный урон",
-          "Нужен магазин",
-          "Слаб на дальних дистанциях"
-      ],
-      "tips": [
-          "Не переоценивай пистолет в бункере.",
-          "Используй для тихой зачистки одиночных целей.",
-          "Береги магазины."
-      ],
-      "recommendedFor": [
-          "Новички",
-          "PvE",
-          "Запасное оружие"
-      ]
+    "slug": "tec01-m9",
+    "name": "TEC01 M9",
+    "category": "Пистолеты",
+    "type": "Пистолет",
+    "ammo": "9x19mm",
+    "rarity": "Редкая",
+    "mode": "PvE/PvP",
+    "tier": "B",
+    "difficulty": "Легкая",
+    "range": "Ближняя",
+    "shortRole": "Вариант M9 для экономной игры",
+    "summary": "TEC01 M9 — практичный пистолет под распространённый 9mm. Полезен как раннее оружие, запасной ствол или тихий инструмент для PvE.",
+    "rating": {
+      "damage": 4,
+      "control": 8,
+      "range": 3,
+      "economy": 9,
+      "bunker": 5,
+      "pvp": 5
+    },
+    "bestBuild": [
+      "Магазин M9",
+      "Глушитель M9",
+      "Фонарик M9",
+      "9mm запас"
+    ],
+    "attachments": [
+      "magazin-m9",
+      "glushitel-m9",
+      "fonarik-dlya-m9"
+    ],
+    "recommendedAttachmentSlugs": [
+      "magazin-m9",
+      "glushitel-m9",
+      "pistoletnyi-glushitel",
+      "samodelnyi-glushitel-iz-banki",
+      "pricel-aimpro-red-dot",
+      "pricel-verteks-snake",
+      "pricel-verteks-wasp",
+      "fonarik-dlya-m9"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 9x19mm.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Города",
+      "Полиция",
+      "Дома",
+      "Военные зоны"
+    ],
+    "pros": [
+      "Дешёвый калибр",
+      "Простое обслуживание",
+      "Хорош запасным"
+    ],
+    "cons": [
+      "Ограниченный урон",
+      "Нужен магазин",
+      "Слаб на дальних дистанциях"
+    ],
+    "tips": [
+      "Не переоценивай пистолет в бункере.",
+      "Используй для тихой зачистки одиночных целей.",
+      "Береги магазины."
+    ],
+    "recommendedFor": [
+      "Новички",
+      "PvE",
+      "Запасное оружие"
+    ]
   },
   {
-      "slug": "mosin",
-      "name": "Mosin",
-      "category": "Снайперские",
-      "type": "Винтовка",
-      "ammo": "7.62x54mmR",
-      "rarity": "Редкая",
-      "mode": "PvE/PvP",
-      "tier": "A",
-      "difficulty": "Средняя",
-      "range": "Дальняя",
-      "shortRole": "Классическая дальнобойная винтовка",
-      "summary": "Mosin — мощная винтовка для охоты, дальних маршрутов и точных выстрелов. Эффективность зависит от оптики, позиции и умения не подставляться после выстрела.",
-      "rating": {
-          "damage": 9,
-          "control": 5,
-          "range": 9,
-          "economy": 7,
-          "bunker": 4,
-          "pvp": 8
-      },
-      "bestBuild": [
-          "Оптика ZF/POSP при наличии",
-          "Глушитель M1891/подходящий",
-          "Запас 7.62x54R",
-          "Пистолет/ПП вторым оружием"
-      ],
-      "attachments": [
-          "opticheskii-pricel-zf39",
-          "opticheskii-pricel-posp-4x24v",
-          "glushitel-m1891"
-      ],
-      "recommendedAttachmentSlugs": [
-          "Scope if compatible",
-          "Mosin/M1891 suppressor if available",
-          "Sidearm"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: 7.62x54mmR.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Охотничьи зоны",
-          "Военные зоны",
-          "Бункеры",
-          "Аирдропы"
-      ],
-      "pros": [
-          "Высокий урон",
-          "Хороша на дальних дистанциях",
-          "Экономный темп стрельбы"
-      ],
-      "cons": [
-          "Медленная скорострельность",
-          "Плоха в коридорах",
-          "После выстрела позицию могут вычислить"
-      ],
-      "tips": [
-          "Не заходи с ней одной в бункер.",
-          "Меняй позицию после громкого выстрела.",
-          "Всегда имей второе оружие."
-      ],
-      "recommendedFor": [
-          "Снайперы",
-          "Охота",
-          "PvP на дистанции"
-      ]
+    "slug": "mosin",
+    "name": "Mosin",
+    "category": "Снайперские",
+    "type": "Винтовка",
+    "ammo": "7.62x54mmR",
+    "rarity": "Редкая",
+    "mode": "PvE/PvP",
+    "tier": "A",
+    "difficulty": "Средняя",
+    "range": "Дальняя",
+    "shortRole": "Классическая дальнобойная винтовка",
+    "summary": "Mosin — мощная винтовка для охоты, дальних маршрутов и точных выстрелов. Эффективность зависит от оптики, позиции и умения не подставляться после выстрела.",
+    "rating": {
+      "damage": 9,
+      "control": 5,
+      "range": 9,
+      "economy": 7,
+      "bunker": 4,
+      "pvp": 8
+    },
+    "bestBuild": [
+      "Оптика ZF/POSP при наличии",
+      "Глушитель M1891/подходящий",
+      "Запас 7.62x54R",
+      "Пистолет/ПП вторым оружием"
+    ],
+    "attachments": [
+      "opticheskii-pricel-zf39",
+      "opticheskii-pricel-posp-4x24v",
+      "glushitel-m1891"
+    ],
+    "recommendedAttachmentSlugs": [
+      "glushitel-hunter",
+      "glushitel-m1891",
+      "opticheskii-pricel-posp-4x24v",
+      "opticheskii-pricel-zf39",
+      "ohotnichii-pricel",
+      "samodelnyi-opticheskii-pricel",
+      "samodelnaya-vintovochnaya-planka"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: 7.62x54mmR.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Охотничьи зоны",
+      "Военные зоны",
+      "Бункеры",
+      "Аирдропы"
+    ],
+    "pros": [
+      "Высокий урон",
+      "Хороша на дальних дистанциях",
+      "Экономный темп стрельбы"
+    ],
+    "cons": [
+      "Медленная скорострельность",
+      "Плоха в коридорах",
+      "После выстрела позицию могут вычислить"
+    ],
+    "tips": [
+      "Не заходи с ней одной в бункер.",
+      "Меняй позицию после громкого выстрела.",
+      "Всегда имей второе оружие."
+    ],
+    "recommendedFor": [
+      "Снайперы",
+      "Охота",
+      "PvP на дистанции"
+    ]
   },
   {
-      "slug": "crossbow",
-      "name": "Crossbow",
-      "category": "Луки",
-      "type": "Арбалет",
-      "ammo": "Болты",
-      "rarity": "Обычная",
-      "mode": "PvE",
-      "tier": "B",
-      "difficulty": "Средняя",
-      "range": "Средняя",
-      "shortRole": "Тихое оружие для охоты и экономного фарма",
-      "summary": "Crossbow — тихий вариант для охоты, одиночных зомби и экономии патронов. Не стоит считать его заменой автомату в сложном бункере.",
-      "rating": {
-          "damage": 6,
-          "control": 6,
-          "range": 5,
-          "economy": 9,
-          "bunker": 4,
-          "pvp": 4
-      },
-      "bestBuild": [
-          "Запас болтов",
-          "Тихий маршрут",
-          "Пистолет вторым оружием",
-          "Лёгкий рюкзак"
-      ],
-      "attachments": [],
-      "recommendedAttachmentSlugs": [
-          "Bolts",
-          "Backup pistol"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: Болты.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Дома",
-          "Охотничьи зоны",
-          "Крафт/торговцы на некоторых серверах"
-      ],
-      "pros": [
-          "Тихий",
-          "Экономит патроны",
-          "Подходит для охоты"
-      ],
-      "cons": [
-          "Медленный темп",
-          "Слаб против групп",
-          "Требует точности"
-      ],
-      "tips": [
-          "Выбирай одиночные цели.",
-          "Не лезь в толпу зомби.",
-          "Бери запас болтов."
-      ],
-      "recommendedFor": [
-          "Охота",
-          "Новички",
-          "Тихий PvE"
-      ]
+    "slug": "crossbow",
+    "name": "Crossbow",
+    "category": "Луки",
+    "type": "Арбалет",
+    "ammo": "Болты",
+    "rarity": "Обычная",
+    "mode": "PvE",
+    "tier": "B",
+    "difficulty": "Средняя",
+    "range": "Средняя",
+    "shortRole": "Тихое оружие для охоты и экономного фарма",
+    "summary": "Crossbow — тихий вариант для охоты, одиночных зомби и экономии патронов. Не стоит считать его заменой автомату в сложном бункере.",
+    "rating": {
+      "damage": 6,
+      "control": 6,
+      "range": 5,
+      "economy": 9,
+      "bunker": 4,
+      "pvp": 4
+    },
+    "bestBuild": [
+      "Запас болтов",
+      "Тихий маршрут",
+      "Пистолет вторым оружием",
+      "Лёгкий рюкзак"
+    ],
+    "attachments": [],
+    "recommendedAttachmentSlugs": [],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: Болты.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Дома",
+      "Охотничьи зоны",
+      "Крафт/торговцы на некоторых серверах"
+    ],
+    "pros": [
+      "Тихий",
+      "Экономит патроны",
+      "Подходит для охоты"
+    ],
+    "cons": [
+      "Медленный темп",
+      "Слаб против групп",
+      "Требует точности"
+    ],
+    "tips": [
+      "Выбирай одиночные цели.",
+      "Не лезь в толпу зомби.",
+      "Бери запас болтов."
+    ],
+    "recommendedFor": [
+      "Охота",
+      "Новички",
+      "Тихий PvE"
+    ]
   },
   {
-      "slug": "compound-bow",
-      "name": "Compound Bow",
-      "category": "Луки",
-      "type": "Блочный лук",
-      "ammo": "Стрелы",
-      "rarity": "Редкая",
-      "mode": "PvE",
-      "tier": "B",
-      "difficulty": "Средняя",
-      "range": "Средняя",
-      "shortRole": "Лучший лук для тихого фарма",
-      "summary": "Compound Bow удобен для охоты, скрытного PvE и экономии патронов. С обвесами становится намного комфортнее, но против тяжёлых целей всё равно уступает огнестрелу.",
-      "rating": {
-          "damage": 6,
-          "control": 7,
-          "range": 6,
-          "economy": 9,
-          "bunker": 4,
-          "pvp": 4
-      },
-      "bestBuild": [
-          "Прицел 3/5 точек",
-          "Стабилизатор",
-          "Глушитель для лука",
-          "Запас стрел"
-      ],
-      "attachments": [
-          "pricel-dlya-blochnogo-luka-3-tochki",
-          "pricel-dlya-blochnogo-luka-5-tochek",
-          "stabilizator-dlya-luka",
-          "glushitel-dlya-luka"
-      ],
-      "recommendedAttachmentSlugs": [
-          "Bow sight",
-          "Stabilizer",
-          "Bow suppressor",
-          "Arrows"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: Стрелы.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Охотничьи зоны",
-          "Спортивный/редкий лут",
-          "Торговцы на некоторых серверах"
-      ],
-      "pros": [
-          "Очень тихий",
-          "Экономный",
-          "Хорош для охоты"
-      ],
-      "cons": [
-          "Не для тяжёлого боя",
-          "Нужен навык стрельбы",
-          "Слаб против групп"
-      ],
-      "tips": [
-          "Настрой натяжение под силу персонажа.",
-          "Тренируй падение стрелы.",
-          "Не бери как единственное оружие в заброшенный бункер."
-      ],
-      "recommendedFor": [
-          "Охота",
-          "Тихий фарм",
-          "PvE"
-      ]
+    "slug": "compound-bow",
+    "name": "Compound Bow",
+    "category": "Луки",
+    "type": "Блочный лук",
+    "ammo": "Стрелы",
+    "rarity": "Редкая",
+    "mode": "PvE",
+    "tier": "B",
+    "difficulty": "Средняя",
+    "range": "Средняя",
+    "shortRole": "Лучший лук для тихого фарма",
+    "summary": "Compound Bow удобен для охоты, скрытного PvE и экономии патронов. С обвесами становится намного комфортнее, но против тяжёлых целей всё равно уступает огнестрелу.",
+    "rating": {
+      "damage": 6,
+      "control": 7,
+      "range": 6,
+      "economy": 9,
+      "bunker": 4,
+      "pvp": 4
+    },
+    "bestBuild": [
+      "Прицел 3/5 точек",
+      "Стабилизатор",
+      "Глушитель для лука",
+      "Запас стрел"
+    ],
+    "attachments": [
+      "pricel-dlya-blochnogo-luka-3-tochki",
+      "pricel-dlya-blochnogo-luka-5-tochek",
+      "stabilizator-dlya-luka",
+      "glushitel-dlya-luka"
+    ],
+    "recommendedAttachmentSlugs": [
+      "glushitel-dlya-luka",
+      "pricel-dlya-blochnogo-luka-3-tochki",
+      "pricel-dlya-blochnogo-luka-5-tochek",
+      "stabilizator-dlya-luka",
+      "samodelnyi-stabilizator-dlya-luka"
+    ],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: Стрелы.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Охотничьи зоны",
+      "Спортивный/редкий лут",
+      "Торговцы на некоторых серверах"
+    ],
+    "pros": [
+      "Очень тихий",
+      "Экономный",
+      "Хорош для охоты"
+    ],
+    "cons": [
+      "Не для тяжёлого боя",
+      "Нужен навык стрельбы",
+      "Слаб против групп"
+    ],
+    "tips": [
+      "Настрой натяжение под силу персонажа.",
+      "Тренируй падение стрелы.",
+      "Не бери как единственное оружие в заброшенный бункер."
+    ],
+    "recommendedFor": [
+      "Охота",
+      "Тихий фарм",
+      "PvE"
+    ]
   },
   {
-      "slug": "katana",
-      "name": "Katana",
-      "category": "Ближний бой",
-      "type": "Холодное оружие",
-      "ammo": "Не требуются",
-      "rarity": "Редкая",
-      "mode": "PvE/PvP",
-      "tier": "A",
-      "difficulty": "Средняя",
-      "range": "Ближняя",
-      "shortRole": "Очень сильное холодное оружие",
-      "summary": "Katana — мощное оружие ближнего боя для экономии патронов и быстрых зачисток одиночных целей. Требует аккуратного тайминга и не прощает ошибок против групп.",
-      "rating": {
-          "damage": 8,
-          "control": 7,
-          "range": 1,
-          "economy": 10,
-          "bunker": 5,
-          "pvp": 5
-      },
-      "bestBuild": [
-          "Лёгкая броня",
-          "Бинты",
-          "Запасное огнестрельное оружие",
-          "Хорошая выносливость"
-      ],
-      "attachments": [],
-      "recommendedAttachmentSlugs": [
-          "No attachments"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: Не требуются.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Редкий гражданский/военный лут",
-          "Торговцы на некоторых серверах",
-          "Особые контейнеры"
-      ],
-      "pros": [
-          "Не нужны патроны",
-          "Высокий урон в ближнем бою",
-          "Стильно и эффективно против одиночных целей"
-      ],
-      "cons": [
-          "Опасно против групп",
-          "Нулевая дальность",
-          "Риск получить урон"
-      ],
-      "tips": [
-          "Не маши в толпе.",
-          "Держи выносливость для отхода.",
-          "В бункер бери огнестрел дополнительно."
-      ],
-      "recommendedFor": [
-          "PvE",
-          "Экономия патронов",
-          "Стильная база"
-      ]
+    "slug": "katana",
+    "name": "Katana",
+    "category": "Ближний бой",
+    "type": "Холодное оружие",
+    "ammo": "Не требуются",
+    "rarity": "Редкая",
+    "mode": "PvE/PvP",
+    "tier": "A",
+    "difficulty": "Средняя",
+    "range": "Ближняя",
+    "shortRole": "Очень сильное холодное оружие",
+    "summary": "Katana — мощное оружие ближнего боя для экономии патронов и быстрых зачисток одиночных целей. Требует аккуратного тайминга и не прощает ошибок против групп.",
+    "rating": {
+      "damage": 8,
+      "control": 7,
+      "range": 1,
+      "economy": 10,
+      "bunker": 5,
+      "pvp": 5
+    },
+    "bestBuild": [
+      "Лёгкая броня",
+      "Бинты",
+      "Запасное огнестрельное оружие",
+      "Хорошая выносливость"
+    ],
+    "attachments": [],
+    "recommendedAttachmentSlugs": [],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: Не требуются.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Редкий гражданский/военный лут",
+      "Торговцы на некоторых серверах",
+      "Особые контейнеры"
+    ],
+    "pros": [
+      "Не нужны патроны",
+      "Высокий урон в ближнем бою",
+      "Стильно и эффективно против одиночных целей"
+    ],
+    "cons": [
+      "Опасно против групп",
+      "Нулевая дальность",
+      "Риск получить урон"
+    ],
+    "tips": [
+      "Не маши в толпе.",
+      "Держи выносливость для отхода.",
+      "В бункер бери огнестрел дополнительно."
+    ],
+    "recommendedFor": [
+      "PvE",
+      "Экономия патронов",
+      "Стильная база"
+    ]
   },
   {
-      "slug": "golden-katana",
-      "name": "Golden Katana",
-      "category": "Ближний бой",
-      "type": "Редкое холодное оружие",
-      "ammo": "Не требуются",
-      "rarity": "Легендарная",
-      "mode": "PvE/PvP",
-      "tier": "A",
-      "difficulty": "Средняя",
-      "range": "Ближняя",
-      "shortRole": "Коллекционная и сильная катана",
-      "summary": "Golden Katana — редкий престижный вариант катаны. Практически полезна как сильное холодное оружие, но из-за ценности её не всегда разумно носить в рискованный PvP.",
-      "rating": {
-          "damage": 8,
-          "control": 7,
-          "range": 1,
-          "economy": 8,
-          "bunker": 5,
-          "pvp": 5
-      },
-      "bestBuild": [
-          "Хранить на базе или брать в PvE",
-          "Бинты",
-          "Запасное оружие",
-          "Не рисковать без причины"
-      ],
-      "attachments": [],
-      "recommendedAttachmentSlugs": [
-          "No attachments"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: Не требуются.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Редкий/особый лут",
-          "Торговцы или ивенты на серверах",
-          "Коллекционные маршруты"
-      ],
-      "pros": [
-          "Редкая и ценная",
-          "Сильная в ближнем бою",
-          "Хороша для коллекции"
-      ],
-      "cons": [
-          "Потеря болезненна",
-          "Нет дальности",
-          "Не решает бой против огнестрела"
-      ],
-      "tips": [
-          "На PvP лучше хранить, а не носить постоянно.",
-          "Используй против одиночных целей.",
-          "Не путай ценность коллекции с безопасностью."
-      ],
-      "recommendedFor": [
-          "Коллекционеры",
-          "PvE",
-          "База"
-      ]
+    "slug": "golden-katana",
+    "name": "Golden Katana",
+    "category": "Ближний бой",
+    "type": "Редкое холодное оружие",
+    "ammo": "Не требуются",
+    "rarity": "Легендарная",
+    "mode": "PvE/PvP",
+    "tier": "A",
+    "difficulty": "Средняя",
+    "range": "Ближняя",
+    "shortRole": "Коллекционная и сильная катана",
+    "summary": "Golden Katana — редкий престижный вариант катаны. Практически полезна как сильное холодное оружие, но из-за ценности её не всегда разумно носить в рискованный PvP.",
+    "rating": {
+      "damage": 8,
+      "control": 7,
+      "range": 1,
+      "economy": 8,
+      "bunker": 5,
+      "pvp": 5
+    },
+    "bestBuild": [
+      "Хранить на базе или брать в PvE",
+      "Бинты",
+      "Запасное оружие",
+      "Не рисковать без причины"
+    ],
+    "attachments": [],
+    "recommendedAttachmentSlugs": [],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: Не требуются.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Редкий/особый лут",
+      "Торговцы или ивенты на серверах",
+      "Коллекционные маршруты"
+    ],
+    "pros": [
+      "Редкая и ценная",
+      "Сильная в ближнем бою",
+      "Хороша для коллекции"
+    ],
+    "cons": [
+      "Потеря болезненна",
+      "Нет дальности",
+      "Не решает бой против огнестрела"
+    ],
+    "tips": [
+      "На PvP лучше хранить, а не носить постоянно.",
+      "Используй против одиночных целей.",
+      "Не путай ценность коллекции с безопасностью."
+    ],
+    "recommendedFor": [
+      "Коллекционеры",
+      "PvE",
+      "База"
+    ]
   },
   {
-      "slug": "grenade",
-      "name": "Grenade",
-      "category": "Взрывчатка",
-      "type": "Граната",
-      "ammo": "Взрывчатка",
-      "rarity": "Редкая",
-      "mode": "PvE/PvP",
-      "tier": "A",
-      "difficulty": "Сложная",
-      "range": "Ближняя",
-      "shortRole": "Расходник для зачистки и давления",
-      "summary": "Grenade — опасный расходник для комнат, углов и давления на игроков. Использовать нужно аккуратно: ошибка с таймингом опасна для своей команды.",
-      "rating": {
-          "damage": 9,
-          "control": 3,
-          "range": 3,
-          "economy": 3,
-          "bunker": 7,
-          "pvp": 8
-      },
-      "bestBuild": [
-          "Брать 1–2 под конкретный рейд",
-          "Не хранить в быстром слоте без привычки",
-          "Команда отхода в дуо",
-          "Медицина после взрыва"
-      ],
-      "attachments": [],
-      "recommendedAttachmentSlugs": [
-          "No attachments"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: Взрывчатка.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Военные зоны",
-          "Бункеры",
-          "Аирдропы",
-          "Торговцы на некоторых серверах"
-      ],
-      "pros": [
-          "Сильна против групп",
-          "Выбивает из укрытия",
-          "Полезна в PvP"
-      ],
-      "cons": [
-          "Опасна для себя",
-          "Одноразовая",
-          "Требует тайминга"
-      ],
-      "tips": [
-          "Не кидай без понимания отскока.",
-          "Предупреждай напарника.",
-          "Не используй ради дешёвого лута."
-      ],
-      "recommendedFor": [
-          "PvP",
-          "Зачистка комнат",
-          "Опытные игроки"
-      ]
+    "slug": "grenade",
+    "name": "Grenade",
+    "category": "Взрывчатка",
+    "type": "Граната",
+    "ammo": "Взрывчатка",
+    "rarity": "Редкая",
+    "mode": "PvE/PvP",
+    "tier": "A",
+    "difficulty": "Сложная",
+    "range": "Ближняя",
+    "shortRole": "Расходник для зачистки и давления",
+    "summary": "Grenade — опасный расходник для комнат, углов и давления на игроков. Использовать нужно аккуратно: ошибка с таймингом опасна для своей команды.",
+    "rating": {
+      "damage": 9,
+      "control": 3,
+      "range": 3,
+      "economy": 3,
+      "bunker": 7,
+      "pvp": 8
+    },
+    "bestBuild": [
+      "Брать 1–2 под конкретный рейд",
+      "Не хранить в быстром слоте без привычки",
+      "Команда отхода в дуо",
+      "Медицина после взрыва"
+    ],
+    "attachments": [],
+    "recommendedAttachmentSlugs": [],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: Взрывчатка.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Военные зоны",
+      "Бункеры",
+      "Аирдропы",
+      "Торговцы на некоторых серверах"
+    ],
+    "pros": [
+      "Сильна против групп",
+      "Выбивает из укрытия",
+      "Полезна в PvP"
+    ],
+    "cons": [
+      "Опасна для себя",
+      "Одноразовая",
+      "Требует тайминга"
+    ],
+    "tips": [
+      "Не кидай без понимания отскока.",
+      "Предупреждай напарника.",
+      "Не используй ради дешёвого лута."
+    ],
+    "recommendedFor": [
+      "PvP",
+      "Зачистка комнат",
+      "Опытные игроки"
+    ]
   },
   {
-      "slug": "claymore",
-      "name": "Claymore",
-      "category": "Взрывчатка",
-      "type": "Мина направленного действия",
-      "ammo": "Взрывчатка",
-      "rarity": "Очень редкая",
-      "mode": "PvP",
-      "tier": "A",
-      "difficulty": "Сложная",
-      "range": "Ближняя",
-      "shortRole": "Опасная ловушка под конкретную задачу",
-      "summary": "Claymore уместна как ловушка или элемент защиты, если механики и правила сервера это позволяют. Точную эффективность и доступность лучше проверять на конкретном сервере.",
-      "rating": {
-          "damage": 9,
-          "control": 2,
-          "range": 2,
-          "economy": 2,
-          "bunker": 3,
-          "pvp": 8
-      },
-      "bestBuild": [
-          "Ставить только по плану",
-          "Маркировать место для команды",
-          "Не использовать рядом с базовым входом без контроля",
-          "Проверять правила сервера"
-      ],
-      "attachments": [],
-      "recommendedAttachmentSlugs": [
-          "No attachments"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: Взрывчатка.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Военные зоны",
-          "Аирдропы",
-          "Торговцы/ивенты на некоторых серверах"
-      ],
-      "pros": [
-          "Сильный психологический эффект",
-          "Защита прохода",
-          "Может остановить преследование"
-      ],
-      "cons": [
-          "Редкая",
-          "Опасна для своих",
-          "Может быть запрещена правилами сервера"
-      ],
-      "tips": [
-          "Всегда проверяй правила сервера.",
-          "Не ставь там, где сам забудешь.",
-          "В дуо озвучивай точку установки."
-      ],
-      "recommendedFor": [
-          "PvP",
-          "Оборона",
-          "Ловушки"
-      ]
+    "slug": "claymore",
+    "name": "Claymore",
+    "category": "Взрывчатка",
+    "type": "Мина направленного действия",
+    "ammo": "Взрывчатка",
+    "rarity": "Очень редкая",
+    "mode": "PvP",
+    "tier": "A",
+    "difficulty": "Сложная",
+    "range": "Ближняя",
+    "shortRole": "Опасная ловушка под конкретную задачу",
+    "summary": "Claymore уместна как ловушка или элемент защиты, если механики и правила сервера это позволяют. Точную эффективность и доступность лучше проверять на конкретном сервере.",
+    "rating": {
+      "damage": 9,
+      "control": 2,
+      "range": 2,
+      "economy": 2,
+      "bunker": 3,
+      "pvp": 8
+    },
+    "bestBuild": [
+      "Ставить только по плану",
+      "Маркировать место для команды",
+      "Не использовать рядом с базовым входом без контроля",
+      "Проверять правила сервера"
+    ],
+    "attachments": [],
+    "recommendedAttachmentSlugs": [],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: Взрывчатка.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Военные зоны",
+      "Аирдропы",
+      "Торговцы/ивенты на некоторых серверах"
+    ],
+    "pros": [
+      "Сильный психологический эффект",
+      "Защита прохода",
+      "Может остановить преследование"
+    ],
+    "cons": [
+      "Редкая",
+      "Опасна для своих",
+      "Может быть запрещена правилами сервера"
+    ],
+    "tips": [
+      "Всегда проверяй правила сервера.",
+      "Не ставь там, где сам забудешь.",
+      "В дуо озвучивай точку установки."
+    ],
+    "recommendedFor": [
+      "PvP",
+      "Оборона",
+      "Ловушки"
+    ]
   },
   {
-      "slug": "c4-explosive",
-      "name": "C4 / взрывчатка",
-      "category": "Взрывчатка",
-      "type": "Взрывчатка",
-      "ammo": "Компоненты/заряды",
-      "rarity": "Легендарная",
-      "mode": "PvP",
-      "tier": "S",
-      "difficulty": "Сложная",
-      "range": "Ближняя",
-      "shortRole": "Высокорисковая взрывчатка для серверов, где она доступна",
-      "summary": "C4 и похожая взрывчатка — предмет поздней игры. Уместность полностью зависит от версии игры, правил сервера, экономики и разрешённых механик рейда.",
-      "rating": {
-          "damage": 10,
-          "control": 2,
-          "range": 2,
-          "economy": 1,
-          "bunker": 4,
-          "pvp": 9
-      },
-      "bestBuild": [
-          "Брать только под согласованный рейд",
-          "Проверить правила сервера",
-          "План отхода",
-          "Минимум лишнего лута"
-      ],
-      "attachments": [],
-      "recommendedAttachmentSlugs": [
-          "No attachments"
-      ],
-      "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
-      "ammoTips": [
-          "Основной боеприпас: Компоненты/заряды.",
-          "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
-          "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
-      ],
-      "whereToFind": [
-          "Высокорисковые зоны",
-          "Ивенты/торговцы на серверах",
-          "Редкий военный лут при наличии в настройках"
-      ],
-      "pros": [
-          "Максимальный потенциал разрушения",
-          "Сильна в рейдовой экономике",
-          "Ценный стратегический ресурс"
-      ],
-      "cons": [
-          "Может быть недоступна",
-          "Очень дорогая потеря",
-          "Высокий риск ошибочного применения"
-      ],
-      "tips": [
-          "Не используй без проверки правил.",
-          "Не носи просто так в обычный фарм.",
-          "Держи отдельный защищённый тайник."
-      ],
-      "recommendedFor": [
-          "Опытные группы",
-          "PvP",
-          "Поздняя игра"
-      ]
+    "slug": "c4-explosive",
+    "name": "C4 / взрывчатка",
+    "category": "Взрывчатка",
+    "type": "Взрывчатка",
+    "ammo": "Компоненты/заряды",
+    "rarity": "Легендарная",
+    "mode": "PvP",
+    "tier": "S",
+    "difficulty": "Сложная",
+    "range": "Ближняя",
+    "shortRole": "Высокорисковая взрывчатка для серверов, где она доступна",
+    "summary": "C4 и похожая взрывчатка — предмет поздней игры. Уместность полностью зависит от версии игры, правил сервера, экономики и разрешённых механик рейда.",
+    "rating": {
+      "damage": 10,
+      "control": 2,
+      "range": 2,
+      "economy": 1,
+      "bunker": 4,
+      "pvp": 9
+    },
+    "bestBuild": [
+      "Брать только под согласованный рейд",
+      "Проверить правила сервера",
+      "План отхода",
+      "Минимум лишнего лута"
+    ],
+    "attachments": [],
+    "recommendedAttachmentSlugs": [],
+    "serverNote": "Характеристики, доступность, цена и точная совместимость могут отличаться в зависимости от версии SCUM и настроек сервера.",
+    "ammoTips": [
+      "Основной боеприпас: Компоненты/заряды.",
+      "Заранее проверь магазины: патроны без магазина плохо спасают в бою.",
+      "Не выдумывай универсальный запас — бери калибр под текущий маршрут и оружие."
+    ],
+    "whereToFind": [
+      "Высокорисковые зоны",
+      "Ивенты/торговцы на серверах",
+      "Редкий военный лут при наличии в настройках"
+    ],
+    "pros": [
+      "Максимальный потенциал разрушения",
+      "Сильна в рейдовой экономике",
+      "Ценный стратегический ресурс"
+    ],
+    "cons": [
+      "Может быть недоступна",
+      "Очень дорогая потеря",
+      "Высокий риск ошибочного применения"
+    ],
+    "tips": [
+      "Не используй без проверки правил.",
+      "Не носи просто так в обычный фарм.",
+      "Держи отдельный защищённый тайник."
+    ],
+    "recommendedFor": [
+      "Опытные группы",
+      "PvP",
+      "Поздняя игра"
+    ]
   }
 ];
 

@@ -169,6 +169,71 @@ function checkMapData() {
   }
 }
 
+
+function parseDataArray(file, constName) {
+  const text = read(file);
+  const match = text.match(new RegExp(String.raw`export const ${constName}: [^=]+ = (\[\n[\s\S]*?\n\]);`));
+  if (!match) {
+    addError(`${file}: не найден массив ${constName}`);
+    return [];
+  }
+  try {
+    return JSON.parse(match[1]);
+  } catch (error) {
+    addError(`${file}: массив ${constName} не удалось разобрать как JSON: ${error.message}`);
+    return [];
+  }
+}
+
+function checkParsedRelations() {
+  const weaponData = parseDataArray("src/data/weapons.ts", "weapons");
+  const attachmentData = parseDataArray("src/data/attachments.ts", "attachments");
+  const weaponSlugs = new Set(weaponData.map((weapon) => weapon.slug));
+  const attachmentSlugs = new Set(attachmentData.map((attachment) => attachment.slug));
+  const weaponsWithAttachments = new Set();
+
+  for (const weapon of weaponData) {
+    for (const field of ["slug", "name", "summary", "shortRole"]) {
+      if (!String(weapon[field] ?? "").trim()) addError(`weapons: ${weapon.slug ?? "unknown"}: пустое поле ${field}`);
+    }
+    for (const attachmentSlug of weapon.recommendedAttachmentSlugs ?? []) {
+      if (!attachmentSlugs.has(attachmentSlug)) addError(`weapons: ${weapon.slug}: recommendedAttachmentSlugs ссылается на несуществующий обвес "${attachmentSlug}"`);
+    }
+    for (const [ratingKey, ratingValue] of Object.entries(weapon.rating ?? {})) {
+      if (!Number.isFinite(ratingValue) || ratingValue < 0 || ratingValue > 10) addError(`weapons: ${weapon.slug}: рейтинг ${ratingKey} должен быть от 0 до 10`);
+    }
+  }
+
+  for (const attachment of attachmentData) {
+    for (const field of ["slug", "name", "summary", "role"]) {
+      if (!String(attachment[field] ?? "").trim()) addError(`attachments: ${attachment.slug ?? "unknown"}: пустое поле ${field}`);
+    }
+    for (const weaponSlug of attachment.compatibleWeaponSlugs ?? []) {
+      if (!weaponSlugs.has(weaponSlug)) addError(`attachments: ${attachment.slug}: compatibleWeaponSlugs ссылается на несуществующее оружие "${weaponSlug}"`);
+      else weaponsWithAttachments.add(weaponSlug);
+    }
+    if ((attachment.compatibleWeaponSlugs ?? []).length !== (attachment.compatibleWeapons ?? []).length) {
+      addWarning(`attachments: ${attachment.slug}: количество slug-связей и текстовых названий отличается`);
+    }
+  }
+
+  for (const weapon of weaponData) {
+    const normalizedName = String(weapon.name ?? "").toLowerCase();
+    const normalizedType = String(weapon.type ?? "").toLowerCase();
+    const normalizedAmmo = String(weapon.ammo ?? "").toLowerCase();
+    const usuallyNoAttachments =
+      ["Ближний бой", "Взрывчатка"].includes(weapon.category) ||
+      normalizedName.includes("самодельный") ||
+      normalizedName.includes("арбалет") ||
+      normalizedAmmo.includes("болт") ||
+      normalizedType.includes("обрез") ||
+      normalizedType.includes("револьвер");
+    if (!usuallyNoAttachments && !weaponsWithAttachments.has(weapon.slug)) {
+      addWarning(`weapons: ${weapon.slug}: нет ни одного подходящего обвеса в базе`);
+    }
+  }
+}
+
 function checkArchiveSafety() {
   const gitignore = read(".gitignore");
   if (!gitignore.includes("node_modules")) addError(".gitignore должен исключать node_modules");
@@ -190,6 +255,7 @@ checkRequiredText("src/data/mapMarkers.ts", ["name", "short", "description"]);
 checkImages();
 checkRatings();
 checkCompatibility();
+checkParsedRelations();
 checkMapData();
 checkInternalLinks();
 checkArchiveSafety();
