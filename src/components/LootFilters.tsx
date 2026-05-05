@@ -5,11 +5,12 @@ import { useMemo, useState } from "react";
 import { MapPin, Package, Search, Star, X } from "lucide-react";
 import {
   lootCategories,
-  lootItems,
+  lootItems as fallbackLootItems,
   lootPriorities,
   lootUsefulnessLevels,
   lootRarities,
   lootWeights,
+  type LootItem,
   type LootPriority,
   type LootRarity,
   type LootWeight,
@@ -40,7 +41,7 @@ const weightOrder: Record<LootWeight, number> = {
   "Тяжелый": 3,
 };
 
-export function LootFilters() {
+export function LootFilters({ lootItems = fallbackLootItems }: { lootItems?: LootItem[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(all);
   const [rarity, setRarity] = useState(all);
@@ -92,7 +93,7 @@ export function LootFilters() {
         if (sort === "weight") return weightOrder[a.weight] - weightOrder[b.weight];
         return priorityWeight[b.priority] - priorityWeight[a.priority] || rarityWeight[b.rarity] - rarityWeight[a.rarity];
       });
-  }, [query, category, rarity, priority, usefulness, weight, sort]);
+  }, [lootItems, query, category, rarity, priority, usefulness, weight, sort]);
 
   function resetFilters() {
     setQuery("");

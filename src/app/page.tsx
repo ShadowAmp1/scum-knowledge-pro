@@ -9,19 +9,21 @@ import { sections } from "@/data/sections";
 import { weapons } from "@/data/weapons";
 import { bunkers } from "@/data/bunkers";
 import { lootItems } from "@/data/loot";
+import { missions } from "@/data/missions";
 
 export default function HomePage() {
   const stats = [
     { label: "Единиц оружия", value: weapons.length },
     { label: "Бункеров", value: bunkers.length },
     { label: "Предметов лута", value: lootItems.length },
+    { label: "Квестов", value: missions.length },
     { label: "Разделов", value: sections.length }
   ];
   return (
     <main>
       <Hero />
       <section className="mx-auto max-w-7xl px-4 py-10">
-        <div className="grid gap-4 md:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-5">
           {stats.map((stat) => (
             <div key={stat.label} className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6">
               <div className="text-4xl font-black text-red-500">{stat.value}</div>
@@ -33,7 +35,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-12">
         <div className="mb-10">
           <h2 className="text-3xl font-black text-white md:text-4xl">Разделы базы знаний</h2>
-          <p className="mt-3 max-w-2xl text-zinc-400">Выбери раздел: оружие, бункеры, лут, карту, базы, транспорт или гайды.</p>
+          <p className="mt-3 max-w-2xl text-zinc-400">Выбери раздел: оружие, квесты, бункеры, лут, карту, базы, транспорт или гайды.</p>
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {sections.map((section) => <SectionCard key={section.href} {...section} />)}

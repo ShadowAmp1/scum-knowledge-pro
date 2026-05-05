@@ -7,10 +7,13 @@ import Link from "next/link";
 import { BarChart3, Puzzle } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { WeaponFilters } from "@/components/WeaponFilters";
-import { weapons } from "@/data/weapons";
-import { attachments } from "@/data/attachments";
+import { getContentData } from "@/lib/content";
 
-export default function WeaponsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function WeaponsPage() {
+  const data = await getContentData();
+  const { weapons, attachments } = data;
   const sTierCount = weapons.filter((weapon) => weapon.tier === "S").length;
   const bunkerTop = [...weapons].sort((a, b) => b.rating.bunker - a.rating.bunker).slice(0, 3);
 
@@ -49,7 +52,7 @@ export default function WeaponsPage() {
         </div>
       </section>
 
-      <WeaponFilters />
+      <WeaponFilters weapons={weapons} />
     </main>
   );
 }

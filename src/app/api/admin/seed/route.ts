@@ -4,18 +4,20 @@ import { dbQuery, hasDatabaseUrl } from "@/lib/database";
 import { attachments } from "@/data/attachments";
 import { guides } from "@/data/guides";
 import { lootItems } from "@/data/loot";
+import { missions } from "@/data/missions";
 import { mapMarkers } from "@/data/mapMarkers";
 import { weapons } from "@/data/weapons";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type Entity = "weapons" | "attachments" | "loot" | "guides" | "mapMarkers";
+type Entity = "weapons" | "attachments" | "loot" | "missions" | "guides" | "mapMarkers";
 type Item = Record<string, unknown>;
 const seedData: Record<Entity, { key: "slug" | "id"; items: Item[] }> = {
   weapons: { key: "slug", items: weapons as unknown as Item[] },
   attachments: { key: "slug", items: attachments as unknown as Item[] },
   loot: { key: "slug", items: lootItems as unknown as Item[] },
+  missions: { key: "slug", items: missions as unknown as Item[] },
   guides: { key: "slug", items: guides as unknown as Item[] },
   mapMarkers: { key: "id", items: mapMarkers as unknown as Item[] },
 };

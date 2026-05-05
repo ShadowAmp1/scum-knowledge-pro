@@ -1,15 +1,19 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CheckCircle2, Target, TriangleAlert } from "lucide-react";
-import { getGuideBySlug, guides } from "@/data/guides";
+import { guides as fallbackGuides } from "@/data/guides";
+import { getContentData } from "@/lib/content";
 import { InfoCard } from "@/components/InfoCard";
 
 export function generateStaticParams() {
-  return guides.map((guide) => ({ slug: guide.slug }));
+  return fallbackGuides.map((guide) => ({ slug: guide.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const guide = getGuideBySlug(params.slug);
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const { guides } = await getContentData();
+  const guide = guides.find((item) => item.slug === params.slug);
   if (!guide) return { title: "Гайд не найден | SCUM DB PRO" };
 
   const title = `${guide.title} | SCUM DB PRO`;
@@ -41,8 +45,9 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function GuidePage({ params }: { params: { slug: string } }) {
-  const guide = getGuideBySlug(params.slug);
+export default async function GuidePage({ params }: { params: { slug: string } }) {
+  const { guides } = await getContentData();
+  const guide = guides.find((item) => item.slug === params.slug);
   if (!guide) notFound();
 
   const related = guides

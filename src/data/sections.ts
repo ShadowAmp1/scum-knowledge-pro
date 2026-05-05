@@ -1,4 +1,4 @@
-import { Backpack, BookOpen, Car, Crosshair, Home, Map, Package, Scale, Search, Settings, Shield, Swords } from "lucide-react";
+import { Backpack, BookOpen, Car, ClipboardList, Crosshair, Home, Map, Package, Scale, Search, Settings, Shield, Swords } from "lucide-react";
 
 export const sections = [
   { title: "Поиск", description: "Глобальный поиск по оружию, обвесам, луту, бункерам, карте и гайдам.", href: "/search", icon: Search, badge: "Search" },
@@ -6,6 +6,7 @@ export const sections = [
   { title: "Сравнение", description: "Сравнение 2–3 видов оружия по рейтингу, роли, патронам и обвесам.", href: "/weapons/compare", icon: Scale, badge: "Compare" },
   { title: "Бункеры", description: "Поиск, фильтры, риск, маршруты, враги и ценный лут в бункерах.", href: "/bunkers", icon: Shield, badge: "Bunkers v3" },
   { title: "Лут", description: "Фильтры по ценности, редкости, приоритету и местам фарма.", href: "/loot", icon: Package, badge: "Loot v3" },
+  { title: "Квесты", description: "Missions PRO: торговцы, tier progression, карточки, фильтры и личный трекер.", href: "/missions", icon: ClipboardList, badge: "Missions PRO" },
   { title: "Подготовка", description: "Готовые наборы перед рейдом: оружие, броня, медицина и инструменты.", href: "/preparation", icon: Backpack, badge: "Raid kits" },
   { title: "Карта", description: "Интерактивные метки, поиск, фильтры, риск, tier лута и маршруты.", href: "/map", icon: Map, badge: "Map v4" },
   { title: "Базы", description: "PvE/PvP идеи, хай-тек базы, гаражи и планировка для дуо.", href: "/bases", icon: Home, badge: "Base" },

@@ -5,9 +5,13 @@ export const metadata = {
 
 import { PageHeader } from "@/components/PageHeader";
 import { GuideFilters } from "@/components/GuideFilters";
-import { guides } from "@/data/guides";
+import { getContentData } from "@/lib/content";
 
-export default function GuidesPage() {
+export const dynamic = "force-dynamic";
+
+export default async function GuidesPage() {
+  const data = await getContentData();
+  const guides = data.guides;
   const categoriesCount = new Set(guides.map((guide) => guide.category)).size;
   const hardCount = guides.filter((guide) => guide.difficulty === "Сложно").length;
 
@@ -35,7 +39,7 @@ export default function GuidesPage() {
         </div>
       </section>
 
-      <GuideFilters />
+      <GuideFilters guides={guides} />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PWARegister } from "@/components/PWARegister";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,8 +10,8 @@ export const metadata: Metadata = {
     default: "SCUM DB PRO — база знаний по SCUM",
     template: "%s | SCUM DB PRO"
   },
-  description: "Оружие, обвесы, лут, обычные и заброшенные бункеры, карты уровней, интерактивная карта и гайды по SCUM.",
-  keywords: ["SCUM", "SCUM база знаний", "SCUM оружие", "SCUM бункеры", "SCUM карта", "SCUM гайды", "SCUM лут"],
+  description: "Оружие, обвесы, лут, квесты, обычные и заброшенные бункеры, карты уровней, интерактивная карта и гайды по SCUM.",
+  keywords: ["SCUM", "SCUM база знаний", "SCUM оружие", "SCUM бункеры", "SCUM карта", "SCUM гайды", "SCUM лут", "SCUM квесты"],
   authors: [{ name: "SCUM DB PRO" }],
   creator: "SCUM DB PRO",
   publisher: "SCUM DB PRO",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     url: "https://scumdbpro.duckdns.org",
     siteName: "SCUM DB PRO",
     title: "SCUM DB PRO — база знаний по SCUM",
-    description: "PRO база знаний по игре SCUM: оружие, обвесы, лут, бункеры, карта и гайды.",
+    description: "PRO база знаний по игре SCUM: оружие, обвесы, лут, квесты, бункеры, карта и гайды.",
     images: [
       {
         url: "/og-image.png",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "SCUM DB PRO — база знаний по SCUM",
-    description: "PRO база знаний по игре SCUM: оружие, обвесы, лут, бункеры, карта и гайды.",
+    description: "PRO база знаний по игре SCUM: оружие, обвесы, лут, квесты, бункеры, карта и гайды.",
     images: ["/og-image.png"]
   },
   robots: {
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ru">
       <body className="min-h-screen bg-black text-white antialiased">
+        <PWARegister />
         <Header />
         {children}
         <Footer />

@@ -1,16 +1,18 @@
 import { NextResponse } from "next/server";
 import { getAdminSession } from "@/lib/adminSession";
 import { dbQuery, hasDatabaseUrl } from "@/lib/database";
+import { ensureContentTables } from "@/lib/content";
 import { attachments } from "@/data/attachments";
 import { guides } from "@/data/guides";
 import { lootItems } from "@/data/loot";
+import { missions } from "@/data/missions";
 import { mapMarkers } from "@/data/mapMarkers";
 import { weapons } from "@/data/weapons";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type Entity = "weapons" | "attachments" | "loot" | "guides" | "mapMarkers";
+type Entity = "weapons" | "attachments" | "loot" | "missions" | "guides" | "mapMarkers";
 type Item = Record<string, unknown>;
 type DataState = Record<Entity, Item[]>;
 
@@ -18,6 +20,7 @@ const fallbackData: DataState = {
   weapons: weapons as unknown as Item[],
   attachments: attachments as unknown as Item[],
   loot: lootItems as unknown as Item[],
+  missions: missions as unknown as Item[],
   guides: guides as unknown as Item[],
   mapMarkers: mapMarkers as unknown as Item[],
 };
@@ -25,6 +28,7 @@ const entityKeys: Record<Entity, "slug" | "id"> = {
   weapons: "slug",
   attachments: "slug",
   loot: "slug",
+  missions: "slug",
   guides: "slug",
   mapMarkers: "id",
 };
@@ -43,6 +47,7 @@ export async function GET() {
       message: "DATABASE_URL не задан — показаны данные из src/data.",
     });
   try {
+    await ensureContentTables();
     const rows = await dbQuery<{ entity: Entity; key: string; data: Item }>(
       "SELECT entity, key, data FROM content_items ORDER BY entity ASC, key ASC",
     );
@@ -50,6 +55,7 @@ export async function GET() {
       weapons: [],
       attachments: [],
       loot: [],
+      missions: [],
       guides: [],
       mapMarkers: [],
     };

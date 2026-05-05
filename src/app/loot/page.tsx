@@ -5,9 +5,13 @@ export const metadata = {
 
 import { PageHeader } from "@/components/PageHeader";
 import { LootFilters } from "@/components/LootFilters";
-import { lootItems } from "@/data/loot";
+import { getContentData } from "@/lib/content";
 
-export default function LootPage() {
+export const dynamic = "force-dynamic";
+
+export default async function LootPage() {
+  const data = await getContentData();
+  const lootItems = data.loot;
   const maxPriority = lootItems.filter((item) => item.priority === "Максимальный").length;
   const rare = lootItems.filter((item) => item.rarity === "Редкий" || item.rarity === "Очень редкий").length;
   const categories = new Set(lootItems.map((item) => item.category)).size;
@@ -33,7 +37,7 @@ export default function LootPage() {
         </div>
       </section>
 
-      <LootFilters />
+      <LootFilters lootItems={lootItems} />
 
       <section className="mx-auto max-w-7xl px-4 pb-16">
         <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-6">

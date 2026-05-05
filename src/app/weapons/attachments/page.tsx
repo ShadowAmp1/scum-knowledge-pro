@@ -7,9 +7,14 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { AttachmentFilters } from "@/components/AttachmentFilters";
 import { PageHeader } from "@/components/PageHeader";
-import { attachmentCategories, attachments, getWeaponMatchStatus } from "@/data/attachments";
+import { attachmentCategories, getWeaponMatchStatus } from "@/data/attachments";
+import { getContentData } from "@/lib/content";
 
-export default function AttachmentsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AttachmentsPage() {
+  const data = await getContentData();
+  const attachments = data.attachments;
   const matchedCount = attachments.filter((attachment) => getWeaponMatchStatus(attachment).hasMatches).length;
 
   return (
@@ -40,7 +45,7 @@ export default function AttachmentsPage() {
         </div>
       </section>
 
-      <AttachmentFilters />
+      <AttachmentFilters attachments={attachments} />
     </main>
   );
 }

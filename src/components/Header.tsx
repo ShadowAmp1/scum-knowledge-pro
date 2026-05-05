@@ -12,6 +12,7 @@ const navItems = [
   { title: "Оружие", href: "/weapons" },
   { title: "Обвесы", href: "/weapons/attachments" },
   { title: "Лут", href: "/loot" },
+  { title: "Квесты", href: "/missions" },
   { title: "Бункеры", href: "/bunkers" },
   { title: "Карта", href: "/map" },
   { title: "Базы", href: "/bases" },
@@ -19,6 +20,9 @@ const navItems = [
   { title: "Подготовка", href: "/preparation" },
   { title: "Гайды", href: "/guides" },
   { title: "Избранное", href: "/favorites" },
+  { title: "Профиль", href: "/profile" },
+  { title: "Трекеры", href: "/trackers" },
+  { title: "Калькуляторы", href: "/calculators" },
 ];
 
 function isActiveLink(pathname: string, href: string) {
@@ -46,7 +50,7 @@ export function Header() {
           </div>
           <div className="min-w-0">
             <div className="truncate text-lg font-black tracking-wide text-white">SCUM DB PRO</div>
-            <div className="text-xs text-zinc-500">Knowledge Base v4.23</div>
+            <div className="text-xs text-zinc-500">Knowledge Base v4.30</div>
           </div>
         </Link>
 

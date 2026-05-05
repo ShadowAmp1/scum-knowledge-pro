@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useMemo, useState } from "react";
-import { searchItems, searchKinds, type SearchKind } from "@/lib/searchIndex";
+import { buildSearchItems, searchItems as fallbackSearchItems, searchKinds, type SearchItem, type SearchKind } from "@/lib/searchIndex";
+import type { ContentData } from "@/lib/content";
 
 type KindFilter = SearchKind | "Все";
 const normalize = (value: string) => value.trim().toLowerCase();
 
-function scoreItem(query: string, item: (typeof searchItems)[number]) {
+function scoreItem(query: string, item: SearchItem) {
   if (!query) return item.priority;
   const title = item.title.toLowerCase();
   let score = item.priority;
@@ -24,7 +25,8 @@ function scoreItem(query: string, item: (typeof searchItems)[number]) {
   return score;
 }
 
-export function GlobalSearch() {
+export function GlobalSearch({ data }: { data?: ContentData }) {
+  const searchItems = useMemo(() => data ? buildSearchItems(data) : fallbackSearchItems, [data]);
   const [query, setQuery] = useState("");
   const [kind, setKind] = useState<KindFilter>("Все");
   const normalizedQuery = normalize(query);
@@ -38,7 +40,7 @@ export function GlobalSearch() {
     .map((item) => ({ item, score: scoreItem(normalizedQuery, item) }))
     .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title, "ru"))
     .map(({ item }) => item)
-    .slice(0, 80), [kind, normalizedQuery]);
+    .slice(0, 80), [kind, normalizedQuery, searchItems]);
 
   const popularQueries = ["AKM", "обвесы", "оружейный ремкомплект", "бункер A1", "деньги", "транспорт", "патроны", "база"];
 

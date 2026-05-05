@@ -3,11 +3,12 @@ import path from "node:path";
 import { NextResponse } from "next/server";
 import { getAdminSession } from "@/lib/adminSession";
 import { dbQuery, hasDatabaseUrl } from "@/lib/database";
+import { ensureContentTables } from "@/lib/content";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type Entity = "weapons" | "attachments" | "loot" | "guides" | "mapMarkers";
+type Entity = "weapons" | "attachments" | "loot" | "missions" | "guides" | "mapMarkers";
 type Config = {
   file: string;
   constName: string;
@@ -36,6 +37,13 @@ const configs: Record<Entity, Config> = {
     typeName: "LootItem[]",
     key: "slug",
     required: ["slug", "name", "category", "usage", "keepOrSell"],
+  },
+  missions: {
+    file: "src/data/missions.ts",
+    constName: "missions",
+    typeName: "Mission[]",
+    key: "slug",
+    required: ["slug", "title", "trader", "tier", "category", "short", "description"],
   },
   guides: {
     file: "src/data/guides.ts",
@@ -152,6 +160,7 @@ export async function PUT(request: Request) {
     validate(body.entity, body.items);
     const items = body.items as Record<string, unknown>[];
     if (hasDatabaseUrl()) {
+      await ensureContentTables();
       await saveToDatabase(body.entity, items, session.username);
       return NextResponse.json({
         ok: true,

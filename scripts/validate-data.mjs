@@ -103,10 +103,11 @@ function checkRatings() {
 }
 
 function checkInternalLinks() {
-  const existingRoutes = new Set(["/", "/search", "/weapons", "/weapons/compare", "/weapons/attachments", "/loot", "/bunkers", "/map", "/bases", "/vehicles", "/preparation", "/guides", "/admin", "/pro-roadmap"]);
+  const existingRoutes = new Set(["/", "/search", "/weapons", "/weapons/compare", "/weapons/attachments", "/loot", "/missions", "/bunkers", "/map", "/favorites", "/bases", "/vehicles", "/preparation", "/guides", "/admin", "/pro-roadmap"]);
   for (const slug of collectQuotedSlugs("src/data/weapons.ts")) existingRoutes.add(`/weapons/${slug}`);
   for (const slug of collectQuotedSlugs("src/data/attachments.ts")) existingRoutes.add(`/weapons/attachments/${slug}`);
   for (const slug of collectQuotedSlugs("src/data/loot.ts")) existingRoutes.add(`/loot/${slug}`);
+  for (const slug of collectQuotedSlugs("src/data/missions.ts")) existingRoutes.add(`/missions/${slug}`);
   for (const slug of collectQuotedSlugs("src/data/guides.ts")) existingRoutes.add(`/guides/${slug}`);
   for (const slug of collectBunkerSlugs()) existingRoutes.add(`/bunkers/${slug}`);
 
@@ -241,7 +242,7 @@ function checkDatabaseSetup() {
   for (const script of ["db:migrate", "db:seed"]) {
     if (!packageJson.scripts?.[script]) addError(`package.json: отсутствует script ${script}`);
   }
-  for (const file of ["src/lib/database.ts", "scripts/migrate-db.mjs", "scripts/seed-db.mjs", "src/app/api/admin/data/route.ts", "src/app/api/admin/seed/route.ts"]) {
+  for (const file of ["src/lib/database.ts", "scripts/migrate-db.mjs", "scripts/seed-db.mjs", "src/data/missions.ts", "src/app/missions/page.tsx", "src/app/api/admin/data/route.ts", "src/app/api/admin/seed/route.ts"]) {
     if (!fs.existsSync(path.join(root, file))) addError(`DB setup: отсутствует файл ${file}`);
   }
   const render = read("render.yaml");
@@ -262,6 +263,7 @@ function checkArchiveSafety() {
 uniqueSlugs("weapons", collectQuotedSlugs("src/data/weapons.ts"));
 uniqueSlugs("loot", collectQuotedSlugs("src/data/loot.ts"));
 uniqueSlugs("guides", collectQuotedSlugs("src/data/guides.ts"));
+uniqueSlugs("missions", collectQuotedSlugs("src/data/missions.ts"));
 uniqueSlugs("attachments", collectQuotedSlugs("src/data/attachments.ts"));
 uniqueSlugs("bunkers", collectBunkerSlugs());
 
@@ -269,6 +271,7 @@ checkRequiredText("src/data/weapons.ts", ["name", "summary", "shortRole"]);
 checkRequiredText("src/data/attachments.ts", ["name", "summary", "role"]);
 checkRequiredText("src/data/loot.ts", ["name", "usage", "keepOrSell"]);
 checkRequiredText("src/data/guides.ts", ["title", "summary", "intro"]);
+checkRequiredText("src/data/missions.ts", ["title", "short", "description"]);
 checkRequiredText("src/data/mapMarkers.ts", ["name", "short", "description"]);
 checkImages();
 checkRatings();

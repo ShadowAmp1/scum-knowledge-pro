@@ -18,6 +18,7 @@ const entityConfigs = {
     key: "slug",
   },
   loot: { file: "src/data/loot.ts", constName: "lootItems", key: "slug" },
+  missions: { file: "src/data/missions.ts", constName: "missions", key: "slug" },
   guides: { file: "src/data/guides.ts", constName: "guides", key: "slug" },
   mapMarkers: {
     file: "src/data/mapMarkers.ts",

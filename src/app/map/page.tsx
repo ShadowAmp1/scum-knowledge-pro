@@ -1,19 +1,3 @@
-export const metadata = {
-  title: "Интерактивная карта SCUM | SCUM DB PRO",
-  description: "Интерактивная карта SCUM с маркерами лута, транспорта, баз, опасных зон, городов, военных зон, торговцев и бункеров.",
-};
-
-import { InteractiveMap } from "@/components/InteractiveMap";
-import { PageHeader } from "@/components/PageHeader";
-
-export default function MapPage() {
-  return (
-    <main>
-      <PageHeader
-        title="Интерактивная карта"
-        description="SCUM DB PRO v4: метки, поиск, фильтры, карточки точек, риск, tier лута и быстрые переходы в связанные разделы."
-      />
-      <InteractiveMap />
-    </main>
-  );
-}
+import { InteractiveMap } from "@/components/InteractiveMap"; import { PageHeader } from "@/components/PageHeader"; import { getContentData } from "@/lib/content";
+export const dynamic="force-dynamic"; export const metadata={title:"Интерактивная карта SCUM PRO | SCUM DB PRO", description:"Интерактивная карта SCUM: бункеры, торговцы, лут, транспорт, базы, опасные зоны и POI."};
+export default async function MapPage(){const data=await getContentData(); return <main><PageHeader eyebrow="Map PRO" title="Интерактивная карта SCUM PRO" description="Маркеры читаются из той же базы, куда сохраняет админка." />{data.__meta.message?<div className="mx-auto max-w-7xl px-4"><div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-100">{data.__meta.message}</div></div>:null}<InteractiveMap markers={data.mapMarkers}/></main>}

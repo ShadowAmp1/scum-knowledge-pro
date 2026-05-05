@@ -5,8 +5,9 @@ import { useMemo, useState } from "react";
 import { Puzzle, Search, SlidersHorizontal, X } from "lucide-react";
 import {
   attachmentCategories,
-  attachments,
+  attachments as fallbackAttachments,
   getWeaponMatchStatus,
+  type Attachment,
   type AttachmentCategory,
 } from "@/data/attachments";
 
@@ -15,7 +16,7 @@ const allMatch = "Любая совместимость";
 
 type MatchFilter = typeof allMatch | "Есть оружие в базе" | "Только текстовая совместимость";
 
-export function AttachmentFilters() {
+export function AttachmentFilters({ attachments = fallbackAttachments }: { attachments?: Attachment[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<AttachmentCategory | typeof allCategory>(allCategory);
   const [match, setMatch] = useState<MatchFilter>(allMatch);
@@ -48,7 +49,7 @@ export function AttachmentFilters() {
 
       return matchesQuery && matchesCategory && matchesWeapon;
     });
-  }, [query, category, match]);
+  }, [attachments, query, category, match]);
 
   function reset() {
     setQuery("");

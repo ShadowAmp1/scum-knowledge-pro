@@ -2,14 +2,18 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Puzzle } from "lucide-react";
 import { InfoCard } from "@/components/InfoCard";
-import { attachments, getAttachmentBySlug, getWeaponMatchStatus } from "@/data/attachments";
+import { attachments as fallbackAttachments, getWeaponMatchStatus } from "@/data/attachments";
+import { getContentData } from "@/lib/content";
 
 export function generateStaticParams() {
-  return attachments.map((attachment) => ({ slug: attachment.slug }));
+  return fallbackAttachments.map((attachment) => ({ slug: attachment.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const attachment = getAttachmentBySlug(params.slug);
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const { attachments } = await getContentData();
+  const attachment = attachments.find((item) => item.slug === params.slug);
   if (!attachment) return { title: "Обвес не найден | SCUM DB PRO" };
 
   return {
@@ -18,8 +22,9 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function AttachmentPage({ params }: { params: { slug: string } }) {
-  const attachment = getAttachmentBySlug(params.slug);
+export default async function AttachmentPage({ params }: { params: { slug: string } }) {
+  const { attachments } = await getContentData();
+  const attachment = attachments.find((item) => item.slug === params.slug);
   if (!attachment) notFound();
 
   const status = getWeaponMatchStatus(attachment);

@@ -1,0 +1,2 @@
+import type { MetadataRoute } from "next";
+export default function manifest():MetadataRoute.Manifest{return {name:"SCUM DB PRO",short_name:"SCUM DB",description:"База знаний, карта, квесты, трекеры и калькуляторы для SCUM.",start_url:"/",display:"standalone",background_color:"#000000",theme_color:"#dc2626",lang:"ru",icons:[{src:"/icons/icon-192.svg",sizes:"192x192",type:"image/svg+xml"},{src:"/icons/icon-512.svg",sizes:"512x512",type:"image/svg+xml"}]}}

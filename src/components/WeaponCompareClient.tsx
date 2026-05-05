@@ -4,19 +4,19 @@ import Link from "next/link";
 import { BarChart3, Plus, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { RarityBadge, TierBadge } from "@/components/WeaponBadge";
-import { attachments } from "@/data/attachments";
-import { weapons, type Weapon } from "@/data/weapons";
+import { attachments as fallbackAttachments, type Attachment } from "@/data/attachments";
+import { weapons as fallbackWeapons, type Weapon } from "@/data/weapons";
 
 const defaults = ["akm", "mk18", "mp5"];
 const ratingLabels: Array<[keyof Weapon["rating"], string]> = [["damage", "Урон"], ["control", "Контроль"], ["range", "Дистанция"], ["economy", "Экономность"], ["bunker", "Бункеры"], ["pvp", "PvP"]];
 
-function initialSelection() {
+function initialSelection(weapons: Weapon[]) {
   const existing = new Set(weapons.map((weapon) => weapon.slug));
   const selected = defaults.filter((slug) => existing.has(slug));
   return selected.length >= 2 ? selected : weapons.slice(0, 3).map((weapon) => weapon.slug);
 }
 
-function compatibleAttachments(weapon: Weapon) {
+function compatibleAttachments(weapon: Weapon, attachments: Attachment[]) {
   const recommended = new Set(weapon.recommendedAttachmentSlugs ?? []);
   return attachments
     .filter((attachment) => attachment.compatibleWeaponSlugs.includes(weapon.slug) || recommended.has(attachment.slug))
@@ -24,14 +24,14 @@ function compatibleAttachments(weapon: Weapon) {
     .map((attachment) => ({ ...attachment, recommended: recommended.has(attachment.slug) }));
 }
 
-export function WeaponCompareClient() {
+export function WeaponCompareClient({ weapons = fallbackWeapons, attachments = fallbackAttachments }: { weapons?: Weapon[]; attachments?: Attachment[] }) {
   const [query, setQuery] = useState("");
-  const [selectedSlugs, setSelectedSlugs] = useState<string[]>(initialSelection);
-  const selectedWeapons = useMemo(() => selectedSlugs.map((slug) => weapons.find((weapon) => weapon.slug === slug)).filter(Boolean) as Weapon[], [selectedSlugs]);
+  const [selectedSlugs, setSelectedSlugs] = useState<string[]>(() => initialSelection(weapons));
+  const selectedWeapons = useMemo(() => selectedSlugs.map((slug) => weapons.find((weapon) => weapon.slug === slug)).filter(Boolean) as Weapon[], [selectedSlugs, weapons]);
   const filteredWeapons = useMemo(() => {
     const q = query.trim().toLowerCase();
     return weapons.filter((weapon) => !q || [weapon.name, weapon.category, weapon.type, weapon.ammo, weapon.summary].join(" ").toLowerCase().includes(q)).sort((a, b) => a.name.localeCompare(b.name, "ru")).slice(0, 80);
-  }, [query]);
+  }, [query, weapons]);
   const add = (slug: string) => setSelectedSlugs((current) => current.includes(slug) ? current : current.length >= 3 ? [current[1], current[2], slug].filter(Boolean) : [...current, slug]);
   const remove = (slug: string) => setSelectedSlugs((current) => current.length <= 2 ? current : current.filter((item) => item !== slug));
   const best = useMemo(() => {
@@ -55,7 +55,7 @@ export function WeaponCompareClient() {
 
       <div className="mt-8 overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950/80"><div className="border-b border-zinc-800 p-5"><h2 className="text-2xl font-black text-white">Таблица сравнения</h2><p className="mt-2 text-sm text-zinc-500">Рейтинги — ориентир из базы проекта, без выдуманных точных характеристик игры.</p></div><div className="overflow-x-auto"><table className="w-full min-w-[760px] text-left text-sm"><tbody className="divide-y divide-zinc-800"><CompareRow label="Категория" values={selectedWeapons.map((weapon) => weapon.category)} /><CompareRow label="Тип" values={selectedWeapons.map((weapon) => weapon.type)} /><CompareRow label="Патрон" values={selectedWeapons.map((weapon) => weapon.ammo)} /><CompareRow label="Редкость" values={selectedWeapons.map((weapon) => weapon.rarity)} /><CompareRow label="Где искать" values={selectedWeapons.map((weapon) => weapon.whereToFind.slice(0, 4).join(" • "))} />{ratingLabels.map(([key, label]) => <tr key={key}><th className="w-52 bg-black/40 p-4 font-black text-zinc-300">{label}</th>{selectedWeapons.map((weapon) => <td key={weapon.slug} className="p-4"><div className="flex items-center gap-3"><div className="h-2 flex-1 overflow-hidden rounded-full bg-zinc-800"><div className="h-full rounded-full bg-red-500" style={{ width: `${weapon.rating[key] * 10}%` }} /></div><b className="text-white">{weapon.rating[key]}/10</b>{best.get(key) === weapon.slug ? <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-xs font-black text-emerald-300">лучше</span> : null}</div></td>)}</tr>)}<CompareRow label="Лучший билд" values={selectedWeapons.map((weapon) => weapon.bestBuild.join(" • "))} /><CompareRow label="Плюсы" values={selectedWeapons.map((weapon) => weapon.pros.join(" • "))} /><CompareRow label="Минусы" values={selectedWeapons.map((weapon) => weapon.cons.join(" • "))} /></tbody></table></div></div>
 
-      <section className="mt-8 rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6"><h2 className="text-2xl font-black text-white">Обвесы по выбранному оружию</h2><div className="mt-5 grid gap-5 lg:grid-cols-3">{selectedWeapons.map((weapon) => { const list = compatibleAttachments(weapon); return <div key={weapon.slug} className="rounded-2xl border border-zinc-800 bg-black p-5"><div className="text-lg font-black text-white">{weapon.name}</div>{list.length > 0 ? <div className="mt-3 flex flex-wrap gap-2">{list.map((attachment) => <Link key={attachment.slug} href={`/weapons/attachments/${attachment.slug}`} className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-300 transition hover:border-red-500/50 hover:text-white">{attachment.name}{attachment.recommended ? " ★" : ""}</Link>)}</div> : <p className="mt-3 text-sm text-zinc-500">В базе пока нет устанавливаемых обвесов для этого оружия.</p>}</div>; })}</div></section>
+      <section className="mt-8 rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6"><h2 className="text-2xl font-black text-white">Обвесы по выбранному оружию</h2><div className="mt-5 grid gap-5 lg:grid-cols-3">{selectedWeapons.map((weapon) => { const list = compatibleAttachments(weapon, attachments); return <div key={weapon.slug} className="rounded-2xl border border-zinc-800 bg-black p-5"><div className="text-lg font-black text-white">{weapon.name}</div>{list.length > 0 ? <div className="mt-3 flex flex-wrap gap-2">{list.map((attachment) => <Link key={attachment.slug} href={`/weapons/attachments/${attachment.slug}`} className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-300 transition hover:border-red-500/50 hover:text-white">{attachment.name}{attachment.recommended ? " ★" : ""}</Link>)}</div> : <p className="mt-3 text-sm text-zinc-500">В базе пока нет устанавливаемых обвесов для этого оружия.</p>}</div>; })}</div></section>
     </section>
   );
 }
