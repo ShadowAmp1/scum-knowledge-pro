@@ -11,6 +11,6 @@ export const sections = [
   { title: "Базы", description: "PvE/PvP идеи, хай-тек базы, гаражи и планировка для дуо.", href: "/bases", icon: Home, badge: "Base" },
   { title: "Транспорт", description: "Машины, мотоциклы, вертолеты, ремонт и советы по хранению.", href: "/vehicles", icon: Car, badge: "Vehicles" },
   { title: "Гайды", description: "Старт с нуля, прокачка, заработок и маршруты выживания.", href: "/guides", icon: BookOpen, badge: "Guides" },
-  { title: "Admin Lite", description: "Черновики новых карточек оружия, лута, карты и гайдов без базы данных.", href: "/admin", icon: Settings, badge: "Admin" },
+  { title: "Admin Panel", description: "Редактирование оружия, обвесов, лута, карты, гайдов и квестов с сохранением в базу данных.", href: "/admin", icon: Settings, badge: "Admin" },
   { title: "PRO-план", description: "Что добавить дальше: админка, база данных, аккаунты и интерактивная карта.", href: "/pro-roadmap", icon: Swords, badge: "Roadmap" }
 ];
