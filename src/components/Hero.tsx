@@ -34,11 +34,11 @@ export function Hero() {
             <ShieldCheck className="text-red-400" />
             <div>
               <div className="font-black text-white">Статус проекта</div>
-              <div className="text-sm text-zinc-500">Готовая статическая PRO-версия</div>
+              <div className="text-sm text-zinc-500">Готовая PRO-версия с админкой и базой данных</div>
             </div>
           </div>
           <div className="mt-5 grid gap-3">
-            {["Next.js + TypeScript", "Tailwind дизайн", "Данные в src/data", "Render Blueprint", "SEO и адаптивность"].map((item) => (
+            {["Next.js + TypeScript", "Tailwind дизайн", "Контент из PostgreSQL + fallback src/data", "Render Blueprint", "SEO и адаптивность"].map((item) => (
               <div key={item} className="rounded-2xl border border-zinc-800 bg-black/40 px-4 py-3 text-zinc-300">✓ {item}</div>
             ))}
           </div>
