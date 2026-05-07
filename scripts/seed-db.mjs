@@ -24,6 +24,7 @@ const entityConfigs = {
     constName: "mapMarkers",
     key: "id",
   },
+  missions: { file: "src/data/missions.ts", constName: "missions", key: "slug" },
 };
 
 function extractArray(source, constName) {
@@ -52,7 +53,11 @@ function extractArray(source, constName) {
     if (ch === "[") depth += 1;
     if (ch === "]") {
       depth -= 1;
-      if (depth === 0) return JSON.parse(source.slice(bracket, i + 1));
+      if (depth === 0) {
+        const arrayText = source.slice(bracket, i + 1);
+        try { return JSON.parse(arrayText); }
+        catch { return Function(`"use strict"; return (${arrayText});`)(); }
+      }
     }
   }
   throw new Error(`Не найден конец массива ${constName}`);

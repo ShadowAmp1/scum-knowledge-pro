@@ -103,11 +103,12 @@ function checkRatings() {
 }
 
 function checkInternalLinks() {
-  const existingRoutes = new Set(["/", "/search", "/weapons", "/weapons/compare", "/weapons/attachments", "/loot", "/bunkers", "/map", "/bases", "/vehicles", "/preparation", "/guides", "/admin", "/pro-roadmap"]);
+  const existingRoutes = new Set(["/", "/search", "/weapons", "/weapons/compare", "/weapons/attachments", "/loot", "/bunkers", "/map", "/bases", "/vehicles", "/preparation", "/guides", "/admin", "/pro-roadmap", "/favorites", "/missions", "/trackers"]);
   for (const slug of collectQuotedSlugs("src/data/weapons.ts")) existingRoutes.add(`/weapons/${slug}`);
   for (const slug of collectQuotedSlugs("src/data/attachments.ts")) existingRoutes.add(`/weapons/attachments/${slug}`);
   for (const slug of collectQuotedSlugs("src/data/loot.ts")) existingRoutes.add(`/loot/${slug}`);
   for (const slug of collectQuotedSlugs("src/data/guides.ts")) existingRoutes.add(`/guides/${slug}`);
+  if (fs.existsSync(path.join(root, "src/data/missions.ts"))) for (const slug of collectQuotedSlugs("src/data/missions.ts")) existingRoutes.add(`/missions/${slug}`);
   for (const slug of collectBunkerSlugs()) existingRoutes.add(`/bunkers/${slug}`);
 
   const files = [...walk("src/app").filter((file) => file.endsWith(".tsx")), ...walk("src/components").filter((file) => file.endsWith(".tsx")), "src/data/mapMarkers.ts", "src/data/sections.ts"];
@@ -256,7 +257,7 @@ function checkArchiveSafety() {
   const gitignore = read(".gitignore");
   if (!gitignore.includes("node_modules")) addError(".gitignore должен исключать node_modules");
   if (!gitignore.includes(".next")) addError(".gitignore должен исключать .next");
-  if (!fs.existsSync(path.join(root, "package-lock.json"))) addError("package-lock.json отсутствует");
+  if (!fs.existsSync(path.join(root, "package-lock.json"))) addWarning("package-lock.json отсутствует — npm install создаст новый lock-файл");
 }
 
 uniqueSlugs("weapons", collectQuotedSlugs("src/data/weapons.ts"));

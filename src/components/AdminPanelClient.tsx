@@ -21,8 +21,9 @@ import { guides } from "@/data/guides";
 import { lootItems } from "@/data/loot";
 import { mapMarkers } from "@/data/mapMarkers";
 import { weapons } from "@/data/weapons";
+import { missions } from "@/data/missions";
 
-type Entity = "weapons" | "attachments" | "loot" | "guides" | "mapMarkers";
+type Entity = "weapons" | "attachments" | "loot" | "guides" | "mapMarkers" | "missions";
 type Item = Record<string, unknown>;
 type DataState = Record<Entity, Item[]>;
 type Field = {
@@ -47,6 +48,7 @@ const initialData: DataState = {
   loot: lootItems as unknown as Item[],
   guides: guides as unknown as Item[],
   mapMarkers: mapMarkers as unknown as Item[],
+  missions: missions as unknown as Item[],
 };
 
 const cats = {
@@ -434,6 +436,55 @@ const configs: Record<Entity, Config> = {
       { key: "linkedHref", label: "Ссылка" },
     ],
   },
+  missions: {
+    label: "Квесты",
+    key: "slug",
+    title: "title",
+    make: () => ({
+      slug: id("new-mission"),
+      title: "Новый квест",
+      trader: "General Goods",
+      source: "Trader Book",
+      tier: 1,
+      category: "Сбор предметов",
+      difficulty: "Легко",
+      risk: "Низкий",
+      dataStatus: "Шаблон",
+      short: "Краткое описание квеста",
+      description: "Подробное описание квеста.",
+      requirements: [],
+      objectives: [],
+      recommendedGear: ["Бинты", "Вода"],
+      bestLocations: ["Деревни"],
+      routePlan: ["Принять квест", "Собрать предметы", "Вернуться"],
+      reward: { cash: "Уточнить", fame: "Уточнить", reputation: "Уточнить", unlocks: [], notes: "Награды зависят от сервера." },
+      progression: { unlockCondition: "Уточнить", unlocksNext: "Уточнить", progressionValue: 10, nextStep: "Уточнить" },
+      tags: ["mission"],
+      relatedLoot: [],
+      relatedSections: ["Квесты"],
+      adminNotes: "Создано из админки",
+      playerTips: ["Проверь требования перед выходом."],
+      mistakes: ["Не сверить точный список предметов."]
+    }),
+    fields: [
+      { key: "title", label: "Название" },
+      { key: "slug", label: "Slug" },
+      { key: "trader", label: "Торговец/источник", type: "select", options: ["General Goods", "Armorer", "Mechanic", "Medic", "Notice Board", "Mobile Phone", "DEENA"] },
+      { key: "source", label: "Источник", type: "select", options: ["Trader Book", "Notice Board", "Mobile Phone", "DEENA Manual"] },
+      { key: "tier", label: "Tier", type: "number" },
+      { key: "category", label: "Категория", type: "select", options: ["Сбор предметов", "Доставка", "Зачистка", "Охота", "Исследование", "Взаимодействие", "Крафт и ремонт", "Выживание", "Обучение"] },
+      { key: "difficulty", label: "Сложность", type: "select", options: ["Легко", "Средне", "Сложно", "Очень сложно"] },
+      { key: "risk", label: "Риск", type: "select", options: ["Низкий", "Средний", "Высокий", "Экстремальный"] },
+      { key: "short", label: "Кратко", type: "textarea" },
+      { key: "description", label: "Описание", type: "textarea" },
+      { key: "recommendedGear", label: "Снаряжение", type: "array" },
+      { key: "bestLocations", label: "Лучшие места", type: "array" },
+      { key: "routePlan", label: "План маршрута", type: "array" },
+      { key: "tags", label: "Теги", type: "array" },
+      { key: "playerTips", label: "Советы", type: "array" },
+      { key: "mistakes", label: "Ошибки", type: "array" },
+    ],
+  },
 };
 
 export function AdminPanelClient() {
@@ -775,7 +826,7 @@ export function AdminPanelClient() {
                   : "src/data fallback"}
             </b>
           </span>
-          . При DATABASE_URL сохранение идёт в базу Render.
+          . При DATABASE_URL сохранение идёт в единую базу PostgreSQL.
         </div>
         <div className="flex flex-wrap gap-2">
           <button

@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ContentItem {
+  id        BigInt   @id @default(autoincrement())
+  entity    String
+  key       String
+  data      Json
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([entity, key])
+  @@index([entity])
+  @@map("content_items")
+}
+
+model AdminAuditLog {
+  id        BigInt   @id @default(autoincrement())
+  action    String
+  entity    String?
+  key       String?
+  username  String?
+  meta      Json?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([createdAt])
+  @@index([entity])
+  @@map("admin_audit_log")
+}

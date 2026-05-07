@@ -6,11 +6,12 @@ import { guides } from "@/data/guides";
 import { lootItems } from "@/data/loot";
 import { mapMarkers } from "@/data/mapMarkers";
 import { weapons } from "@/data/weapons";
+import { missions } from "@/data/missions";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type Entity = "weapons" | "attachments" | "loot" | "guides" | "mapMarkers";
+type Entity = "weapons" | "attachments" | "loot" | "guides" | "mapMarkers" | "missions";
 type Item = Record<string, unknown>;
 type DataState = Record<Entity, Item[]>;
 
@@ -20,6 +21,7 @@ const fallbackData: DataState = {
   loot: lootItems as unknown as Item[],
   guides: guides as unknown as Item[],
   mapMarkers: mapMarkers as unknown as Item[],
+  missions: missions as unknown as Item[],
 };
 const entityKeys: Record<Entity, "slug" | "id"> = {
   weapons: "slug",
@@ -27,6 +29,7 @@ const entityKeys: Record<Entity, "slug" | "id"> = {
   loot: "slug",
   guides: "slug",
   mapMarkers: "id",
+  missions: "slug",
 };
 
 export async function GET() {
@@ -52,6 +55,7 @@ export async function GET() {
       loot: [],
       guides: [],
       mapMarkers: [],
+      missions: [],
     };
     for (const row of rows.rows)
       if (row.entity in data) data[row.entity].push(row.data);
@@ -71,6 +75,9 @@ export async function GET() {
         message:
           "База подключена, но ещё пустая. Нажми Seed в БД или выполни npm run db:seed.",
       });
+    for (const entity of Object.keys(data) as Entity[]) {
+      if (data[entity].length === 0) data[entity] = fallbackData[entity];
+    }
     return NextResponse.json({ ok: true, source: "database", data });
   } catch (error) {
     return NextResponse.json({

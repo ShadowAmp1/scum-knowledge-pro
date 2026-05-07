@@ -8,7 +8,7 @@ import { dbQuery, hasDatabaseUrl } from "@/lib/database";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type Entity = "weapons" | "attachments" | "loot" | "guides" | "mapMarkers";
+type Entity = "weapons" | "attachments" | "loot" | "guides" | "mapMarkers" | "missions";
 type Item = Record<string, unknown>;
 type DataState = Record<Entity, Item[]>;
 type Config = { file: string; constName: string; typeName: string; key: "slug" | "id"; required: string[] };
@@ -19,6 +19,7 @@ const configs: Record<Entity, Config> = {
   loot: { file: "src/data/loot.ts", constName: "lootItems", typeName: "LootItem[]", key: "slug", required: ["slug", "name", "category", "usage", "keepOrSell"] },
   guides: { file: "src/data/guides.ts", constName: "guides", typeName: "Guide[]", key: "slug", required: ["slug", "title", "category", "summary", "intro"] },
   mapMarkers: { file: "src/data/mapMarkers.ts", constName: "mapMarkers", typeName: "MapMarker[]", key: "id", required: ["id", "name", "category", "sector", "x", "y", "short", "description"] },
+  missions: { file: "src/data/missions.ts", constName: "missions", typeName: "Mission[]", key: "slug", required: ["slug", "title", "trader", "source", "category", "short", "description"] },
 };
 const entityList = Object.keys(configs) as Entity[];
 
@@ -47,8 +48,8 @@ function replaceArray(source: string, config: Config, items: unknown) {
   return source.replace(pattern, `export const ${config.constName}: ${config.typeName} = ${JSON.stringify(items, null, 2)};`);
 }
 function revalidatePublicPages() {
-  for (const route of ["/", "/search", "/weapons", "/weapons/attachments", "/loot", "/guides", "/map", "/favorites"]) revalidatePath(route);
-  revalidatePath("/weapons/[slug]", "page"); revalidatePath("/weapons/attachments/[slug]", "page"); revalidatePath("/loot/[slug]", "page"); revalidatePath("/guides/[slug]", "page");
+  for (const route of ["/", "/search", "/weapons", "/weapons/attachments", "/loot", "/guides", "/map", "/favorites", "/missions", "/trackers"]) revalidatePath(route);
+  revalidatePath("/weapons/[slug]", "page"); revalidatePath("/weapons/attachments/[slug]", "page"); revalidatePath("/loot/[slug]", "page"); revalidatePath("/guides/[slug]", "page"); revalidatePath("/missions/[slug]", "page");
 }
 async function saveEntityToDatabase(entity: Entity, items: Item[], username?: string) {
   const config = configs[entity];

@@ -1,5 +1,30 @@
 "use client";
-import { useEffect, useMemo, useState } from "react"; import Link from "next/link"; import { CheckCircle2, Package, Plus, Trash2 } from "lucide-react"; import type { LootItem } from "@/data/loot";
-type Entry={slug:string;status:"need"|"found";amount:number}; const key="scum-db-pro-loot-tracker-v1";
-export function LootTrackerClient({lootItems}:{lootItems:LootItem[]}){const[entries,setEntries]=useState<Entry[]>([]);const[selected,setSelected]=useState(lootItems[0]?.slug??"");useEffect(()=>{try{const raw=localStorage.getItem(key);if(raw)setEntries(JSON.parse(raw))}catch{}},[]);useEffect(()=>{try{localStorage.setItem(key,JSON.stringify(entries))}catch{}},[entries]);const stats=useMemo(()=>({total:entries.length,found:entries.filter(e=>e.status==="found").length,need:entries.filter(e=>e.status==="need").length}),[entries]);function add(){if(!selected||entries.some(e=>e.slug===selected))return;setEntries(c=>[...c,{slug:selected,status:"need",amount:1}])}function update(slug:string,patch:Partial<Entry>){setEntries(c=>c.map(e=>e.slug===slug?{...e,...patch}:e))}return <section className="mx-auto max-w-7xl px-4 py-8"><div className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6"><div className="flex items-center gap-3 text-red-300"><Package/><span className="text-sm font-black uppercase tracking-[0.25em]">Loot tracker</span></div><div className="mt-4 grid gap-3 md:grid-cols-[1fr_auto]"><select value={selected} onChange={e=>setSelected(e.target.value)} className="h-12 rounded-2xl border border-zinc-800 bg-black px-4 text-sm text-white">{lootItems.map(i=><option key={i.slug} value={i.slug}>{i.name} — {i.category}</option>)}</select><button onClick={add} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-red-600 px-5 py-3 text-sm font-black text-white"><Plus size={16}/>Добавить</button></div><div className="mt-4 grid gap-3 md:grid-cols-3"><Stat label="Всего" value={stats.total}/><Stat label="Нужно" value={stats.need}/><Stat label="Найдено" value={stats.found}/></div><div className="mt-6 space-y-3">{entries.map(entry=>{const item=lootItems.find(l=>l.slug===entry.slug);if(!item)return null;return <article key={entry.slug} className="flex flex-col gap-4 rounded-2xl border border-zinc-800 bg-black/50 p-4 md:flex-row md:items-center md:justify-between"><div><div className="flex flex-wrap gap-2"><span className="rounded-full border border-zinc-800 px-3 py-1 text-xs font-bold text-zinc-400">{item.category}</span><span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-bold text-red-200">{item.priority}</span></div><Link href={`/loot/${item.slug}`} className="mt-2 block text-lg font-black text-white hover:text-red-300">{item.name}</Link><p className="mt-1 text-sm text-zinc-500">{item.keepOrSell}</p></div><div className="flex flex-wrap gap-2"><input type="number" min={1} value={entry.amount} onChange={e=>update(entry.slug,{amount:Number(e.target.value)||1})} className="h-10 w-20 rounded-xl border border-zinc-800 bg-black px-3 text-sm text-white"/><button onClick={()=>update(entry.slug,{status:entry.status==="found"?"need":"found"})} className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-xs font-bold text-emerald-200"><CheckCircle2 size={14}/>{entry.status==="found"?"Найдено":"Нужно"}</button><button onClick={()=>setEntries(c=>c.filter(e=>e.slug!==entry.slug))} className="rounded-xl border border-zinc-800 px-3 py-2 text-zinc-500 hover:text-red-300"><Trash2 size={14}/></button></div></article>})}</div></div></section>}
-function Stat({label,value}:{label:string;value:number}){return <div className="rounded-2xl border border-zinc-800 bg-black/60 p-4"><div className="text-2xl font-black text-white">{value}</div><div className="text-xs font-bold uppercase tracking-[0.18em] text-zinc-500">{label}</div></div>}
+
+import { useEffect, useMemo, useState } from "react";
+import { PackageCheck, RotateCcw } from "lucide-react";
+
+type LootItem = { slug: string; name: string; category?: string; priority?: string; usage?: string };
+type TrackerState = Record<string, boolean>;
+const STORAGE_KEY = "scum-loot-tracker";
+
+export function LootTrackerClient({ lootItems }: { lootItems: LootItem[] }) {
+  const [state, setState] = useState<TrackerState>({});
+  const important = useMemo(() => lootItems.filter((item) => ["Высокий", "Максимальный"].includes(String(item.priority ?? ""))).slice(0, 60), [lootItems]);
+  const done = important.filter((item) => state[item.slug]).length;
+
+  useEffect(() => {
+    try { setState(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}") as TrackerState); } catch { setState({}); }
+  }, []);
+
+  function save(next: TrackerState) { setState(next); localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); }
+  function toggle(slug: string) { save({ ...state, [slug]: !state[slug] }); }
+
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-8">
+      <div className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3"><div><div className="flex items-center gap-2 text-sm font-black uppercase tracking-[0.25em] text-red-400"><PackageCheck size={16} /> Loot tracker</div><h2 className="mt-2 text-2xl font-black text-white">Важный лут</h2><p className="mt-2 text-sm text-zinc-400">Отмечено {done} из {important.length}. Прогресс хранится в браузере.</p></div><button type="button" onClick={() => save({})} className="inline-flex items-center gap-2 rounded-xl border border-zinc-800 px-4 py-2 text-sm font-bold text-zinc-300 hover:border-red-500/50 hover:text-white"><RotateCcw size={16} /> Сбросить</button></div>
+        <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">{important.map((item) => <label key={item.slug} className="flex cursor-pointer items-start gap-3 rounded-2xl border border-zinc-800 bg-black/40 p-4 hover:border-red-500/40"><input type="checkbox" checked={Boolean(state[item.slug])} onChange={() => toggle(item.slug)} className="mt-1 h-4 w-4 accent-red-600" /><div><div className="font-black text-white">{item.name}</div><div className="mt-1 text-xs text-zinc-500">{item.category} • {item.priority}</div>{item.usage ? <p className="mt-2 line-clamp-2 text-sm text-zinc-400">{item.usage}</p> : null}</div></label>)}</div>
+      </div>
+    </section>
+  );
+}

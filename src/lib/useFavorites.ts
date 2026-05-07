@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export type FavoriteType = "weapon" | "attachment" | "loot" | "guide" | "bunker";
+export type FavoriteType = "weapon" | "attachment" | "loot" | "guide" | "bunker" | "mission";
 
 type FavoriteItem = {
   type: FavoriteType;

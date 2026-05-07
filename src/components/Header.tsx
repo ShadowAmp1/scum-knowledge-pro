@@ -8,9 +8,9 @@ import { useFavorites } from "@/lib/useFavorites";
 
 const navItems = [
   { title: "Главная", href: "/" }, { title: "Поиск", href: "/search" }, { title: "Оружие", href: "/weapons" },
-  { title: "Обвесы", href: "/weapons/attachments" }, { title: "Лут", href: "/loot" }, { title: "Бункеры", href: "/bunkers" },
+  { title: "Обвесы", href: "/weapons/attachments" }, { title: "Лут", href: "/loot" }, { title: "Квесты", href: "/missions" }, { title: "Бункеры", href: "/bunkers" },
   { title: "Карта", href: "/map" }, { title: "Базы", href: "/bases" }, { title: "Транспорт", href: "/vehicles" },
-  { title: "Подготовка", href: "/preparation" }, { title: "Гайды", href: "/guides" },
+  { title: "Подготовка", href: "/preparation" }, { title: "Гайды", href: "/guides" }, { title: "Трекеры", href: "/trackers" },
 ];
 function isActiveLink(pathname: string, href: string) { if (href === "/") return pathname === "/"; return pathname === href || pathname.startsWith(`${href}/`); }
 function navLinkClass(active: boolean) { return active ? "shrink-0 rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm font-black text-red-200" : "shrink-0 rounded-xl px-3 py-2 text-sm font-medium text-zinc-400 transition hover:bg-zinc-900 hover:text-white"; }
