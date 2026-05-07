@@ -8,7 +8,7 @@ import { useFavorites } from "@/lib/useFavorites";
 
 const navItems = [
   { title: "Главная", href: "/" }, { title: "Поиск", href: "/search" }, { title: "Оружие", href: "/weapons" },
-  { title: "Обвесы", href: "/weapons/attachments" }, { title: "Лут", href: "/loot" }, { title: "Квесты", href: "/missions" }, { title: "Бункеры", href: "/bunkers" },
+  { title: "Сравнение", href: "/weapons/compare" }, { title: "Обвесы", href: "/weapons/attachments" }, { title: "Лут", href: "/loot" }, { title: "Квесты", href: "/missions" }, { title: "Бункеры", href: "/bunkers" },
   { title: "Карта", href: "/map" }, { title: "Базы", href: "/bases" }, { title: "Транспорт", href: "/vehicles" },
   { title: "Подготовка", href: "/preparation" }, { title: "Гайды", href: "/guides" }, { title: "Трекеры", href: "/trackers" },
 ];
