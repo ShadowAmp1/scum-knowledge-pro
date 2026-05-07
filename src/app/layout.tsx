@@ -8,7 +8,7 @@ const siteName = "SCUM DB PRO";
 const siteTitle = "SCUM DB PRO — база знаний по SCUM";
 const siteDescription =
   "Оружие, обвесы, лут, обычные и заброшенные бункеры, карты уровней, интерактивная карта, гайды и трекеры по SCUM.";
-const previewImage = `${siteUrl}/opengraph-image?v=3`;
+const previewImage = `${siteUrl}/og-image.png?v=5`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
