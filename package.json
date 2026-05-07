@@ -11,7 +11,8 @@
     "db:migrate": "node scripts/migrate-db.mjs",
     "db:seed": "node scripts/seed-db.mjs",
     "db:studio": "prisma studio",
-    "db:push": "prisma db push"
+    "db:push": "prisma db push",
+    "db:backup": "node scripts/backup-db.mjs"
   },
   "dependencies": {
     "@next/env": "14.2.23",
