@@ -3,6 +3,28 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Оружие SCUM | SCUM DB PRO",
   description: "Оружие SCUM, лучшие билды, патроны, обвесы, фильтры, роли и советы для PvE/PvP.",
+  openGraph: {
+    title: "Оружие SCUM | SCUM DB PRO",
+    description: "Лучшие билды оружия SCUM, патроны, обвесы, фильтры, роли и советы для PvE/PvP.",
+    url: "https://scumdbpro.duckdns.org/weapons",
+    siteName: "SCUM DB PRO",
+    locale: "ru_RU",
+    type: "website",
+    images: [
+      {
+        url: "https://scumdbpro.duckdns.org/weapons/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Оружие SCUM | SCUM DB PRO"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Оружие SCUM | SCUM DB PRO",
+    description: "Лучшие билды оружия SCUM, патроны, обвесы, фильтры, роли и советы для PvE/PvP.",
+    images: ["https://scumdbpro.duckdns.org/weapons/opengraph-image"]
+  }
 };
 
 import Link from "next/link";

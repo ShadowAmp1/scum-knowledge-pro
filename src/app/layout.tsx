@@ -1,40 +1,61 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
 
+const siteUrl = "https://scumdbpro.duckdns.org";
+const siteName = "SCUM DB PRO";
+const siteTitle = "SCUM DB PRO — база знаний по SCUM";
+const siteDescription =
+  "Оружие, обвесы, лут, обычные и заброшенные бункеры, карты уровней, интерактивная карта, гайды и трекеры по SCUM.";
+const previewImage = "/opengraph-image.png";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://scumdbpro.duckdns.org"),
+  metadataBase: new URL(siteUrl),
+  applicationName: siteName,
   title: {
-    default: "SCUM DB PRO — база знаний по SCUM",
-    template: "%s | SCUM DB PRO"
+    default: siteTitle,
+    template: `%s | ${siteName}`
   },
-  description: "Оружие, обвесы, лут, обычные и заброшенные бункеры, карты уровней, интерактивная карта и гайды по SCUM.",
-  keywords: ["SCUM", "SCUM база знаний", "SCUM оружие", "SCUM бункеры", "SCUM карта", "SCUM гайды", "SCUM лут"],
-  authors: [{ name: "SCUM DB PRO" }],
-  creator: "SCUM DB PRO",
-  publisher: "SCUM DB PRO",
+  description: siteDescription,
+  keywords: [
+    "SCUM",
+    "SCUM DB PRO",
+    "SCUM база знаний",
+    "SCUM оружие",
+    "SCUM обвесы",
+    "SCUM бункеры",
+    "SCUM карта",
+    "SCUM гайды",
+    "SCUM лут"
+  ],
+  authors: [{ name: siteName }],
+  creator: siteName,
+  publisher: siteName,
+  alternates: {
+    canonical: siteUrl
+  },
   openGraph: {
     type: "website",
     locale: "ru_RU",
-    url: "https://scumdbpro.duckdns.org",
-    siteName: "SCUM DB PRO",
-    title: "SCUM DB PRO — база знаний по SCUM",
-    description: "PRO база знаний по игре SCUM: оружие, обвесы, лут, бункеры, карта и гайды.",
+    url: siteUrl,
+    siteName,
+    title: siteTitle,
+    description: "PRO база знаний по SCUM: оружие, обвесы, лут, бункеры, карта, гайды и полезные трекеры для игроков.",
     images: [
       {
-        url: "/og-image.png",
+        url: previewImage,
         width: 1200,
         height: 630,
-        alt: "SCUM DB PRO - База знаний по SCUM"
+        alt: "SCUM DB PRO — оружие, лут, бункеры, карта и гайды"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "SCUM DB PRO — база знаний по SCUM",
-    description: "PRO база знаний по игре SCUM: оружие, обвесы, лут, бункеры, карта и гайды.",
-    images: ["/og-image.png"]
+    title: siteTitle,
+    description: "PRO база знаний по SCUM: оружие, обвесы, лут, бункеры, карта, гайды и полезные трекеры.",
+    images: [previewImage]
   },
   robots: {
     index: true,
@@ -46,7 +67,13 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1
     }
-  }
+  },
+  category: "gaming"
+};
+
+export const viewport: Viewport = {
+  themeColor: "#16f2b3",
+  colorScheme: "dark"
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
