@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Обвесы SCUM | SCUM DB PRO",
   description: "Магазины, прицелы, глушители, фонарики и совместимое оружие в базе SCUM DB PRO.",
@@ -8,13 +10,10 @@ import { ArrowLeft } from "lucide-react";
 import { AttachmentFilters } from "@/components/AttachmentFilters";
 import { PageHeader } from "@/components/PageHeader";
 import { attachmentCategories, getWeaponMatchStatus } from "@/data/attachments";
-import { getContentData } from "@/lib/content";
-
-export const dynamic = "force-dynamic";
+import { getAttachments } from "@/lib/content";
 
 export default async function AttachmentsPage() {
-  const data = await getContentData();
-  const attachments = data.attachments;
+  const attachments = await getAttachments();
   const matchedCount = attachments.filter((attachment) => getWeaponMatchStatus(attachment).hasMatches).length;
 
   return (

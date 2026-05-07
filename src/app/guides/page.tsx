@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Гайды SCUM | SCUM DB PRO",
   description: "Практичные гайды SCUM: старт, прокачка, деньги, бункеры, оружие, база, транспорт и маршруты фарма.",
@@ -5,13 +7,10 @@ export const metadata = {
 
 import { PageHeader } from "@/components/PageHeader";
 import { GuideFilters } from "@/components/GuideFilters";
-import { getContentData } from "@/lib/content";
-
-export const dynamic = "force-dynamic";
+import { getGuides } from "@/lib/content";
 
 export default async function GuidesPage() {
-  const data = await getContentData();
-  const guides = data.guides;
+  const guides = await getGuides();
   const categoriesCount = new Set(guides.map((guide) => guide.category)).size;
   const hardCount = guides.filter((guide) => guide.difficulty === "Сложно").length;
 

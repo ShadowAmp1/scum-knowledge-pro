@@ -58,3 +58,6 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #71717a;
 }
+
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }

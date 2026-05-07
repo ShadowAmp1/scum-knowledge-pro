@@ -1,70 +1,24 @@
-src/app/admin/page.tsx
-src/app/api/admin/data/route.ts
-src/app/api/admin/save/route.ts
-src/app/api/admin/seed/route.ts
-src/app/api/admin/session/route.ts
-src/app/bases/page.tsx
-src/app/bunkers/[slug]/page.tsx
-src/app/bunkers/page.tsx
-src/app/favorites/page.tsx
-src/app/globals.css
-src/app/guides/[slug]/page.tsx
-src/app/guides/page.tsx
-src/app/layout.tsx
-src/app/loot/[slug]/page.tsx
-src/app/loot/page.tsx
-src/app/map/page.tsx
-src/app/missions/[slug]/page.tsx
-src/app/missions/page.tsx
-src/app/not-found.tsx
-src/app/page.tsx
-src/app/preparation/page.tsx
-src/app/pro-roadmap/page.tsx
-src/app/robots.ts
-src/app/search/page.tsx
-src/app/sitemap.ts
-src/app/vehicles/page.tsx
-src/app/weapons/[slug]/page.tsx
-src/app/weapons/attachments/[slug]/page.tsx
-src/app/weapons/attachments/page.tsx
-src/app/weapons/compare/page.tsx
-src/app/weapons/page.tsx
-src/components/AdminPanelClient.tsx
-src/components/AttachmentFilters.tsx
-src/components/BunkerFilters.tsx
-src/components/FavoriteButton.tsx
-src/components/Footer.tsx
-src/components/GlobalSearch.tsx
-src/components/GuideFilters.tsx
-src/components/Header.tsx
-src/components/Hero.tsx
-src/components/InfoCard.tsx
-src/components/InteractiveMap.tsx
-src/components/LootFilters.tsx
-src/components/MissionFilters.tsx
-src/components/MissionObjectiveTracker.tsx
-src/components/MissionTracker.tsx
-src/components/OptimizedMapBackground.tsx
-src/components/PageHeader.tsx
-src/components/RaidKits.tsx
-src/components/SectionCard.tsx
-src/components/StatBar.tsx
-src/components/WeaponBadge.tsx
-src/components/WeaponCompareClient.tsx
-src/components/WeaponFilters.tsx
-src/data/attachments.ts
-src/data/bunkers.ts
-src/data/guides.ts
-src/data/loot.ts
-src/data/mapMarkers.ts
-src/data/missions.ts
-src/data/preparation.ts
-src/data/sections.ts
-src/data/vehicles.ts
-src/data/weapons.ts
-src/lib/adminSession.ts
-src/lib/database.ts
-src/lib/searchIndex.ts
-src/lib/useFavorites.ts
-src/lib/useMissionTracker.ts
-src/lib/utils.ts
+SCUM DB PRO v4 files overview
+
+Core:
+- package.json
+- render.yaml
+- README.md
+- CHANGELOG_V2.md
+- CHANGELOG_V3.md
+- CHANGELOG_V4.md
+
+App pages:
+- src/app/page.tsx
+- src/app/weapons/page.tsx
+- src/app/weapons/[slug]/page.tsx
+- src/app/bunkers/page.tsx
+- src/app/bunkers/[slug]/page.tsx
+- src/app/loot/page.tsx
+- src/app/preparation/page.tsx
+- src/app/map/page.tsx
+
+New in v4:
+- src/components/InteractiveMap.tsx
+- src/data/mapMarkers.ts
+- map styles in src/app/globals.css

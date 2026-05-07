@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Оружие SCUM | SCUM DB PRO",
   description: "Оружие SCUM, лучшие билды, патроны, обвесы, фильтры, роли и советы для PvE/PvP.",
@@ -7,13 +9,10 @@ import Link from "next/link";
 import { BarChart3, Puzzle } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { WeaponFilters } from "@/components/WeaponFilters";
-import { getContentData } from "@/lib/content";
-
-export const dynamic = "force-dynamic";
+import { getContent } from "@/lib/content";
 
 export default async function WeaponsPage() {
-  const data = await getContentData();
-  const { weapons, attachments } = data;
+  const { weapons, attachments } = await getContent();
   const sTierCount = weapons.filter((weapon) => weapon.tier === "S").length;
   const bunkerTop = [...weapons].sort((a, b) => b.rating.bunker - a.rating.bunker).slice(0, 3);
 

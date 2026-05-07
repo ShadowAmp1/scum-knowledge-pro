@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Лут SCUM | SCUM DB PRO",
   description: "Предметы лута SCUM: где искать, что хранить, что продавать, приоритеты и советы по серверам.",
@@ -5,13 +7,10 @@ export const metadata = {
 
 import { PageHeader } from "@/components/PageHeader";
 import { LootFilters } from "@/components/LootFilters";
-import { getContentData } from "@/lib/content";
-
-export const dynamic = "force-dynamic";
+import { getLootItems } from "@/lib/content";
 
 export default async function LootPage() {
-  const data = await getContentData();
-  const lootItems = data.loot;
+  const lootItems = await getLootItems();
   const maxPriority = lootItems.filter((item) => item.priority === "Максимальный").length;
   const rare = lootItems.filter((item) => item.rarity === "Редкий" || item.rarity === "Очень редкий").length;
   const categories = new Set(lootItems.map((item) => item.category)).size;

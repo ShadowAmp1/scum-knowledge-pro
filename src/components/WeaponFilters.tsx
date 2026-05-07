@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import {
-  weapons as fallbackWeapons,
   weaponCategories,
   weaponModes,
   weaponRarities,
@@ -27,7 +26,7 @@ const allTier = "Любой tier";
 
 const tierWeight: Record<WeaponTier, number> = { S: 4, A: 3, B: 2, C: 1 };
 
-export function WeaponFilters({ weapons = fallbackWeapons }: { weapons?: Weapon[] }) {
+export function WeaponFilters({ weapons }: { weapons: Weapon[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<WeaponCategory | typeof allCategory>(allCategory);
   const [rarity, setRarity] = useState<WeaponRarity | typeof allRarity>(allRarity);
@@ -62,7 +61,7 @@ export function WeaponFilters({ weapons = fallbackWeapons }: { weapons?: Weapon[
         if (sort === "economy") return b.rating.economy - a.rating.economy;
         return tierWeight[b.tier] - tierWeight[a.tier] || b.rating.pvp - a.rating.pvp;
       });
-  }, [weapons, query, category, rarity, mode, tier, sort]);
+  }, [query, category, rarity, mode, tier, sort]);
 
   const resetFilters = () => {
     setQuery("");

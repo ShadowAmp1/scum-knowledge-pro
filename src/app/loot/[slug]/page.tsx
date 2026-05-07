@@ -1,19 +1,18 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CheckCircle2, MapPin, Package, TriangleAlert } from "lucide-react";
 import { InfoCard } from "@/components/InfoCard";
-import { lootItems as fallbackLootItems } from "@/data/loot";
-import { getContentData } from "@/lib/content";
+import { getLootBySlug, lootItems } from "@/data/loot";
+import { getLootItems } from "@/lib/content";
 
 export function generateStaticParams() {
-  return fallbackLootItems.map((item) => ({ slug: item.slug }));
+  return lootItems.map((item) => ({ slug: item.slug }));
 }
 
-export const dynamic = "force-dynamic";
-
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const { loot } = await getContentData();
-  const item = loot.find((entry) => entry.slug === params.slug);
+export function generateMetadata({ params }: { params: { slug: string } }) {
+  const item = getLootBySlug(params.slug);
   if (!item) return { title: "Лут не найден | SCUM DB PRO" };
 
   const title = `${item.name} | SCUM DB PRO`;
@@ -46,8 +45,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function LootItemPage({ params }: { params: { slug: string } }) {
-  const data = await getContentData();
-  const lootItems = data.loot;
+  const lootItems = await getLootItems();
   const item = lootItems.find((entry) => entry.slug === params.slug);
   if (!item) notFound();
 

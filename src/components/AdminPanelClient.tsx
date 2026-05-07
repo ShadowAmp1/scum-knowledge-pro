@@ -19,11 +19,10 @@ import {
 import { attachments } from "@/data/attachments";
 import { guides } from "@/data/guides";
 import { lootItems } from "@/data/loot";
-import { missions } from "@/data/missions";
 import { mapMarkers } from "@/data/mapMarkers";
 import { weapons } from "@/data/weapons";
 
-type Entity = "weapons" | "attachments" | "loot" | "missions" | "guides" | "mapMarkers";
+type Entity = "weapons" | "attachments" | "loot" | "guides" | "mapMarkers";
 type Item = Record<string, unknown>;
 type DataState = Record<Entity, Item[]>;
 type Field = {
@@ -46,7 +45,6 @@ const initialData: DataState = {
   weapons: weapons as unknown as Item[],
   attachments: attachments as unknown as Item[],
   loot: lootItems as unknown as Item[],
-  missions: missions as unknown as Item[],
   guides: guides as unknown as Item[],
   mapMarkers: mapMarkers as unknown as Item[],
 };
@@ -70,17 +68,6 @@ const cats = {
     "Фонарики",
     "Планки",
     "Глушители",
-  ],
-  mission: [
-    "Сбор предметов",
-    "Доставка",
-    "Зачистка",
-    "Охота",
-    "Исследование",
-    "Взаимодействие",
-    "Крафт и ремонт",
-    "Выживание",
-    "Обучение",
   ],
   guide: [
     "Новичок",
@@ -214,35 +201,6 @@ function loot(): Item {
     mistakes: ["Брать без цели."],
     related: ["Лут"],
     serverNote: "Спавн и цена зависят от сервера.",
-  };
-}
-
-function mission(): Item {
-  return {
-    slug: id("new-mission"),
-    title: "Новая миссия",
-    trader: "General Goods",
-    source: "Trader Book",
-    tier: 1,
-    category: "Сбор предметов",
-    difficulty: "Легко",
-    risk: "Низкий",
-    dataStatus: "Шаблон",
-    short: "Краткое описание миссии.",
-    description: "Полное описание миссии, зачем она нужна и как её выполнять.",
-    requirements: [{ name: "Предмет", amount: 1, note: "Уточнить" }],
-    objectives: [{ title: "Шаг 1", description: "Что сделать", target: "Цель", amount: 1, locationHint: "Где искать", trackerLabel: "Шаг 1 выполнен" }],
-    recommendedGear: ["Бинты", "Рюкзак"],
-    bestLocations: ["Уточнить"],
-    routePlan: ["Принять квест", "Выполнить objective", "Сдать награду"],
-    reward: { cash: "Уточнить", fame: "Уточнить", reputation: "Уточнить", unlocks: ["Следующий tier"], notes: "Награда зависит от сервера." },
-    progression: { unlockCondition: "Уточнить", unlocksNext: "Уточнить", progressionValue: 25, nextStep: "Уточнить" },
-    tags: ["mission"],
-    relatedLoot: [],
-    relatedSections: ["Квесты"],
-    adminNotes: "Проверить на сервере перед публикацией как точную миссию.",
-    playerTips: ["Проверь требования перед выполнением."],
-    mistakes: ["Не сверить точный список предметов."],
   };
 }
 function guide(): Item {
@@ -400,35 +358,6 @@ const configs: Record<Entity, Config> = {
       { key: "keepOrSell", label: "Хранить/продавать", type: "textarea" },
       { key: "bestLocations", label: "Лучшие места", type: "array" },
       { key: "tips", label: "Советы", type: "array" },
-      { key: "mistakes", label: "Ошибки", type: "array" },
-    ],
-  },
-
-  missions: {
-    label: "Квесты",
-    key: "slug",
-    title: "title",
-    make: mission,
-    fields: [
-      { key: "title", label: "Название" },
-      { key: "slug", label: "Slug" },
-      { key: "trader", label: "Торговец/источник", type: "select", options: ["General Goods", "Armorer", "Mechanic", "Medic", "Notice Board", "Mobile Phone", "DEENA"] },
-      { key: "source", label: "Источник", type: "select", options: ["Trader Book", "Notice Board", "Mobile Phone", "DEENA Manual"] },
-      { key: "tier", label: "Tier", type: "number" },
-      { key: "category", label: "Категория", type: "select", options: cats.mission },
-      { key: "difficulty", label: "Сложность", type: "select", options: ["Легко", "Средне", "Сложно", "Очень сложно"] },
-      { key: "risk", label: "Риск", type: "select", options: ["Низкий", "Средний", "Высокий", "Экстремальный"] },
-      { key: "dataStatus", label: "Статус данных", type: "select", options: ["Готово", "Требует проверки", "Шаблон"] },
-      { key: "short", label: "Кратко", type: "textarea" },
-      { key: "description", label: "Описание", type: "textarea" },
-      { key: "recommendedGear", label: "Снаряжение", type: "array" },
-      { key: "bestLocations", label: "Лучшие места", type: "array" },
-      { key: "routePlan", label: "Маршрут", type: "array" },
-      { key: "tags", label: "Теги", type: "array" },
-      { key: "relatedLoot", label: "Связанный лут", type: "array" },
-      { key: "relatedSections", label: "Связанные разделы", type: "array" },
-      { key: "adminNotes", label: "Admin note", type: "textarea" },
-      { key: "playerTips", label: "Советы", type: "array" },
       { key: "mistakes", label: "Ошибки", type: "array" },
     ],
   },
@@ -697,16 +626,16 @@ export function AdminPanelClient() {
     await fetch("/api/admin/session", { method: "DELETE" });
     setLogged(false);
   }
-  async function save() {
+  async function saveAll() {
     const response = await fetch("/api/admin/save", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ entity, items }),
+      body: JSON.stringify({ data }),
     });
     const payload = (await response.json()) as {
       ok?: boolean;
       message?: string;
-      count?: number;
+      total?: number;
       storage?: "files" | "database";
     };
     if (payload.storage === "database") setDataSource("database");
@@ -714,7 +643,7 @@ export function AdminPanelClient() {
       ok: Boolean(response.ok && payload.ok),
       text:
         response.ok && payload.ok
-          ? `Сохранено элементов: ${payload.count}. Хранилище: ${payload.storage === "database" ? "PostgreSQL" : "src/data"}.`
+          ? `Все изменения сохранены: ${payload.total} записей. Хранилище: ${payload.storage === "database" ? "PostgreSQL" : "src/data"}. Сайт обновлён.`
           : (payload.message ?? "Ошибка сохранения"),
     });
   }
@@ -818,7 +747,7 @@ export function AdminPanelClient() {
 
   return (
     <section className="mx-auto max-w-[1500px] px-4 py-10">
-      <div className="grid gap-4 md:grid-cols-6">
+      <div className="grid gap-4 md:grid-cols-5">
         {(Object.keys(configs) as Entity[]).map((e) => (
           <button
             key={e}
@@ -850,22 +779,16 @@ export function AdminPanelClient() {
         </div>
         <div className="flex flex-wrap gap-2">
           <button
+            onClick={() => void saveAll()}
+            className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-5 py-2 text-sm font-black text-white transition hover:bg-red-500"
+          >
+            <Save size={16} /> Сохранить
+          </button>
+          <button
             onClick={() => void loadData()}
             className="inline-flex items-center gap-2 rounded-xl border border-zinc-800 bg-black px-4 py-2 text-sm font-bold text-zinc-300"
           >
             <RefreshCw size={16} /> Обновить
-          </button>
-          <button
-            onClick={() => void seedDatabase()}
-            className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-bold text-emerald-200"
-          >
-            <UploadCloud size={16} /> Seed в БД
-          </button>
-          <button
-            onClick={() => setData(initialData)}
-            className="inline-flex items-center gap-2 rounded-xl border border-zinc-800 bg-black px-4 py-2 text-sm font-bold text-zinc-300"
-          >
-            <RefreshCw size={16} /> Сбросить
           </button>
           <button
             onClick={() => void logout()}
@@ -955,12 +878,6 @@ export function AdminPanelClient() {
                   className="inline-flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-bold text-red-200"
                 >
                   <Trash2 size={16} /> Удалить
-                </button>
-                <button
-                  onClick={() => void save()}
-                  className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-5 py-2 text-sm font-black text-white"
-                >
-                  <Save size={16} /> Сохранить
                 </button>
               </div>
             </div>

@@ -6,7 +6,6 @@ import { useMemo, useState } from "react";
 import {
   guideCategories,
   guideDifficulties,
-  guides as fallbackGuides,
   type Guide,
   type GuideCategory,
   type GuideDifficulty,
@@ -16,7 +15,7 @@ import { FavoriteButton } from "@/components/FavoriteButton";
 const allCategories = "Все категории";
 const allDifficulty = "Любая сложность";
 
-export function GuideFilters({ guides = fallbackGuides }: { guides?: Guide[] }) {
+export function GuideFilters({ guides }: { guides: Guide[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<GuideCategory | typeof allCategories>(allCategories);
   const [difficulty, setDifficulty] = useState<GuideDifficulty | typeof allDifficulty>(allDifficulty);
@@ -49,7 +48,7 @@ export function GuideFilters({ guides = fallbackGuides }: { guides?: Guide[] }) 
 
       return matchesQuery && matchesCategory && matchesDifficulty;
     });
-  }, [guides, query, category, difficulty]);
+  }, [query, category, difficulty]);
 
   function resetFilters() {
     setQuery("");

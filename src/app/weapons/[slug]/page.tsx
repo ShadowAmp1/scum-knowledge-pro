@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -5,19 +7,16 @@ import { InfoCard } from "@/components/InfoCard";
 import { RarityBadge, TierBadge } from "@/components/WeaponBadge";
 import { StatBar } from "@/components/StatBar";
 import { FavoriteButton } from "@/components/FavoriteButton";
-import { weapons as fallbackWeapons } from "@/data/weapons";
+import { getWeaponBySlug, weapons } from "@/data/weapons";
 import { attachmentCategories } from "@/data/attachments";
-import { getContentData } from "@/lib/content";
+import { getContent } from "@/lib/content";
 
 export function generateStaticParams() {
-  return fallbackWeapons.map((weapon) => ({ slug: weapon.slug }));
+  return weapons.map((weapon) => ({ slug: weapon.slug }));
 }
 
-export const dynamic = "force-dynamic";
-
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const { weapons } = await getContentData();
-  const weapon = weapons.find((item) => item.slug === params.slug);
+export function generateMetadata({ params }: { params: { slug: string } }) {
+  const weapon = getWeaponBySlug(params.slug);
   if (!weapon) return { title: "Оружие не найдено | SCUM DB PRO" };
 
   const title = `${weapon.name} | SCUM DB PRO`;
@@ -50,7 +49,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function WeaponPage({ params }: { params: { slug: string } }) {
-  const { weapons, attachments } = await getContentData();
+  const { weapons, attachments } = await getContent();
   const weapon = weapons.find((item) => item.slug === params.slug);
   if (!weapon) notFound();
 

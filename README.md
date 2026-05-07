@@ -1,18 +1,4 @@
-# SCUM Knowledge PRO
-
-## v4.30 Hosting PRO
-
-Добавлены: единый контент-слой PostgreSQL для публичного сайта, `/api/content`, личный кабинет, Quest/Loot trackers, калькуляторы, Discord webhook, PWA manifest/service worker и динамический sitemap.
-
-Главная цепочка данных теперь такая:
-
-```text
-Админка Save → PostgreSQL content_items → getContentData() → публичные страницы
-```
-
-Если `DATABASE_URL` не задан или БД пустая, сайт использует `src/data/*.ts` как fallback/seed.
-
- v4.21 v4.20
+# SCUM Knowledge PRO v4.21 v4.20
 
 Готовый фан-сайт-база знаний по SCUM: оружие, обвесы, лут, обычные и заброшенные бункеры, карты уровней, интерактивная карта, базы, транспорт, подготовка и гайды.
 

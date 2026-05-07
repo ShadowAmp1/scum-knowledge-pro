@@ -24,7 +24,6 @@ import {
   MapMarker,
   MapMarkerCategory,
   mapCategoryLabels,
-  mapMarkers as fallbackMapMarkers,
 } from "@/data/mapMarkers";
 
 const categoryIcons: Record<MapMarkerCategory, ElementType> = {
@@ -102,21 +101,23 @@ const zoomClasses: Record<ZoomLevel, string> = {
   full: "max-w-none",
 };
 
-export function InteractiveMap({ markers = fallbackMapMarkers }: { markers?: MapMarker[] }) {
-  const categories = (Object.keys(mapCategoryLabels) as MapMarkerCategory[]).filter((category) => markers.some((marker) => marker.category === category));
+export function InteractiveMap({ mapMarkers }: { mapMarkers: MapMarker[] }) {
+  const categories = (Object.keys(mapCategoryLabels) as MapMarkerCategory[]).filter((category) =>
+    mapMarkers.some((marker) => marker.category === category)
+  );
   const [query, setQuery] = useState("");
   const defaultCategories = categories.filter((category) => ["bunker", "abandonedBunker", "trader"].includes(category));
   const [activeCategories, setActiveCategories] = useState<MapMarkerCategory[]>(defaultCategories);
-  const [selectedId, setSelectedId] = useState(markers[0]?.id ?? "");
+  const [selectedId, setSelectedId] = useState(mapMarkers[0]?.id ?? "");
   const [risk, setRisk] = useState<"all" | MapMarker["risk"]>("all");
   const [zoom, setZoom] = useState<ZoomLevel>("wide");
 
-  const selectedMarker = markers.find((marker) => marker.id === selectedId) ?? markers[0]!;
+  const selectedMarker = mapMarkers.find((marker) => marker.id === selectedId) ?? mapMarkers[0]!;
 
   const filteredMarkers = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
-    return markers.filter((marker) => {
+    return mapMarkers.filter((marker) => {
       const matchesCategory = activeCategories.includes(marker.category);
       const matchesRisk = risk === "all" || marker.risk === risk;
       const matchesQuery =
@@ -128,7 +129,7 @@ export function InteractiveMap({ markers = fallbackMapMarkers }: { markers?: Map
 
       return matchesCategory && matchesRisk && matchesQuery;
     });
-  }, [activeCategories, markers, query, risk]);
+  }, [activeCategories, query, risk]);
 
   function toggleCategory(category: MapMarkerCategory) {
     setActiveCategories((current) =>
@@ -142,7 +143,7 @@ export function InteractiveMap({ markers = fallbackMapMarkers }: { markers?: Map
     setQuery("");
     setRisk("all");
     setActiveCategories(defaultCategories);
-    setSelectedId(markers[0]?.id ?? "");
+    setSelectedId(mapMarkers[0]?.id ?? "");
     setZoom("wide");
   }
 
