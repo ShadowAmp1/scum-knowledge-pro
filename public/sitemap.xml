@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://scumdbpro.duckdns.org/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://scumdbpro.duckdns.org/weapons</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://scumdbpro.duckdns.org/loot</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://scumdbpro.duckdns.org/bunkers</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://scumdbpro.duckdns.org/map</loc>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>
