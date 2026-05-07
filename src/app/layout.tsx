@@ -8,7 +8,7 @@ const siteName = "SCUM DB PRO";
 const siteTitle = "SCUM DB PRO — база знаний по SCUM";
 const siteDescription =
   "Оружие, обвесы, лут, обычные и заброшенные бункеры, карты уровней, интерактивная карта, гайды и трекеры по SCUM.";
-const previewImage = "/opengraph-image.png";
+const previewImage = `${siteUrl}/og-image.png?v=5`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -41,10 +41,11 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName,
     title: siteTitle,
-    description: "PRO база знаний по SCUM: оружие, обвесы, лут, бункеры, карта, гайды и полезные трекеры для игроков.",
+    description: siteDescription,
     images: [
       {
         url: previewImage,
+        secureUrl: previewImage,
         width: 1200,
         height: 630,
         alt: "SCUM DB PRO — оружие, лут, бункеры, карта и гайды"
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
-    description: "PRO база знаний по SCUM: оружие, обвесы, лут, бункеры, карта, гайды и полезные трекеры.",
+    description: siteDescription,
     images: [previewImage]
   },
   robots: {
