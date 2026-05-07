@@ -16,9 +16,9 @@ services:
       - key: NODE_ENV
         value: production
       - key: ADMIN_USER
-        value: Shadow
+        sync: false
       - key: ADMIN_PASSWORD
-        value: "5623741"
+        sync: false
       - key: ADMIN_SESSION_SECRET
         generateValue: true
       - key: DATABASE_URL
