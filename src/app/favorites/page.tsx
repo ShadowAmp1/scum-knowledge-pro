@@ -235,7 +235,7 @@ export default function FavoritesPage() {
                   </span>
                 </div>
                 <h3 className="text-xl font-black text-white">{bunker.name}</h3>
-                <p className="mt-2 text-sm text-zinc-400">{bunker.location}</p>
+                <p className="mt-2 text-sm text-zinc-400">{(bunker as any).location ?? (bunker as any).sector ?? (bunker as any).description ?? "Локация уточняется"}</p>
               </Link>
             ))}
           </div>

@@ -112,3 +112,5 @@ export async function getLootItems() { return (await getContent()).loot; }
 export async function getGuides() { return (await getContent()).guides; }
 export async function getMapMarkers() { return (await getContent()).mapMarkers; }
 export async function getMissions() { return (await getContent()).missions; }
+
+export type ContentData = ContentState;
