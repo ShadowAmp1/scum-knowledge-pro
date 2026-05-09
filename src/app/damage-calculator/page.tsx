@@ -1,248 +1,278 @@
 "use client";
 
 import { useState } from "react";
-import { weapons } from "@/data/weapons";
-import { lootItems } from "@/data/loot";
-import { Calculator, Target, TrendingUp, AlertTriangle } from "lucide-react";
+import { WeaponStats, AmmoType, TargetType } from "@/types/ammo";
+import { weaponStats } from "@/data/ammo";
+import { DamageCalculator } from "@/utils/damageCalculator";
+import { Calculator, Target, Zap, BarChart3, Settings } from "lucide-react";
+
+// Components
+import WeaponSelector from "@/components/DamageCalculator/WeaponSelector";
+import AmmoSelector from "@/components/DamageCalculator/AmmoSelector";
+import TargetSelector from "@/components/DamageCalculator/TargetSelector";
+import DistanceSelector from "@/components/DamageCalculator/DistanceSelector";
+import DamageResults from "@/components/DamageCalculator/DamageResults";
+import AmmoComparison from "@/components/DamageCalculator/AmmoComparison";
 
 export default function DamageCalculatorPage() {
-  const [selectedWeapon, setSelectedWeapon] = useState("");
-  const [selectedAmmo, setSelectedAmmo] = useState("");
-  const [targetDistance, setTargetDistance] = useState(50);
-  const [targetArmor, setTargetArmor] = useState(0);
+  const [selectedWeapon, setSelectedWeapon] = useState<WeaponStats | null>(null);
+  const [selectedAmmo, setSelectedAmmo] = useState<AmmoType | null>(null);
+  const [selectedTarget, setSelectedTarget] = useState<TargetType | null>(null);
+  const [distance, setDistance] = useState(100);
+  const [isHeadshot, setIsHeadshot] = useState(false);
+  const [isCritical, setIsCritical] = useState(false);
+  const [showComparison, setShowComparison] = useState(false);
 
-  // Данные урона для разных патронов
-  const ammoDamageData = {
-    "9mm": { baseDamage: 25, armorPenetration: 15, range: 50 },
-    "45-acp": { baseDamage: 35, armorPenetration: 20, range: 40 },
-    "556x45mm": { baseDamage: 45, armorPenetration: 35, range: 100 },
-    "762x39mm": { baseDamage: 55, armorPenetration: 40, range: 80 },
-    "762x51mm": { baseDamage: 75, armorPenetration: 60, range: 150 },
-    "545x39mm": { baseDamage: 40, armorPenetration: 30, range: 90 },
-    "12g": { baseDamage: 80, armorPenetration: 25, range: 30 },
-    "308": { baseDamage: 85, armorPenetration: 65, range: 200 }
+  // Calculate damage when all parameters are selected
+  const calculation = selectedWeapon && selectedAmmo && selectedTarget
+    ? DamageCalculator.calculateDamage(
+        selectedWeapon.name,
+        selectedAmmo.id,
+        selectedTarget.id,
+        distance,
+        isHeadshot,
+        isCritical
+      )
+    : null;
+
+  // Auto-select ammo when weapon is selected
+  const handleWeaponSelect = (weapon: WeaponStats) => {
+    setSelectedWeapon(weapon);
+    // Reset ammo to force re-selection
+    setSelectedAmmo(null);
   };
 
-  // Получаем доступное оружие
-  const availableWeapons = weapons.filter(w => w.slug === selectedWeapon || !selectedWeapon);
-  
-  // Получаем патроны для выбранного оружия
-  const availableAmmo = selectedWeapon ? 
-    lootItems.filter(item => 
-      item.category === "Патроны" && 
-      item.name.toLowerCase().includes(selectedWeapon.toLowerCase().split('-')[0])
-    ) : [];
-
-  // Расчет урона
-  const calculateDamage = () => {
-    if (!selectedWeapon || !selectedAmmo) return null;
-    
-    const weapon = weapons.find(w => w.slug === selectedWeapon);
-    const ammo = availableAmmo.find(a => a.slug === selectedAmmo);
-    
-    if (!weapon || !ammo) return null;
-
-    // Получаем данные урона для патрона
-    const ammoType = getAmmoType(ammo.name);
-    const ammoData = ammoDamageData[ammoType];
-    
-    if (!ammoData) return null;
-
-    // Расчет урона с учетом расстояния и брони
-    const distanceMultiplier = Math.max(0.3, 1 - (targetDistance / ammoData.range));
-    const effectiveDamage = ammoData.baseDamage * distanceMultiplier;
-    const armorDamage = Math.max(0, effectiveDamage - (targetArmor * (1 - ammoData.armorPenetration / 100)));
-    
-    return {
-      baseDamage: ammoData.baseDamage,
-      effectiveDamage: Math.round(effectiveDamage),
-      armorDamage: Math.round(armorDamage),
-      damageReduction: Math.round((1 - armorDamage / effectiveDamage) * 100),
-      ammoType: ammoType,
-      optimalRange: ammoData.range
-    };
+  // Auto-calculate when parameters change
+  const handleAmmoSelect = (ammo: AmmoType) => {
+    setSelectedAmmo(ammo);
   };
 
-  const getAmmoType = (ammoName: string) => {
-    if (ammoName.includes("9mm")) return "9mm";
-    if (ammoName.includes(".45")) return "45-acp";
-    if (ammoName.includes("5.56")) return "556x45mm";
-    if (ammoName.includes("7.62x39")) return "762x39mm";
-    if (ammoName.includes("7.62x51")) return "762x51mm";
-    if (ammoName.includes("5.45")) return "545x39mm";
-    if (ammoName.includes("12g")) return "12g";
-    if (ammoName.includes(".308")) return "308";
-    return "9mm";
+  const handleTargetSelect = (target: TargetType) => {
+    setSelectedTarget(target);
   };
-
-  const damageResult = calculateDamage();
 
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="mx-auto max-w-7xl px-4 py-8">
+        {/* Header */}
         <div className="mb-8">
           <h1 className="mb-4 text-4xl font-black text-white">
             <Calculator className="mr-3 inline-block h-10 w-10 text-red-500" />
-            Калькулятор урона
+            Продвинутый калькулятор урона SCUM
           </h1>
           <p className="text-lg text-zinc-400">
-            Рассчитайте урон для разных патронов и оружия в SCUM
+            Точные расчеты урона с учетом всех типов патронов, целей и дистанций
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3">
-          {/* Панель ввода */}
+        {/* Main Content */}
+        <div className="grid gap-8 lg:grid-cols-3">
+          {/* Left Column - Selection */}
           <div className="space-y-6">
+            {/* Weapon Selection */}
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-              <h3 className="mb-4 text-lg font-bold text-white">Оружие</h3>
-              <select
-                value={selectedWeapon}
-                onChange={(e) => {
-                  setSelectedWeapon(e.target.value);
-                  setSelectedAmmo("");
-                }}
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2 text-white"
-              >
-                <option value="">Выберите оружие</option>
-                {weapons.map((weapon) => (
-                  <option key={weapon.slug} value={weapon.slug}>
-                    {weapon.name} ({weapon.ammo})
-                  </option>
-                ))}
-              </select>
+              <h2 className="mb-4 text-xl font-bold text-white flex items-center gap-2">
+                <Target className="h-5 w-5 text-red-500" />
+                Оружие
+              </h2>
+              <WeaponSelector
+                selectedWeapon={selectedWeapon}
+                onWeaponSelect={handleWeaponSelect}
+              />
             </div>
 
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-              <h3 className="mb-4 text-lg font-bold text-white">Патроны</h3>
-              <select
-                value={selectedAmmo}
-                onChange={(e) => setSelectedAmmo(e.target.value)}
-                disabled={!selectedWeapon}
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2 text-white disabled:opacity-50"
-              >
-                <option value="">Выберите патроны</option>
-                {availableAmmo.map((ammo) => (
-                  <option key={ammo.slug} value={ammo.slug}>
-                    {ammo.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-              <h3 className="mb-4 text-lg font-bold text-white">Цель</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-zinc-300">
-                    Расстояние: {targetDistance}м
-                  </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="300"
-                    value={targetDistance}
-                    onChange={(e) => setTargetDistance(Number(e.target.value))}
-                    className="w-full"
-                  />
-                </div>
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-zinc-300">
-                    Броня: {targetArmor}%
-                  </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={targetArmor}
-                    onChange={(e) => setTargetArmor(Number(e.target.value))}
-                    className="w-full"
-                  />
-                </div>
+            {/* Ammo Selection */}
+            {selectedWeapon && (
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+                <h2 className="mb-4 text-xl font-bold text-white flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-yellow-500" />
+                  Патроны
+                </h2>
+                <AmmoSelector
+                  selectedAmmo={selectedAmmo}
+                  onAmmoSelect={handleAmmoSelect}
+                  caliber={selectedWeapon.caliber}
+                />
               </div>
+            )}
+
+            {/* Target Selection */}
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+              <h2 className="mb-4 text-xl font-bold text-white flex items-center gap-2">
+                <Settings className="h-5 w-5 text-blue-500" />
+                Цель
+              </h2>
+              <TargetSelector
+                selectedTarget={selectedTarget}
+                onTargetSelect={handleTargetSelect}
+              />
             </div>
           </div>
 
-          {/* Результаты расчета */}
-          <div className="lg:col-span-2">
-            {damageResult ? (
-              <div className="space-y-6">
-                <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-                  <h3 className="mb-4 flex items-center text-lg font-bold text-white">
-                    <Target className="mr-2 h-5 w-5 text-red-500" />
-                    Результаты расчета
-                  </h3>
-                  
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <div className="rounded-xl border border-zinc-700 bg-zinc-800/50 p-4">
-                      <div className="text-sm text-zinc-400">Базовый урон</div>
-                      <div className="text-2xl font-bold text-white">{damageResult.baseDamage}</div>
-                    </div>
-                    
-                    <div className="rounded-xl border border-zinc-700 bg-zinc-800/50 p-4">
-                      <div className="text-sm text-zinc-400">Эффективный урон</div>
-                      <div className="text-2xl font-bold text-green-400">{damageResult.effectiveDamage}</div>
-                    </div>
-                    
-                    <div className="rounded-xl border border-zinc-700 bg-zinc-800/50 p-4">
-                      <div className="text-sm text-zinc-400">Урон по броне</div>
-                      <div className="text-2xl font-bold text-orange-400">{damageResult.armorDamage}</div>
-                    </div>
-                    
-                    <div className="rounded-xl border border-zinc-700 bg-zinc-800/50 p-4">
-                      <div className="text-sm text-zinc-400">Снижение урона</div>
-                      <div className="text-2xl font-bold text-red-400">{damageResult.damageReduction}%</div>
-                    </div>
-                  </div>
-                </div>
+          {/* Middle Column - Parameters */}
+          <div className="space-y-6">
+            {/* Distance Selection */}
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+              <DistanceSelector
+                distance={distance}
+                onDistanceChange={setDistance}
+              />
+            </div>
 
-                <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-                  <h3 className="mb-4 flex items-center text-lg font-bold text-white">
-                    <TrendingUp className="mr-2 h-5 w-5 text-blue-500" />
-                    Характеристики патрона
-                  </h3>
-                  
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-zinc-400">Тип патрона:</span>
-                      <span className="font-medium text-white">{damageResult.ammoType.toUpperCase()}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-zinc-400">Оптимальная дальность:</span>
-                      <span className="font-medium text-white">{damageResult.optimalRange}м</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-zinc-400">Бронепробитие:</span>
-                      <span className="font-medium text-white">{ammoDamageData[damageResult.ammoType]?.armorPenetration}%</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-yellow-500/30 bg-yellow-500/10 p-6">
-                  <div className="flex items-start gap-3">
-                    <AlertTriangle className="mt-1 h-5 w-5 flex-shrink-0 text-yellow-400" />
-                    <div>
-                      <h4 className="mb-2 font-medium text-yellow-200">Советы по использованию</h4>
-                      <ul className="space-y-1 text-sm text-yellow-300">
-                        <li>• Эффективность урона снижается на {Math.round((targetDistance / damageResult.optimalRange) * 100)}% на текущем расстоянии</li>
-                        <li>• {damageResult.damageReduction > 50 ? "Высокая броня цели значительно снижает урон" : "Броня цели умеренно снижает урон"}</li>
-                        <li>• {targetDistance > damageResult.optimalRange ? "Цель находится за пределами оптимальной дальности" : "Цель в пределах эффективной дальности"}</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+            {/* Hit Options */}
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+              <h3 className="mb-4 text-lg font-bold text-white">Параметры выстрела</h3>
+              <div className="space-y-4">
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={isHeadshot}
+                    onChange={(e) => setIsHeadshot(e.target.checked)}
+                    className="w-4 h-4 text-red-500 bg-zinc-800 border-zinc-600 rounded focus:ring-red-500"
+                  />
+                  <span className="text-white">Выстрел в голову</span>
+                </label>
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={isCritical}
+                    onChange={(e) => setIsCritical(e.target.checked)}
+                    className="w-4 h-4 text-red-500 bg-zinc-800 border-zinc-600 rounded focus:ring-red-500"
+                  />
+                  <span className="text-white">Критический урон</span>
+                </label>
               </div>
-            ) : (
-              <div className="flex items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900/50 p-12">
-                <div className="text-center">
-                  <Calculator className="mx-auto mb-4 h-16 w-16 text-zinc-600" />
-                  <p className="text-zinc-400">
-                    Выберите оружие и патроны для расчета урона
-                  </p>
+            </div>
+
+            {/* Comparison Toggle */}
+            {selectedWeapon && selectedTarget && (
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+                <button
+                  onClick={() => setShowComparison(!showComparison)}
+                  className={`w-full px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2 ${
+                    showComparison
+                      ? 'bg-red-500/20 border border-red-500 text-red-400'
+                      : 'bg-zinc-800 border border-zinc-700 text-zinc-400 hover:border-zinc-500'
+                  }`}
+                >
+                  <BarChart3 className="h-5 w-5" />
+                  {showComparison ? 'Скрыть сравнение' : 'Сравнить все патроны'}
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Right Column - Results */}
+          <div className="space-y-6">
+            {/* Damage Results */}
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+              <DamageResults
+                calculation={calculation}
+                isHeadshot={isHeadshot}
+                isCritical={isCritical}
+              />
+            </div>
+
+            {/* Quick Stats */}
+            {calculation && (
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+                <h3 className="mb-4 text-lg font-bold text-white">Быстрая статистика</h3>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-zinc-500">Эффективность:</span>
+                    <div className="font-bold text-green-400 capitalize">
+                      {calculation.effectiveness === 'optimal' && 'Оптимально'}
+                      {calculation.effectiveness === 'excellent' && 'Отлично'}
+                      {calculation.effectiveness === 'good' && 'Хорошо'}
+                      {calculation.effectiveness === 'fair' && 'Удовлетворительно'}
+                      {calculation.effectiveness === 'poor' && 'Плохо'}
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500">Шанс крита:</span>
+                    <div className="font-bold text-yellow-400">
+                      {Math.round(calculation.criticalChance)}%
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500">Выстрелов до убийства:</span>
+                    <div className="font-bold text-red-400">
+                      {Math.ceil(100 / calculation.finalDamage)}
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500">Патронов в магазине:</span>
+                    <div className="font-bold text-blue-400">
+                      {selectedWeapon?.magazineSize || 0}
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </div>
+
+        {/* Comparison Section */}
+        {showComparison && selectedWeapon && selectedTarget && (
+          <div className="mt-8">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+              <AmmoComparison
+                weaponName={selectedWeapon.name}
+                targetId={selectedTarget.id}
+                distance={distance}
+                isHeadshot={isHeadshot}
+                isCritical={isCritical}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Tips Section */}
+        {calculation && (
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-6">
+              <h3 className="mb-4 text-lg font-bold text-green-400">✅ Рекомендации</h3>
+              <div className="space-y-2 text-sm text-zinc-300">
+                {calculation.effectiveness === 'optimal' && (
+                  <p>• Идеальный выбор! Это оружие и патроны максимально эффективны против цели.</p>
+                )}
+                {calculation.penetrationChance > 80 && (
+                  <p>• Высокий шанс пробития брони - отлично против бронированных целей.</p>
+                )}
+                {calculation.dps > 100 && (
+                  <p>• Высокий DPS - быстро уничтожает цели.</p>
+                )}
+                {calculation.finalDamage > 50 && (
+                  <p>• Большой урон за выстрел - эффективно для снайперской дуели.</p>
+                )}
+                {distance <= 50 && calculation.finalDamage > 80 && (
+                  <p>• Отлично для ближнего боя в помещениях.</p>
+                )}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-yellow-500/30 bg-yellow-500/10 p-6">
+              <h3 className="mb-4 text-lg font-bold text-yellow-400">⚡ Тактические советы</h3>
+              <div className="space-y-2 text-sm text-zinc-300">
+                {calculation.ttk > 5 && (
+                  <p>• TTK довольно высокий - рассмотрите более мощные патроны.</p>
+                )}
+                {calculation.penetrationChance < 30 && (
+                  <p>• Низкое пробитие - используйте AP или урановые патроны против брони.</p>
+                )}
+                {distance > 300 && !isHeadshot && (
+                  <p>• На больших дистанциях старайтесь целиться в голову.</p>
+                )}
+                {selectedWeapon && selectedWeapon.recoil > 70 && (
+                  <p>• Высокая отдача - стреляйте короткими очередями.</p>
+                )}
+                {calculation.criticalChance < 5 && (
+                  <p>• Низкий шанс крита - не полагайтесь на удачу.</p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
