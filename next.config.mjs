@@ -11,6 +11,16 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
   },
+  // Fix for standalone mode
+  assetPrefix: process.env.NODE_ENV === "production" ? "" : undefined,
+  basePath: "",
+  trailingSlash: false,
+  experimental: {
+    // Ensure static files are properly handled in standalone
+    outputFileTracingIncludes: {
+      '*': ['./public/**/*', './src/**/*']
+    },
+  },
 };
 
 export default nextConfig;
