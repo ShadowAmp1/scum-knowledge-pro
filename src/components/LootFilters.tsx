@@ -18,7 +18,7 @@ import { FavoriteButton } from "@/components/FavoriteButton";
 
 const all = "Все";
 
-type SortMode = "priority" | "name" | "rarity" | "weight";
+type SortMode = "priority" | "name" | "rarity" | "weight" | "update";
 
 const priorityWeight: Record<LootPriority, number> = {
   "Максимальный": 4,
@@ -48,6 +48,7 @@ export function LootFilters({ lootItems }: { lootItems: LootItem[] }) {
   const [usefulness, setUsefulness] = useState(all);
   const [weight, setWeight] = useState(all);
   const [sort, setSort] = useState<SortMode>("priority");
+  const [updateFilter, setUpdateFilter] = useState<"all" | "0.96" | "legacy">("all");
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -77,13 +78,29 @@ export function LootFilters({ lootItems }: { lootItems: LootItem[] }) {
             .toLowerCase()
             .includes(q);
 
+        // Определяем предметы из обновления 0.96
+        const isUpdate096 = [
+          "head-lamp",
+          "spektral-dr-scope", 
+          "cruiser-motorcycle",
+          "squad-armband",
+          "mac-10",
+          "scar-l",
+          "scar-dmr"
+        ].includes(item.slug);
+
+        const matchesUpdate = updateFilter === "all" || 
+          (updateFilter === "0.96" && isUpdate096) ||
+          (updateFilter === "legacy" && !isUpdate096);
+
         return (
           matchesQuery &&
           (category === all || item.category === category) &&
           (rarity === all || item.rarity === rarity) &&
           (priority === all || item.priority === priority) &&
           (usefulness === all || item.usefulness === usefulness) &&
-          (weight === all || item.weight === weight)
+          (weight === all || item.weight === weight) &&
+          matchesUpdate
         );
       })
       .sort((a, b) => {
@@ -139,6 +156,18 @@ export function LootFilters({ lootItems }: { lootItems: LootItem[] }) {
           <Select title="Приоритет" value={priority} setValue={setPriority} options={[all, ...lootPriorities]} />
           <Select title="Полезность" value={usefulness} setValue={setUsefulness} options={[all, ...lootUsefulnessLevels]} />
           <Select title="Вес" value={weight} setValue={setWeight} options={[all, ...lootWeights]} />
+          <label className="block">
+            <span className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Обновление</span>
+            <select
+              value={updateFilter}
+              onChange={(event) => setUpdateFilter(event.target.value as "all" | "0.96" | "legacy")}
+              className="h-12 w-full rounded-2xl border border-zinc-800 bg-black px-4 text-sm text-white outline-none transition focus:border-red-500"
+            >
+              <option value="all">Все предметы</option>
+              <option value="0.96">Обновление 0.96</option>
+              <option value="legacy">Старые предметы</option>
+            </select>
+          </label>
           <label className="block">
             <span className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Сортировка</span>
             <select

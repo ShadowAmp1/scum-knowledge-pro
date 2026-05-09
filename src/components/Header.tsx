@@ -7,9 +7,9 @@ import { useState } from "react";
 import { useFavorites } from "@/lib/useFavorites";
 
 const navItems = [
-  { title: "Главная", href: "/" }, { title: "Поиск", href: "/search" }, { title: "Оружие", href: "/weapons" },
+  { title: "Главная", href: "/" }, { title: "Глобальный поиск", href: "/global-search" }, { title: "Оружие", href: "/weapons" },
   { title: "Сравнение", href: "/weapons/compare" }, { title: "Обвесы", href: "/weapons/attachments" }, { title: "Лут", href: "/loot" }, { title: "Квесты", href: "/missions" }, { title: "Бункеры", href: "/bunkers" },
-  { title: "Карта", href: "/map" }, { title: "Базы", href: "/bases" }, { title: "Транспорт", href: "/vehicles" },
+  { title: "Крафт", href: "/crafting" }, { title: "Калькулятор", href: "/damage-calculator" }, { title: "Билды", href: "/build-builder" }, { title: "Карта", href: "/map" }, { title: "Базы", href: "/bases" }, { title: "Транспорт", href: "/vehicles" },
   { title: "Подготовка", href: "/preparation" }, { title: "Гайды", href: "/guides" }, { title: "Трекеры", href: "/trackers" },
 ];
 function isActiveLink(pathname: string, href: string) { if (href === "/") return pathname === "/"; return pathname === href || pathname.startsWith(`${href}/`); }
