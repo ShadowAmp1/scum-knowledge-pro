@@ -54,4 +54,66 @@ rm -f /etc/nginx/sites-enabled/default
 nginx -t
 systemctl restart nginx
 
+echo "🚀 SCUM Knowledge PRO - VPS Deployment"
+echo "===================================="
+
+echo "✅ Running on Linux VPS"
+
+echo ""
+echo "📥 Step 1: Pulling latest changes from GitHub..."
+git pull origin main
+if [ $? -ne 0 ]; then
+    echo "❌ Failed to pull from GitHub"
+    exit 1
+fi
+echo "✅ Latest changes pulled"
+
+echo ""
+echo "📦 Step 2: Installing dependencies..."
+npm ci --production=false
+if [ $? -ne 0 ]; then
+    echo "❌ Failed to install dependencies"
+    exit 1
+fi
+echo "✅ Dependencies installed"
+
+echo ""
+echo "🏗️ Step 3: Building project..."
+npm run build
+if [ $? -ne 0 ]; then
+    echo "❌ Build failed"
+    exit 1
+fi
+echo "✅ Build completed successfully"
+
+echo ""
+echo "🔄 Step 4: Restarting PM2 process..."
+pm2 restart scum-knowledge-pro
+if [ $? -ne 0 ]; then
+    echo "❌ Failed to restart PM2 process"
+    exit 1
+fi
+echo "✅ PM2 process restarted"
+
+echo ""
+echo "📊 Step 5: Checking PM2 status..."
+pm2 status scum-knowledge-pro
+
+echo ""
+echo "🎉 Deployment completed successfully!"
+echo "===================================="
+echo "🌐 Your site should be available at: https://scumdbpro.duckdns.org"
+echo ""
+echo "📋 New features deployed:"
+echo "• /crafting - Complete crafting system with filters"
+echo "• /damage-calculator - Interactive damage calculator"
+echo "• /build-builder - Weapon build creator with attachments"
+echo "• /mission-tracker - Mission progress tracking"
+echo "• /global-search - Unified search system"
+echo "• Updated weapons data with SCAR-L, MAC-10, SCAR-DMR"
+echo "• New equipment items and missions"
+echo "• Fixed TypeScript errors and updated dependencies"
+echo ""
+echo "⏱️ Allow 2-3 minutes for PM2 to fully restart"
+
 echo "Deploy finished: http://${DOMAIN}"
