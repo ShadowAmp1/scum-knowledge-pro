@@ -1,76 +1,107 @@
 "use client";
 
-import { useState } from "react";
-import { WeaponStats, AmmoType, TargetType } from "@/types/ammo";
-import { weaponStats } from "@/data/ammo";
-import { DamageCalculator } from "@/utils/damageCalculator";
-import { Calculator, RotateCcw, Zap, Target, BarChart3 } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { TacticalWeapon, TacticalTarget, TacticalAmmo, DamageCalculation, TargetZone } from '@/types/tactical';
+import { tacticalWeapons, tacticalTargets } from '@/data/tacticalWeapons';
 
 // Components
-import WeaponCard from "@/components/DamageCalculator/WeaponCard";
-import AmmoCard from "@/components/DamageCalculator/AmmoCard";
-import TargetCard from "@/components/DamageCalculator/TargetCard";
-import DistanceSelectorPanel from "@/components/DamageCalculator/DistanceSelectorPanel";
-import DamageResultPanel from "@/components/DamageCalculator/DamageResultPanel";
-import RecommendationPanel from "@/components/DamageCalculator/RecommendationPanel";
+import WeaponBrowser from '@/components/TacticalDamageCalculator/WeaponBrowser';
+import AmmoCards from '@/components/TacticalDamageCalculator/AmmoCards';
+import TargetSilhouette from '@/components/TacticalDamageCalculator/TargetSilhouette';
+import TTKPanel from '@/components/TacticalDamageCalculator/TTKPanel';
+import DistanceSelector from '@/components/TacticalDamageCalculator/DistanceSelector';
+import SummaryPanel from '@/components/TacticalDamageCalculator/SummaryPanel';
 
-export default function DamageCalculatorPage() {
-  const [selectedWeapon, setSelectedWeapon] = useState<WeaponStats | null>(null);
-  const [selectedAmmo, setSelectedAmmo] = useState<AmmoType | null>(null);
-  const [selectedTarget, setSelectedTarget] = useState<TargetType | null>(null);
+import { Calculator, RotateCcw, Zap } from 'lucide-react';
+
+export default function TacticalDamageCalculator() {
+  const [selectedWeapon, setSelectedWeapon] = useState<TacticalWeapon | null>(null);
+  const [selectedAmmo, setSelectedAmmo] = useState<TacticalAmmo | null>(null);
+  const [selectedTarget, setSelectedTarget] = useState<TacticalTarget | null>(null);
   const [distance, setDistance] = useState(100);
-  const [isHeadshot, setIsHeadshot] = useState(false);
-  const [isCritical, setIsCritical] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortBy, setSortBy] = useState<string>("name");
+  const [customDistance, setCustomDistance] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedFilter, setSelectedFilter] = useState('pvp');
+  const [hoveredZone, setHoveredZone] = useState<TargetZone | null>(null);
+  const [calculation, setCalculation] = useState<DamageCalculation | null>(null);
 
-  // Calculate damage when all parameters are selected
-  const calculation = selectedWeapon && selectedAmmo && selectedTarget
-    ? DamageCalculator.calculateDamage(
-        selectedWeapon.name,
-        selectedAmmo.id,
-        selectedTarget.id,
-        distance,
-        isHeadshot,
-        isCritical
-      )
-    : null;
+  // Calculate damage when parameters change
+  useEffect(() => {
+    if (selectedWeapon && selectedAmmo && selectedTarget) {
+      const calc = calculateDamage();
+      setCalculation(calc);
+    } else {
+      setCalculation(null);
+    }
+  }, [selectedWeapon, selectedAmmo, selectedTarget, distance]);
 
-  // Filter and sort weapons
-  const filteredWeapons = weaponStats
-    .filter(weapon => 
-      weapon.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      weapon.caliber.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort((a, b) => {
-      switch (sortBy) {
-        case "name":
-          return a.name.localeCompare(b.name);
-        case "damage":
-          return Math.max(...Object.values(a.damagePerShot)) - Math.max(...Object.values(b.damagePerShot));
-        case "fireRate":
-          return b.fireRate - a.fireRate;
-        case "accuracy":
-          return b.accuracy - a.accuracy;
-        case "recoil":
-          return a.recoil - b.recoil;
-        default:
-          return 0;
-      }
-    });
+  const calculateDamage = (): DamageCalculation | null => {
+    if (!selectedWeapon || !selectedAmmo || !selectedTarget) return null;
 
-  // Auto-select ammo when weapon is selected
-  const handleWeaponSelect = (weapon: WeaponStats) => {
-    setSelectedWeapon(weapon);
-    setSelectedAmmo(null); // Reset ammo to force re-selection
+    // Distance damage falloff
+    const distanceMultiplier = calculateDistanceMultiplier(distance, selectedWeapon.effectiveRange);
+    const baseDamage = selectedAmmo.damage;
+    const distanceDamage = Math.round(baseDamage * distanceMultiplier);
+
+    // Armor calculation
+    const armorPenetration = selectedAmmo.penetration;
+    const armorRating = selectedTarget.armorRating;
+    const penetrationChance = Math.min(100, Math.max(0, (armorPenetration - armorRating) + 50));
+    
+    const armorMultiplier = penetrationChance > 50 ? 1 : 0.5;
+    const armorDamage = Math.round(distanceDamage * armorMultiplier * (1 - selectedTarget.damageReduction / 100));
+    
+    // Final damage
+    const finalDamage = Math.round(armorDamage);
+
+    // TTK calculation
+    const shotsToKill = Math.ceil(selectedTarget.totalHealth / finalDamage);
+    const ttk = (shotsToKill / (selectedWeapon.stats.fireRate / 60)) + (shotsToKill - 1) * (60 / selectedWeapon.stats.fireRate);
+
+    // Zone-specific calculations
+    const headshotDamage = Math.round(finalDamage * 2.5);
+    const chestDamage = finalDamage;
+    const legDamage = Math.round(finalDamage * 0.7);
+
+    const headshotShots = Math.ceil(selectedTarget.zones.find(z => z.id === 'head')?.health || 25 / headshotDamage);
+    const chestShots = Math.ceil(selectedTarget.zones.find(z => z.id === 'chest')?.health || 40 / chestDamage);
+    const legShots = Math.ceil(selectedTarget.zones.find(z => z.id === 'legs')?.health || 20 / legDamage);
+
+    // Effectiveness rating
+    let effectiveness: DamageCalculation['effectiveness'] = 'poor';
+    if (finalDamage >= 50 && penetrationChance >= 80 && ttk <= 2) effectiveness = 'optimal';
+    else if (finalDamage >= 35 && penetrationChance >= 60 && ttk <= 3) effectiveness = 'excellent';
+    else if (finalDamage >= 25 && penetrationChance >= 40 && ttk <= 4) effectiveness = 'good';
+    else if (finalDamage >= 15 && penetrationChance >= 20) effectiveness = 'fair';
+
+    return {
+      weapon: selectedWeapon,
+      ammo: selectedAmmo,
+      target: selectedTarget,
+      distance,
+      baseDamage,
+      distanceDamage,
+      armorDamage,
+      finalDamage,
+      penetrationChance,
+      ttk,
+      shotsToKill,
+      headshotShots,
+      chestShots,
+      legShots,
+      effectiveness
+    };
   };
 
-  const handleAmmoSelect = (ammo: AmmoType) => {
-    setSelectedAmmo(ammo);
-  };
-
-  const handleTargetSelect = (target: TargetType) => {
-    setSelectedTarget(target);
+  const calculateDistanceMultiplier = (dist: number, effectiveRange: number): number => {
+    if (dist <= 25) return 1.0;
+    if (dist <= 50) return 0.95;
+    if (dist <= 100) return 0.85;
+    if (dist <= 200) return 0.65;
+    if (dist <= 300) return 0.45;
+    if (dist <= 500) return 0.25;
+    return 0.15;
   };
 
   const handleReset = () => {
@@ -78,484 +109,153 @@ export default function DamageCalculatorPage() {
     setSelectedAmmo(null);
     setSelectedTarget(null);
     setDistance(100);
-    setIsHeadshot(false);
-    setIsCritical(false);
-    setSearchTerm("");
-    setSortBy("name");
+    setCustomDistance('');
+    setSelectedCategory('all');
+    setSelectedFilter('pvp');
+    setHoveredZone(null);
   };
 
   const handleBestAmmo = () => {
     if (!selectedWeapon || !selectedTarget) return;
     
-    const bestAmmo = DamageCalculator.getBestAmmoForTarget(
-      selectedWeapon.name,
-      selectedTarget.id,
-      distance,
-      'damage'
-    );
+    const bestAmmo = selectedWeapon.ammoTypes.reduce((best, ammo) => {
+      const currentEffectiveness = ammo.effectiveness[selectedFilter as keyof typeof ammo.effectiveness];
+      const bestEffectiveness = best.effectiveness[selectedFilter as keyof typeof best.effectiveness];
+      return currentEffectiveness > bestEffectiveness ? ammo : best;
+    });
     
-    if (bestAmmo) {
-      setSelectedAmmo(bestAmmo.calculation.ammoType);
-    }
+    setSelectedAmmo(bestAmmo);
   };
 
-  const handlePreset = (type: 'pvp' | 'pve' | 'robots' | 'bunker') => {
-    switch (type) {
-      case 'pvp':
-        setSelectedTarget({
-          id: 'medium_armor',
-          name: 'Средняя броня',
-          category: 'medium_armor' as const,
-          armorRating: 45,
-          damageReduction: 30,
-          penetrationResistance: 50,
-          headshotVulnerability: 1.5,
-          explosiveVulnerability: 1.2,
-          fireVulnerability: 1.0,
-          uraniumVulnerability: 1.5,
-          icon: '🎖️',
-          color: '#F0E68C',
-          description: 'Medium armor for standard combat situations'
-        });
-        setDistance(100);
-        break;
-      case 'pve':
-        setSelectedTarget({
-          id: 'puppet',
-          name: 'Puppet',
-          category: 'puppet' as const,
-          armorRating: 30,
-          damageReduction: 20,
-          penetrationResistance: 35,
-          headshotVulnerability: 2.5,
-          explosiveVulnerability: 1.4,
-          fireVulnerability: 1.3,
-          uraniumVulnerability: 1.3,
-          icon: '🎭',
-          color: '#DDA0DD',
-          description: 'Puppet enemies with weak headshot points'
-        });
-        setDistance(50);
-        break;
-      case 'robots':
-        setSelectedTarget({
-          id: 'robot',
-          name: 'Робот',
-          category: 'robot' as const,
-          armorRating: 60,
-          damageReduction: 40,
-          penetrationResistance: 80,
-          headshotVulnerability: 1.0,
-          explosiveVulnerability: 1.8,
-          fireVulnerability: 0.5,
-          uraniumVulnerability: 2.5,
-          icon: '🤖',
-          color: '#C0C0C0',
-          description: 'Mechanical robots with high armor resistance'
-        });
-        setDistance(200);
-        break;
-      case 'bunker':
-        setSelectedTarget({
-          id: 'heavy_armor',
-          name: 'Тяжелая броня',
-          category: 'heavy_armor' as const,
-          armorRating: 70,
-          damageReduction: 50,
-          penetrationResistance: 75,
-          headshotVulnerability: 1.2,
-          explosiveVulnerability: 1.0,
-          fireVulnerability: 0.8,
-          uraniumVulnerability: 2.0,
-          icon: '🏰',
-          color: '#B8860B',
-          description: 'Heavy armor providing maximum protection'
-        });
-        setDistance(25);
-        break;
-    }
+  const getDamagePerZone = (): Record<string, number> => {
+    if (!calculation) return {};
+    
+    const zoneDamage: Record<string, number> = {};
+    
+    selectedTarget.zones.forEach(zone => {
+      const baseDamage = calculation.finalDamage;
+      const multiplier = zone.multiplier;
+      const armor = zone.armor;
+      const resistance = zone.resistance;
+      
+      let damage = baseDamage * multiplier;
+      damage = damage * (1 - armor / 100);
+      damage = damage * (1 - resistance / 100);
+      
+      zoneDamage[zone.id] = Math.round(damage);
+    });
+    
+    return zoneDamage;
   };
+
+  const damagePerZone = getDamagePerZone();
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-red-900/20 via-zinc-900 to-zinc-900">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent"></div>
-        <div className="relative mx-auto max-w-7xl px-4 py-12">
-          <div className="text-center">
-            <h1 className="mb-4 text-5xl font-black text-white">
-              <Calculator className="mr-4 inline-block h-12 w-12 text-red-500" />
-              Калькулятор Урона SCUM
-            </h1>
-            <p className="text-xl text-zinc-400 max-w-3xl mx-auto">
-              Профессиональный инструмент для расчета урона с учетом всех типов патронов, целей и дистанций
-            </p>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-black text-white">
+      {/* Background Effects */}
+      <div className="fixed inset-0 bg-gradient-to-br from-red-900/10 via-transparent to-zinc-900/50 pointer-events-none" />
+      <div className="fixed inset-0 opacity-30">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            radial-gradient(circle at 20% 20%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.05) 0%, transparent 50%)
+          `
+        }} />
       </div>
-
-      {/* Control Bar */}
-      <div className="bg-zinc-900/50 border-b border-zinc-800 sticky top-0 z-40 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 py-4">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            {/* Search */}
-            <div className="flex-1 min-w-64">
-              <input
-                type="text"
-                placeholder="Поиск оружия..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-2 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500"
-              />
-            </div>
-
-            {/* Sort */}
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-amber-500"
-            >
-              <option value="name">По имени</option>
-              <option value="damage">По урону</option>
-              <option value="fireRate">По скорострельности</option>
-              <option value="accuracy">По точности</option>
-              <option value="recoil">По отдаче</option>
-            </select>
-
-            {/* Presets */}
-            <div className="flex gap-2">
-              <button
-                onClick={() => handlePreset('pvp')}
-                className="px-3 py-2 bg-red-500/20 border border-red-500 text-red-400 rounded-lg hover:bg-red-500/30 transition text-sm"
-              >
-                PvP
-              </button>
-              <button
-                onClick={() => handlePreset('pve')}
-                className="px-3 py-2 bg-green-500/20 border border-green-500 text-green-400 rounded-lg hover:bg-green-500/30 transition text-sm"
-              >
-                PvE
-              </button>
-              <button
-                onClick={() => handlePreset('robots')}
-                className="px-3 py-2 bg-purple-500/20 border border-purple-500 text-purple-400 rounded-lg hover:bg-purple-500/30 transition text-sm"
-              >
-                Роботы
-              </button>
-              <button
-                onClick={() => handlePreset('bunker')}
-                className="px-3 py-2 bg-blue-500/20 border border-blue-500 text-blue-400 rounded-lg hover:bg-blue-500/30 transition text-sm"
-              >
-                Бункер
-              </button>
-            </div>
-
-            {/* Actions */}
-            <div className="flex gap-2">
-              <button
-                onClick={handleBestAmmo}
-                disabled={!selectedWeapon || !selectedTarget}
-                className="px-3 py-2 bg-amber-500/20 border border-amber-500 text-amber-400 rounded-lg hover:bg-amber-500/30 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm flex items-center gap-2"
-              >
-                <Zap className="h-4 w-4" />
-                Лучший патрон
-              </button>
-              <button
-                onClick={handleReset}
-                className="px-3 py-2 bg-zinc-800/50 border border-zinc-700 text-zinc-400 rounded-lg hover:bg-zinc-800/70 transition text-sm flex items-center gap-2"
-              >
-                <RotateCcw className="h-4 w-4" />
-                Сброс
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      
+      {/* Noise Overlay */}
+      <div className="fixed inset-0 opacity-5 pointer-events-none" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`
+      }} />
 
       {/* Main Content */}
-      <div className="mx-auto max-w-7xl px-4 py-8">
-        <div className="grid gap-8 lg:grid-cols-3">
-          {/* Left Column - Weapon Selection */}
-          <div className="space-y-6">
-            <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6">
-              <h2 className="mb-4 text-xl font-bold text-white flex items-center gap-2">
-                <Target className="h-5 w-5 text-red-500" />
-                Оружие
-              </h2>
-              <div className="space-y-3 max-h-96 overflow-y-auto">
-                {filteredWeapons.map(weapon => (
-                  <WeaponCard
-                    key={weapon.name}
-                    weapon={weapon}
-                    isSelected={selectedWeapon?.name === weapon.name}
-                    onClick={() => handleWeaponSelect(weapon)}
-                  />
-                ))}
+      <div className="relative z-10">
+        {/* Header */}
+        <div className="bg-black/40 backdrop-blur-xl border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-4 py-6">
+            <div className="flex items-center gap-4">
+              <Calculator className="h-8 w-8 text-red-500" />
+              <h1 className="text-3xl font-black text-white">Tactical Damage Calculator</h1>
+              <div className="flex-1" />
+              <div className="flex gap-2">
+                <button
+                  onClick={handleBestAmmo}
+                  disabled={!selectedWeapon || !selectedTarget}
+                  className="px-4 py-2 bg-yellow-500/20 border border-yellow-500/50 text-yellow-400 rounded-xl hover:bg-yellow-500/30 transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Zap className="h-4 w-4" />
+                  Лучший патрон
+                </button>
+                <button
+                  onClick={handleReset}
+                  className="px-4 py-2 bg-zinc-800/50 border border-zinc-700 text-zinc-400 rounded-xl hover:bg-zinc-800/70 transition-all flex items-center gap-2"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                  Сброс
+                </button>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Middle Column - Ammo and Distance */}
-          <div className="space-y-6">
-            {/* Ammo Selection */}
-            {selectedWeapon && (
-              <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6">
-                <h2 className="mb-4 text-xl font-bold text-white flex items-center gap-2">
-                  <Zap className="h-5 w-5 text-yellow-500" />
-                  Патроны ({selectedWeapon.caliber})
-                </h2>
-                <div className="space-y-3 max-h-64 overflow-y-auto">
-                  {(() => {
-                    const weaponAmmoIds = Object.keys(selectedWeapon.damagePerShot);
-                    const availableAmmo = weaponAmmoIds.map(ammoId => 
-                      selectedWeapon.damagePerShot[ammoId] ? {
-                        id: ammoId,
-                        name: ammoId.replace(/_/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
-                        caliber: selectedWeapon.caliber,
-                        category: 'rifle' as const,
-                        rarity: 'common' as const,
-                        baseDamage: selectedWeapon.damagePerShot[ammoId],
-                        penetration: 30,
-                        armorDamage: 10,
-                        effectiveRange: 300,
-                        velocity: 800,
-                        headshotMultiplier: 2.0,
-                        limbMultiplier: 0.8,
-                        torsoMultiplier: 1.0,
-                        damageFalloffStart: 100,
-                        damageFalloffEnd: 500,
-                        minDamagePercent: 0.4,
-                        color: '#90EE90',
-                        icon: '🟢',
-                        description: `${selectedWeapon.caliber} ammunition`
-                      } : null
-                    ).filter(Boolean);
-                    
-                    return availableAmmo.map((ammo, index) => (
-                      <AmmoCard
-                        key={index}
-                        ammo={ammo}
-                        isSelected={selectedAmmo?.id === ammo.id}
-                        onClick={() => handleAmmoSelect(ammo)}
-                      />
-                    ));
-                  })()}
-                </div>
-              </div>
-            )}
-
-            {/* Distance Selection */}
-            <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6">
-              <DistanceSelectorPanel
-                distance={distance}
-                onDistanceChange={setDistance}
-                weaponEffectiveRange={selectedWeapon ? 300 : undefined}
-                ammoEffectiveRange={selectedAmmo?.effectiveRange}
+        {/* Main Grid */}
+        <div className="max-w-7xl mx-auto px-4 py-8 pb-32">
+          <div className="grid grid-cols-12 gap-6">
+            {/* Left Column - Weapon Browser */}
+            <div className="col-span-12 lg:col-span-4">
+              <WeaponBrowser
+                weapons={tacticalWeapons}
+                selectedWeapon={selectedWeapon}
+                onWeaponSelect={setSelectedWeapon}
+                selectedCategory={selectedCategory}
+                onCategoryChange={setSelectedCategory}
+                selectedFilter={selectedFilter}
+                onFilterChange={setSelectedFilter}
               />
             </div>
 
-            {/* Hit Options */}
-            <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6">
-              <h3 className="mb-4 text-lg font-bold text-white">Параметры выстрела</h3>
-              <div className="space-y-4">
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={isHeadshot}
-                    onChange={(e) => setIsHeadshot(e.target.checked)}
-                    className="w-4 h-4 text-red-500 bg-zinc-800 border-zinc-600 rounded focus:ring-red-500"
-                  />
-                  <span className="text-white">Выстрел в голову</span>
-                </label>
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={isCritical}
-                    onChange={(e) => setIsCritical(e.target.checked)}
-                    className="w-4 h-4 text-red-500 bg-zinc-800 border-zinc-600 rounded focus:ring-red-500"
-                  />
-                  <span className="text-white">Критический урон</span>
-                </label>
-              </div>
+            {/* Middle Column - Ammo & Distance */}
+            <div className="col-span-12 lg:col-span-4 space-y-6">
+              {selectedWeapon && (
+                <AmmoCards
+                  ammoTypes={selectedWeapon.ammoTypes}
+                  selectedAmmo={selectedAmmo}
+                  onAmmoSelect={setSelectedAmmo}
+                  selectedFilter={selectedFilter}
+                />
+              )}
+              
+              <DistanceSelector
+                distance={distance}
+                onDistanceChange={setDistance}
+                customDistance={customDistance}
+                onCustomDistanceChange={setCustomDistance}
+              />
             </div>
-          </div>
 
-          {/* Right Column - Target Selection */}
-          <div className="space-y-6">
-            <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6">
-              <h2 className="mb-4 text-xl font-bold text-white flex items-center gap-2">
-                <Target className="h-5 w-5 text-blue-500" />
-                Цель
-              </h2>
-              <div className="space-y-3 max-h-96 overflow-y-auto">
-                {[
-                  {
-                    id: 'civilian',
-                    name: 'Обычная одежда',
-                    category: 'civilian' as const,
-                    armorRating: 0,
-                    damageReduction: 0,
-                    penetrationResistance: 0,
-                    headshotVulnerability: 2.0,
-                    explosiveVulnerability: 1.5,
-                    fireVulnerability: 1.2,
-                    uraniumVulnerability: 1.0,
-                    icon: '👤',
-                    color: '#87CEEB',
-                    description: 'Unarmored civilian targets with basic clothing'
-                  },
-                  {
-                    id: 'light_armor',
-                    name: 'Легкая броня',
-                    category: 'light_armor' as const,
-                    armorRating: 20,
-                    damageReduction: 15,
-                    penetrationResistance: 25,
-                    headshotVulnerability: 1.8,
-                    explosiveVulnerability: 1.3,
-                    fireVulnerability: 1.1,
-                    uraniumVulnerability: 1.2,
-                    icon: '🛡️',
-                    color: '#98FB98',
-                    description: 'Light armor providing basic protection'
-                  },
-                  {
-                    id: 'medium_armor',
-                    name: 'Средняя броня',
-                    category: 'medium_armor' as const,
-                    armorRating: 45,
-                    damageReduction: 30,
-                    penetrationResistance: 50,
-                    headshotVulnerability: 1.5,
-                    explosiveVulnerability: 1.2,
-                    fireVulnerability: 1.0,
-                    uraniumVulnerability: 1.5,
-                    icon: '🎖️',
-                    color: '#F0E68C',
-                    description: 'Medium armor for standard combat situations'
-                  },
-                  {
-                    id: 'heavy_armor',
-                    name: 'Тяжелая броня',
-                    category: 'heavy_armor' as const,
-                    armorRating: 70,
-                    damageReduction: 50,
-                    penetrationResistance: 75,
-                    headshotVulnerability: 1.2,
-                    explosiveVulnerability: 1.0,
-                    fireVulnerability: 0.8,
-                    uraniumVulnerability: 2.0,
-                    icon: '🏰',
-                    color: '#B8860B',
-                    description: 'Heavy armor providing maximum protection'
-                  },
-                  {
-                    id: 'robot',
-                    name: 'Робот',
-                    category: 'robot' as const,
-                    armorRating: 60,
-                    damageReduction: 40,
-                    penetrationResistance: 80,
-                    headshotVulnerability: 1.0,
-                    explosiveVulnerability: 1.8,
-                    fireVulnerability: 0.5,
-                    uraniumVulnerability: 2.5,
-                    icon: '🤖',
-                    color: '#C0C0C0',
-                    description: 'Mechanical robots with high armor resistance'
-                  },
-                  {
-                    id: 'puppet',
-                    name: 'Puppet',
-                    category: 'puppet' as const,
-                    armorRating: 30,
-                    damageReduction: 20,
-                    penetrationResistance: 35,
-                    headshotVulnerability: 2.5,
-                    explosiveVulnerability: 1.4,
-                    fireVulnerability: 1.3,
-                    uraniumVulnerability: 1.3,
-                    icon: '🎭',
-                    color: '#DDA0DD',
-                    description: 'Puppet enemies with weak headshot points'
-                  },
-                  {
-                    id: 'armored_puppet',
-                    name: 'Armored Puppet',
-                    category: 'puppet' as const,
-                    armorRating: 55,
-                    damageReduction: 35,
-                    penetrationResistance: 60,
-                    headshotVulnerability: 2.0,
-                    explosiveVulnerability: 1.2,
-                    fireVulnerability: 1.0,
-                    uraniumVulnerability: 1.8,
-                    icon: '🎭',
-                    color: '#9370DB',
-                    description: 'Armored puppet variants with increased protection'
-                  },
-                  {
-                    id: 'vehicle',
-                    name: 'Vehicle',
-                    category: 'vehicle' as const,
-                    armorRating: 85,
-                    damageReduction: 60,
-                    penetrationResistance: 90,
-                    headshotVulnerability: 0.5,
-                    explosiveVulnerability: 2.5,
-                    fireVulnerability: 1.5,
-                    uraniumVulnerability: 3.0,
-                    icon: '🚗',
-                    color: '#696969',
-                    description: 'Vehicles requiring high penetration or explosive ammo'
-                  },
-                  {
-                    id: 'boss',
-                    name: 'Boss',
-                    category: 'boss' as const,
-                    armorRating: 80,
-                    damageReduction: 55,
-                    penetrationResistance: 85,
-                    headshotVulnerability: 1.8,
-                    explosiveVulnerability: 1.6,
-                    fireVulnerability: 1.4,
-                    uraniumVulnerability: 2.8,
-                    icon: '👹',
-                    color: '#8B0000',
-                    description: 'Boss enemies with high health and armor'
-                  }
-                ].map(target => (
-                  <TargetCard
-                    key={target.id}
-                    target={target}
-                    isSelected={selectedTarget?.id === target.id}
-                    onClick={() => handleTargetSelect(target)}
-                  />
-                ))}
-              </div>
+            {/* Right Column - Target & TTK */}
+            <div className="col-span-12 lg:col-span-4 space-y-6">
+              <TargetSilhouette
+                targets={tacticalTargets}
+                selectedTarget={selectedTarget}
+                onTargetSelect={setSelectedTarget}
+                hoveredZone={hoveredZone}
+                onZoneHover={setHoveredZone}
+                damagePerZone={damagePerZone}
+              />
+              
+              <TTKPanel calculation={calculation} />
             </div>
           </div>
         </div>
 
-        {/* Results Section */}
-        <div className="mt-8">
-          <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6">
-            <DamageResultPanel
-              calculation={calculation}
-              isHeadshot={isHeadshot}
-              isCritical={isCritical}
-            />
-          </div>
-        </div>
-
-        {/* Recommendations Section */}
-        <div className="mt-8">
-          <RecommendationPanel
-            calculation={calculation}
-            weaponName={selectedWeapon?.name}
-            distance={distance}
-          />
-        </div>
+        {/* Sticky Summary Panel */}
+        <SummaryPanel
+          calculation={calculation}
+          onReset={handleReset}
+          onBestAmmo={handleBestAmmo}
+        />
       </div>
     </div>
   );
