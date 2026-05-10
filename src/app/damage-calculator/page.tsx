@@ -6,16 +6,15 @@ import { TacticalWeapon, TacticalTarget, TacticalAmmo, DamageCalculation, Target
 import { tacticalWeapons, tacticalTargets } from '@/data/tacticalWeapons';
 
 // Components
-import WeaponBrowser from '@/components/TacticalDamageCalculator/WeaponBrowser';
-import AmmoCards from '@/components/TacticalDamageCalculator/AmmoCards';
-import TargetSilhouette from '@/components/TacticalDamageCalculator/TargetSilhouette';
-import TTKPanel from '@/components/TacticalDamageCalculator/TTKPanel';
-import DistanceSelector from '@/components/TacticalDamageCalculator/DistanceSelector';
-import SummaryPanel from '@/components/TacticalDamageCalculator/SummaryPanel';
+import WeaponColumn from '@/components/ExactDamageCalculator/WeaponColumn';
+import AmmoColumn from '@/components/ExactDamageCalculator/AmmoColumn';
+import TargetColumn from '@/components/ExactDamageCalculator/TargetColumn';
+import DistanceSelector from '@/components/ExactDamageCalculator/DistanceSelector';
+import StickySummary from '@/components/ExactDamageCalculator/StickySummary';
 
-import { Calculator, RotateCcw, Zap } from 'lucide-react';
+import { Calculator } from 'lucide-react';
 
-export default function TacticalDamageCalculator() {
+export default function ExactDamageCalculator() {
   const [selectedWeapon, setSelectedWeapon] = useState<TacticalWeapon | null>(null);
   const [selectedAmmo, setSelectedAmmo] = useState<TacticalAmmo | null>(null);
   const [selectedTarget, setSelectedTarget] = useState<TacticalTarget | null>(null);
@@ -176,35 +175,17 @@ export default function TacticalDamageCalculator() {
           <div className="max-w-7xl mx-auto px-4 py-6">
             <div className="flex items-center gap-4">
               <Calculator className="h-8 w-8 text-red-500" />
-              <h1 className="text-3xl font-black text-white">Tactical Damage Calculator</h1>
-              <div className="flex-1" />
-              <div className="flex gap-2">
-                <button
-                  onClick={handleBestAmmo}
-                  disabled={!selectedWeapon || !selectedTarget}
-                  className="px-4 py-2 bg-yellow-500/20 border border-yellow-500/50 text-yellow-400 rounded-xl hover:bg-yellow-500/30 transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Zap className="h-4 w-4" />
-                  Лучший патрон
-                </button>
-                <button
-                  onClick={handleReset}
-                  className="px-4 py-2 bg-zinc-800/50 border border-zinc-700 text-zinc-400 rounded-xl hover:bg-zinc-800/70 transition-all flex items-center gap-2"
-                >
-                  <RotateCcw className="h-4 w-4" />
-                  Сброс
-                </button>
-              </div>
+              <h1 className="text-3xl font-black text-white">Damage Calculator</h1>
             </div>
           </div>
         </div>
 
-        {/* Main Grid */}
+        {/* Main Grid - 3 Columns */}
         <div className="max-w-7xl mx-auto px-4 py-8 pb-32">
           <div className="grid grid-cols-12 gap-6">
-            {/* Left Column - Weapon Browser */}
+            {/* Left Column - Weapon */}
             <div className="col-span-12 lg:col-span-4">
-              <WeaponBrowser
+              <WeaponColumn
                 weapons={tacticalWeapons}
                 selectedWeapon={selectedWeapon}
                 onWeaponSelect={setSelectedWeapon}
@@ -218,7 +199,7 @@ export default function TacticalDamageCalculator() {
             {/* Middle Column - Ammo & Distance */}
             <div className="col-span-12 lg:col-span-4 space-y-6">
               {selectedWeapon && (
-                <AmmoCards
+                <AmmoColumn
                   ammoTypes={selectedWeapon.ammoTypes}
                   selectedAmmo={selectedAmmo}
                   onAmmoSelect={setSelectedAmmo}
@@ -234,9 +215,9 @@ export default function TacticalDamageCalculator() {
               />
             </div>
 
-            {/* Right Column - Target & TTK */}
-            <div className="col-span-12 lg:col-span-4 space-y-6">
-              <TargetSilhouette
+            {/* Right Column - Target */}
+            <div className="col-span-12 lg:col-span-4">
+              <TargetColumn
                 targets={tacticalTargets}
                 selectedTarget={selectedTarget}
                 onTargetSelect={setSelectedTarget}
@@ -244,14 +225,12 @@ export default function TacticalDamageCalculator() {
                 onZoneHover={setHoveredZone}
                 damagePerZone={damagePerZone}
               />
-              
-              <TTKPanel calculation={calculation} />
             </div>
           </div>
         </div>
 
         {/* Sticky Summary Panel */}
-        <SummaryPanel
+        <StickySummary
           calculation={calculation}
           onReset={handleReset}
           onBestAmmo={handleBestAmmo}
