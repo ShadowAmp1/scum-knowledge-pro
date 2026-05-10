@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { TacticalTarget, TargetZone } from '@/types/tactical';
-import { Target, Shield, Heart } from 'lucide-react';
+import { Shield, Swords, Heart, Zap } from 'lucide-react';
 
 interface TargetColumnProps {
   targets: TacticalTarget[];
@@ -147,7 +148,7 @@ export default function TargetColumn({
                 {damagePerZone[hoveredZone.id] > 0 && (
                   <div className="pt-2 border-t border-white/10">
                     <div className="flex items-center gap-1">
-                      <Target className="h-3 w-3 text-green-400" />
+                      <Zap className="h-3 w-3 text-green-400" />
                       <span className="text-zinc-400">Урон:</span>
                       <span className="text-green-400 font-bold">{damagePerZone[hoveredZone.id]}</span>
                     </div>
@@ -210,8 +211,19 @@ export default function TargetColumn({
                 : 'border-white/10 bg-black/40 hover:border-white/20'
             }`}
           >
-            <div className="flex items-center justify-between">
-              <div>
+            <div className="flex items-center gap-4">
+              {/* Target Image */}
+              <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/30 flex items-center justify-center overflow-hidden">
+                <Image
+                  src={target.image}
+                  alt={target.name}
+                  width={64}
+                  height={64}
+                  className="object-contain hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              
+              <div className="flex-1">
                 <h4 className="font-bold text-white">{target.name}</h4>
                 <div className="flex items-center gap-4 mt-1 text-xs text-zinc-400">
                   <span>HP: {target.totalHealth}</span>

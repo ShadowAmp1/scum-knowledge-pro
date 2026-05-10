@@ -1,0 +1,53 @@
+<svg width="80" height="100" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="targetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d2d2d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Full Military Player Silhouette -->
+  <g filter="url(#glow)">
+    <!-- Head with tactical helmet -->
+    <circle cx="40" cy="15" r="8" fill="url(#targetGradient)" stroke="#8b5cf6" stroke-width="0.5" opacity="0.9"/>
+    <path d="M 28 6 Q 40 1, 52 6 L 52 14 Q 40 9, 28 14 Z" fill="url(#targetGradient)" stroke="#8b5cf6" stroke-width="0.5" opacity="0.6"/>
+    <rect x="38" y="3" width="4" height="6" fill="#8b5cf6" opacity="0.4"/>
+    
+    <!-- Body with tactical vest -->
+    <rect x="30" y="23" width="20" height="25" rx="3" fill="url(#targetGradient)" stroke="#8b5cf6" stroke-width="0.5" opacity="0.9"/>
+    <rect x="26" y="25" width="28" height="22" rx="2" fill="none" stroke="#8b5cf6" stroke-width="0.8" opacity="0.6"/>
+    <rect x="33" y="27" width="14" height="10" fill="none" stroke="#8b5cf6" stroke-width="0.5" opacity="0.4"/>
+    <circle cx="36" cy="32" r="1" fill="#8b5cf6" opacity="0.6"/>
+    <circle cx="44" cy="32" r="1" fill="#8b5cf6" opacity="0.6"/>
+    
+    <!-- Arms with tactical gear -->
+    <rect x="20" y="25" width="8" height="18" rx="2" fill="url(#targetGradient)" stroke="#8b5cf6" stroke-width="0.5" opacity="0.9"/>
+    <rect x="52" y="25" width="8" height="18" rx="2" fill="url(#targetGradient)" stroke="#8b5cf6" stroke-width="0.5" opacity="0.9"/>
+    <rect x="19" y="27" width="10" height="14" fill="none" stroke="#8b5cf6" stroke-width="0.5" opacity="0.4"/>
+    <rect x="51" y="27" width="10" height="14" fill="none" stroke="#8b5cf6" stroke-width="0.5" opacity="0.4"/>
+    
+    <!-- Legs with tactical pants -->
+    <rect x="32" y="48" width="7" height="25" rx="2" fill="url(#targetGradient)" stroke="#8b5cf6" stroke-width="0.5" opacity="0.9"/>
+    <rect x="41" y="48" width="7" height="25" rx="2" fill="url(#targetGradient)" stroke="#8b5cf6" stroke-width="0.5" opacity="0.9"/>
+    <rect x="30" y="48" width="11" height="15" fill="none" stroke="#8b5cf6" stroke-width="0.6" opacity="0.4"/>
+    <rect x="39" y="48" width="11" height="15" fill="none" stroke="#8b5cf6" stroke-width="0.6" opacity="0.4"/>
+    
+    <!-- Hit zones indicators -->
+    <circle cx="40" cy="15" r="2" fill="#8b5cf6" opacity="0.6"/>
+    <rect x="38" y="30" width="4" height="4" fill="#8b5cf6" opacity="0.6"/>
+    <rect x="24" y="30" width="4" height="4" fill="#8b5cf6" opacity="0.6"/>
+    <rect x="52" y="30" width="4" height="4" fill="#8b5cf6" opacity="0.6"/>
+    <rect x="35" y="55" width="4" height="4" fill="#8b5cf6" opacity="0.6"/>
+    <rect x="41" y="55" width="4" height="4" fill="#8b5cf6" opacity="0.6"/>
+  </g>
+  
+  <!-- Label -->
+  <text x="40" y="85" text-anchor="middle" fill="#8b5cf6" font-family="monospace" font-size="8" opacity="0.5">MILITARY</text>
+</svg>

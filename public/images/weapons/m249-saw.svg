@@ -1,0 +1,44 @@
+<svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="weaponGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- M249 SAW LMG Silhouette -->
+  <g filter="url(#glow)">
+    <!-- Main body -->
+    <rect x="20" y="30" width="80" height="20" rx="2" fill="url(#weaponGradient)" stroke="#ff5030" stroke-width="0.5" opacity="0.9"/>
+    
+    <!-- Long barrel -->
+    <rect x="100" y="37" width="45" height="6" rx="1" fill="url(#weaponGradient)" stroke="#ff5030" stroke-width="0.5" opacity="0.9"/>
+    
+    <!-- Box magazine -->
+    <rect x="25" y="45" width="25" height="15" rx="2" fill="url(#weaponGradient)" stroke="#ff5030" stroke-width="0.5" opacity="0.9"/>
+    
+    <!-- Bipod -->
+    <rect x="90" y="48" width="20" height="3" fill="url(#weaponGradient)" stroke="#ff5030" stroke-width="0.5" opacity="0.9"/>
+    <rect x="95" y="51" width="3" height="12" fill="url(#weaponGradient)" stroke="#ff5030" stroke-width="0.5" opacity="0.9"/>
+    <rect x="102" y="51" width="3" height="12" fill="url(#weaponGradient)" stroke="#ff5030" stroke-width="0.5" opacity="0.9"/>
+    
+    <!-- Stock -->
+    <rect x="10" y="25" width="15" height="30" rx="2" fill="url(#weaponGradient)" stroke="#ff5030" stroke-width="0.5" opacity="0.9"/>
+    
+    <!-- Carry handle -->
+    <rect x="60" y="25" width="20" height="8" rx="2" fill="url(#weaponGradient)" stroke="#ff5030" stroke-width="0.5" opacity="0.9"/>
+    
+    <!-- Grip -->
+    <rect x="45" y="48" width="12" height="12" rx="2" fill="url(#weaponGradient)" stroke="#ff5030" stroke-width="0.5" opacity="0.9"/>
+  </g>
+  
+  <!-- SCUM DB PRO Brand -->
+  <text x="80" y="75" text-anchor="middle" fill="#ff5030" font-family="monospace" font-size="8" opacity="0.5">SCUM DB PRO</text>
+</svg>

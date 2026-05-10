@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { TacticalWeapon } from '@/types/tactical';
 import { Search, Zap, Target, TrendingUp } from 'lucide-react';
 
@@ -154,8 +155,14 @@ export default function WeaponColumn({
             >
               <div className="flex items-center gap-4">
                 {/* Weapon Image */}
-                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/30 flex items-center justify-center">
-                  <span className="text-2xl">🔫</span>
+                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/30 flex items-center justify-center overflow-hidden">
+                  <Image
+                    src={weapon.image}
+                    alt={weapon.name}
+                    width={64}
+                    height={64}
+                    className="object-contain hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
 
                 {/* Weapon Info */}
@@ -212,8 +219,14 @@ export default function WeaponColumn({
         >
           <div className="flex items-center gap-6 mb-6">
             {/* Large Weapon Image */}
-            <div className="w-24 h-24 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/30 flex items-center justify-center">
-              <span className="text-4xl">🔫</span>
+            <div className="w-24 h-24 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/30 flex items-center justify-center overflow-hidden">
+              <Image
+                src={selectedWeapon.image}
+                alt={selectedWeapon.name}
+                width={96}
+                height={96}
+                className="object-contain hover:scale-105 transition-transform duration-300"
+              />
             </div>
 
             {/* Weapon Details */}

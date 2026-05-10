@@ -22,6 +22,7 @@ export interface TacticalAmmo {
   name: string;
   type: 'ap' | 'hp' | 'slug' | 'tracer' | 'fmj';
   color: string;
+  image: string;
   description: string;
   effectiveness: {
     pvp: number;
@@ -40,6 +41,7 @@ export interface TacticalTarget {
   name: string;
   category: 'pvp' | 'pve' | 'bunker';
   type: 'naked' | 'light' | 'heavy' | 'full' | 'puppet' | 'mech';
+  image: string;
   zones: TargetZone[];
   totalHealth: number;
   armorRating: number;

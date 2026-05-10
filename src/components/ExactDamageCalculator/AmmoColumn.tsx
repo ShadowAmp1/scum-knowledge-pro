@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { TacticalAmmo } from '@/types/tactical';
 import { Zap, Shield, Target } from 'lucide-react';
 
@@ -76,10 +77,16 @@ export default function AmmoColumn({
               <div className="flex items-center gap-4">
                 {/* Ammo Icon */}
                 <div 
-                  className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl"
+                  className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden"
                   style={{ backgroundColor: `${ammo.color}20` }}
                 >
-                  {getAmmoIcon(ammo.type)}
+                  <Image
+                    src={ammo.image}
+                    alt={ammo.name}
+                    width={48}
+                    height={48}
+                    className="object-contain hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
 
                 {/* Ammo Info */}
